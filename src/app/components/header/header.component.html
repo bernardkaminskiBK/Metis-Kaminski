@@ -1,9 +1,13 @@
 <nav>
-    <img src="https://angular.io/assets/images/logos/angularjs/AngularJS-Shield.svg"/>
-   <ul>
-    <li><a href="#">Home</a></li>
-    <li><a href="#">About</a></li>
-    <li><a href="#">Login</a></li>
-    <li><a href="#">Users</a></li>
-   </ul>
+  <div routerLink="/" class="logo">
+    <img
+      alt="logo"
+      src="https://angular.io/assets/images/logos/angularjs/AngularJS-Shield.svg"
+    />
+    <h2>{{ name }}</h2>
+  </div>
+  <ul>
+    <li><a routerLink="/referencie">Referencie</a></li>
+    <li><a routerLink="/prihlaska">Prihláška</a></li>
+  </ul>
 </nav>
