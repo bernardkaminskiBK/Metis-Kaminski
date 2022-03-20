@@ -1,0 +1,14 @@
+.vendor {
+  border-radius: 5px;
+  padding: 5px 15px 5px 15px;
+  color: white;
+  font-weight: bold;
+  background-color: brown;
+  width: fit-content;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 10px;
+}

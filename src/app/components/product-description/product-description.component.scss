@@ -7,7 +7,7 @@
 .main-product {
   border-radius: 5px;
   width: 600px;
-  height: 600px;
+  height: 800px;
   background-color: brown;
   margin: 25px;
 }
@@ -17,6 +17,7 @@
   height: 80px;
   margin-top: 80px;
   background-color: white;
+  padding: 15px;
 }
 
 h2 {
@@ -24,25 +25,59 @@ h2 {
 }
 
 .column-product {
-  margin-left: 15px;
+  margin-left: 55px;
   margin-top: 5px;
   float: left;
-  width: 50%;
 }
 
-.title {
- padding: 15px;
-}
 .column-category {
   float: right;
-  margin-right: 30px;
+  margin-right: 55px;
+}
+
+.column-price {
+  margin-left: 18px;
+  float: left;
+  color: brown;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 50px;
+}
+
+.column-stock {
+  float: right;
+  margin-right: 80px;
+  color: brown;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 48.5px;
 }
 
 .column-category h2 {
-  border-radius: 25px;
+  border-radius: 5px;
   padding: 5px 15px 5px 15px;
   color: white;
   background-color: brown;
+}
+
+.column-description .row-description {
+  padding: 15px;
+}
+
+.row-description {
+  padding: 15px;
+}
+
+.row-vendors {
+  padding: 15px;
+}
+
+hr {
+  border: 0.5px solid brown;
+}
+
+.row-description p {
+  font-size: 14px;
 }
 
 .row:after {
@@ -55,7 +90,7 @@ h2 {
   margin: 10px 10.5px 0px 100px;
   width: 483px;
   position: absolute;
-  height: 406px;
+  height: 606px;
   border-radius: 0 0 5px 0;
   background-color: white;
 }

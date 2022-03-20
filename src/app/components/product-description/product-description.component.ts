@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-product-description',
@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductDescriptionComponent implements OnInit {
 
-  constructor() { }
+  @Output() descriptionEvent = new EventEmitter();
+
+  constructor() {
+  }
 
   ngOnInit(): void {
+  }
+
+  isDescriptionEmpty(descriptionLength: number) : void {
+    this.descriptionEvent.emit();
   }
 
 }

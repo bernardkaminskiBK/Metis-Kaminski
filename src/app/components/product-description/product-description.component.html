@@ -1,0 +1,48 @@
+<div class="center">
+  <div class="main-product">
+    <div class="title">
+
+      <div class="row">
+        <div class="column-product">
+          <h2>
+            <ng-content select="[productName]"></ng-content>
+          </h2>
+        </div>
+        <div class="column-category">
+          <h2>
+            <ng-content select="[category]"></ng-content>
+          </h2>
+        </div>
+      </div>
+
+      <div class="content">
+
+        <div class="row">
+          <div class="column-price">
+            <ng-content select="[price]"></ng-content>
+          </div>
+          <div class="column-stock">
+            <ng-content select="[stock]"></ng-content>
+          </div>
+        </div>
+
+        <div class="row-description">
+          <h2>Description</h2>
+          <hr>
+          <div class="column-description">
+            <ng-content select="[description]"> </ng-content>
+          </div>
+        </div>
+
+        <div class="row-vendors">
+          <h2>Vendors</h2>
+          <hr>
+          <div class="column-vendor">
+            <ng-content select="[vendors]"></ng-content>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

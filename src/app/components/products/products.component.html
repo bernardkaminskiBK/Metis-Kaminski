@@ -1,0 +1,34 @@
+<div *ngFor="let product of productList">
+  <app-product-description>
+    <span productName>{{product.name}}</span>
+
+    <ng-container category>
+      <span>{{product.category}}</span>
+    </ng-container>
+
+    <ng-container price>
+      <span *ngIf="product.price === 0"></span>
+      <span *ngIf="product.price !== 0">Price: {{product.price}}€</span>
+    </ng-container>
+
+    <ng-container stock>
+      <span *ngIf="product.stock === 0">Sold Out</span>
+      <span *ngIf="product.stock > 0">Stock: {{product.stock}}x</span>
+    </ng-container>
+
+    <ng-container description>
+      <span>{{product.description}}</span>
+    </ng-container>
+
+    <ng-container vendors>
+      <div class="wrapper">
+        <div *ngFor="let vendor of product.vendors">
+          <div class="vendor">{{vendor}}</div>
+        </div>
+      </div>
+    </ng-container>
+
+  </app-product-description>
+</div>
+
+

@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {PrihlaskaComponent} from './components/prihlaska/prihlaska.component';
 import {ReferenciaComponent} from './components/referencia/referencia.component';
-import {ProductsComponent} from "./products/products.component";
+import {ProductsComponent} from "./components/products/products.component";
 
 const routes: Routes = [
   {path: 'referencie', component: ReferenciaComponent},
