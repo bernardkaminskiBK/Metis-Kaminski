@@ -24,9 +24,9 @@
 
     <ng-container vendors>
       <div class="wrapper">
-        <div *ngFor="let vendor of product.vendors">
-          <div class="vendor">{{vendor}}</div>
-        </div>
+        <ng-container *ngFor="let vendor of product.vendors">
+          <div *ngIf="vendor.productInStock > 0" class="vendor">{{vendor.name}}</div>
+        </ng-container>
       </div>
     </ng-container>
 
