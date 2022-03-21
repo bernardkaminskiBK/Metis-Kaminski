@@ -137,7 +137,9 @@ export class ProductsComponent implements OnInit {
         category: "Food",
         price: 1.25,
         stock: 102,
-        description: "Mnam mnam",
+        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the\n" +
+          "              industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of\n" +
+          "              type and scrambled it to make a type specimen book.",
         vendors: [
           {
             name: "Vendor 1",
@@ -145,7 +147,7 @@ export class ProductsComponent implements OnInit {
           },
           {
             name: "Vendor 2",
-            productInStock: 0
+            productInStock: 1
           },
           {
             name: "Vendor 3",
@@ -153,7 +155,7 @@ export class ProductsComponent implements OnInit {
           },
           {
             name: "Vendor 4",
-            productInStock: 0
+            productInStock: 1
           },
           {
             name: "Vendor 5",
@@ -161,7 +163,7 @@ export class ProductsComponent implements OnInit {
           },
           {
             name: "Vendor 6",
-            productInStock: 0
+            productInStock: 1
           },
           {
             name: "Vendor 7",
@@ -169,7 +171,7 @@ export class ProductsComponent implements OnInit {
           },
           {
             name: "Vendor 8",
-            productInStock: 0
+            productInStock: 1
           },
           {
             name: "Vendor 9",
@@ -202,7 +204,31 @@ export class ProductsComponent implements OnInit {
           },
           {
             name: "Vendor 4",
-            productInStock: 32
+            productInStock: 0
+          },
+          {
+            name: "Vendor 5",
+            productInStock: 22
+          },
+          {
+            name: "Vendor 6",
+            productInStock: 0
+          },
+          {
+            name: "Vendor 7",
+            productInStock: 0
+          },
+          {
+            name: "Vendor 8",
+            productInStock: 0
+          },
+          {
+            name: "Vendor 9",
+            productInStock: 132
+          },
+          {
+            name: "Vendor 10",
+            productInStock: 22
           }
         ]
       }
