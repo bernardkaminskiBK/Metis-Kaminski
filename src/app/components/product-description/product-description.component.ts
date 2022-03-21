@@ -7,16 +7,10 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class ProductDescriptionComponent implements OnInit {
 
-  @Output() descriptionEvent = new EventEmitter();
-
   constructor() {
   }
 
   ngOnInit(): void {
-  }
-
-  isDescriptionEmpty(descriptionLength: number) : void {
-    this.descriptionEvent.emit();
   }
 
 }

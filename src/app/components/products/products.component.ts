@@ -18,6 +18,14 @@ export class ProductsComponent implements OnInit {
   private getProductList(): void {
     this.productList = [
       {
+        name: "Ananas",
+        category: "Food",
+        price: 3.99,
+        stock: 0,
+        description: "",
+        vendors: ["Vendor 1", "Vendor 2", "Vendor 3", "Vendor 4", "Vendor 5"]
+      },
+      {
         name: "Product name",
         category: "Products",
         price: 9000,
@@ -32,13 +40,11 @@ export class ProductsComponent implements OnInit {
         category: "Furniture",
         price: 255.55,
         stock: 0,
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the\n" +
-          "              industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of\n" +
-          "              type and scrambled it to make a type specimen book.",
+        description: "",
         vendors: ["Vendor 1", "Vendor 2", "Vendor 3", "Vendor 4", "Vendor 5"]
       },
       {
-        name: "Adidas",
+        name: "Addidas",
         category: "shoes",
         price: 0,
         stock: 8,
@@ -55,7 +61,7 @@ export class ProductsComponent implements OnInit {
       },
       {
         name: "Bananas",
-        category: "Grocery",
+        category: "Food",
         price: 1.25,
         stock: 102,
         description: "Mnam mnam",

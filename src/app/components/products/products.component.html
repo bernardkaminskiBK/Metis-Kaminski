@@ -12,11 +12,13 @@
     </ng-container>
 
     <ng-container stock>
-      <span *ngIf="product.stock === 0">Sold Out</span>
+      <span *ngIf="product.stock === 0" class="sold-out">Sold Out</span>
       <span *ngIf="product.stock > 0">Stock: {{product.stock}}x</span>
     </ng-container>
 
-    <ng-container description>
+    <ng-container *ngIf="product.description.length > 0" description>
+      <h2>Description</h2>
+      <hr>
       <span>{{product.description}}</span>
     </ng-container>
 
