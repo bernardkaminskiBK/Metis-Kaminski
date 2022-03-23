@@ -8,6 +8,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProductDescriptionComponent } from './components/product-description/product-description.component';
 import { ProductsComponent } from './components/products/products.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ProductsComponent } from './components/products/products.component';
     routingComponents,
     ProductDescriptionComponent,
     ProductsComponent,
+    WelcomeComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FontAwesomeModule],
   providers: [],
