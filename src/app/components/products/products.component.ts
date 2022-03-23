@@ -76,7 +76,6 @@ export class ProductsComponent implements OnInit {
       {
         name: 'Asus Zenbook 13',
         category: 'Ultrabook',
-        description: '',
         price: 1149,
         stockCount: 6,
         vendors: [
@@ -84,7 +83,7 @@ export class ProductsComponent implements OnInit {
           {name: 'Agem', stockCount: 1},
           {name: 'MediaMarkt', stockCount: 1},
           {name: 'Asbis', stockCount: 1},
-          {name: 'Nay', stockCount: 1},
+          {name: 'Nay', stockCount: 1}
         ]
       },
       {

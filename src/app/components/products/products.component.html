@@ -16,19 +16,21 @@
       <span *ngIf="product.stockCount > 0">Stock: {{product.stockCount}}x</span>
     </ng-container>
 
-    <ng-container *ngIf="product.description.length > 0" description>
+    <ng-container *ngIf="product.description && product.description.length" description>
       <h2>Description</h2>
       <hr>
       <span>{{product.description}}</span>
     </ng-container>
 
-    <ng-container vendors>
-      <div class="wrapper">
-        <ng-container *ngFor="let vendor of product.vendors">
-          <div *ngIf="vendor.stockCount > 0" class="vendor">{{vendor.name}}</div>
-        </ng-container>
-      </div>
-    </ng-container>
+
+      <ng-container vendors>
+        <div class="wrapper">
+          <ng-container *ngFor="let vendor of product.vendors">
+            <div *ngIf="vendor.stockCount > 0" class="vendor">{{vendor.name}}</div>
+          </ng-container>
+        </div>
+      </ng-container>
+
 
   </app-product-description>
 </div>

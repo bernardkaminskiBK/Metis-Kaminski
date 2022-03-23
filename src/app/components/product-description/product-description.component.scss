@@ -7,9 +7,9 @@
 .main-product {
   border-radius: 5px;
   width: 600px;
-  height: 750px;
   background-color: brown;
   margin: 25px;
+  position: relative;
 }
 
 .title {
@@ -88,12 +88,11 @@ hr {
 }
 
 .content {
-  margin: 10px 10.5px 0 100px;
+  margin: 3px 3px 3px 113px;
   width: 483px;
-  position: absolute;
-  height: 556px;
   border-radius: 0 0 5px 0;
   background-color: white;
+  position: relative;
 }
 
 .center {
