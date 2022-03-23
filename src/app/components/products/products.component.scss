@@ -9,7 +9,7 @@
 
 .wrapper {
   display: grid;
-  grid-template-columns: repeat(4, [col-start] fit-content(200px) [col-end]);
+  grid-template-columns: repeat(3, [col-start] fit-content(200px) [col-end]);
   gap: 10px;
 }
 

@@ -62,7 +62,6 @@ export class ProductsComponent implements OnInit {
       {
         name: 'Dell Vostro 3500',
         category: 'Kancelária',
-        price: 0,
         stockCount: 18,
         description: 'Notebook – Intel Core i3 1115G4 Tiger Lake, 15" IPS matný 1920 × 1080, RAM 8GB DDR4, Intel UHD Graphics, SSD 256GB, numerická klávesnica, podsvietená klávesnica, webkamera, USB 3.2 Gen 1, čítačka odtlačkov prstov, WiFi 5, 42 Wh batéria, hmotnosť 1.98kg, Windows 10 Pro (NBD)',
         vendors: [
@@ -84,20 +83,6 @@ export class ProductsComponent implements OnInit {
           {name: 'MediaMarkt', stockCount: 1},
           {name: 'Asbis', stockCount: 1},
           {name: 'Nay', stockCount: 1}
-        ]
-      },
-      {
-        name: 'Product',
-        category: 'Product',
-        description: '',
-        price: 0,
-        stockCount: 0,
-        vendors: [
-          {name: 'Alza', stockCount: 0},
-          {name: 'Agem', stockCount: 0},
-          {name: 'MediaMarkt', stockCount: 0},
-          {name: 'Asbis', stockCount: 0},
-          {name: 'Nay', stockCount: 0},
         ]
       }
     ];

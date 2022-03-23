@@ -7,8 +7,8 @@
     </ng-container>
 
     <ng-container price>
-      <span *ngIf="product.price === 0"></span>
-      <span *ngIf="product.price !== 0">Price: {{product.price}}€</span>
+      <span *ngIf="product.price && product.price === 0"></span>
+      <span *ngIf="product.price && product.price !== 0">Price: {{product.price}}€</span>
     </ng-container>
 
     <ng-container stock>
