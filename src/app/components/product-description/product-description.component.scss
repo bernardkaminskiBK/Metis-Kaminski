@@ -27,8 +27,12 @@ h2 {
 .column-product {
   font-size: 15px;
   margin-left: 55px;
-  margin-top: 5px;
+  margin-top: 14px;
   float: left;
+}
+
+.column-product h2{
+  font-size: 20px;
 }
 
 .column-category {
@@ -88,7 +92,7 @@ hr {
 }
 
 .content {
-  margin: 3px 3px 3px 113px;
+  margin: 2px 2px 2px 115px;
   width: 483px;
   border-radius: 0 0 5px 0;
   background-color: white;
