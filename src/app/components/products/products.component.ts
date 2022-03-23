@@ -18,220 +18,89 @@ export class ProductsComponent implements OnInit {
   private getProductList(): void {
     this.productList = [
       {
-        name: "Ananas",
-        category: "Food",
-        price: 3.99,
-        stock: 0,
-        description: "",
+        name: 'Acer Nitro 5 Obsidian',
+        category: 'Gaming',
+        price: 849,
+        stockCount: 18,
+        description: 'Herný notebook – Intel Core i5 9300H Coffee Lake, 15.6" IPS matný 1920 × 1080 120Hz, RAM 8GB DDR4, NVIDIA GeForce GTX 1650 4GB, SSD 512GB, numerická klávesnica, podsvietená klávesnica, webkamera, USB-C, WiFi 6, 56 Wh batéria, hmotnosť 2.5kg, Windows 10 Home, HDD upgrade kit (AN515-54-54KC) ',
         vendors: [
-          {
-            name: "Vendor 1",
-            productInStock: 1
-          },
-          {
-            name: "Vendor 2",
-            productInStock: 0
-          },
-          {
-            name: "Vendor 2",
-            productInStock: 3
-          }
+          {name: 'Alza', stockCount: 10},
+          {name: 'Agem', stockCount: 2},
+          {name: 'MediaMarkt', stockCount: 1},
+          {name: 'Asbis', stockCount: 0},
+          {name: 'Nay', stockCount: 5},
         ]
       },
       {
-        name: "Product name",
-        category: "Products",
-        price: 9000,
-        stock: 24,
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the\n" +
-          "              industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of\n" +
-          "              type and scrambled it to make a type specimen book.",
+        name: 'Lenovo Legion 5 Pro',
+        category: 'Gaming',
+        price: 1539,
+        stockCount: 50,
+        description: 'Herný notebook – AMD Ryzen 7 5800H, 16" IPS antireflexný 2560 × 1600 165Hz, RAM 16GB DDR4, NVIDIA GeForce RTX 3070 8GB 140 W, SSD 1000GB, numerická klávesnica, podsvietená RGB klávesnica, webkamera, USB-C, WiFi 6, 80 Wh batéria, hmotnosť 2.45kg, bez operačného systému',
         vendors: [
-          {
-            name: "Vendor 1",
-            productInStock: 1
-          },
-          {
-            name: "Vendor 2",
-            productInStock: 0
-          },
-          {
-            name: "Vendor 3",
-            productInStock: 3
-          },
-          {
-            name: "Vendor 4",
-            productInStock: 32
-          },
-          {
-            name: "Vendor 5",
-            productInStock: 22
-          }
+          {name: 'Alza', stockCount: 10},
+          {name: 'Agem', stockCount: 10},
+          {name: 'MediaMarkt', stockCount: 10},
+          {name: 'Asbis', stockCount: 10},
+          {name: 'Nay', stockCount: 10},
         ]
       },
       {
-        name: "Wardrobe",
-        category: "Furniture",
-        price: 255.55,
-        stock: 0,
-        description: "",
+        name: 'Macbook Pro 13" M1 SK2020',
+        category: 'MacBook',
+        price: 1459,
+        stockCount: 3,
+        description: 'MacBook – Apple M1, 13.3" IPS lesklý 2560 × 1600 , RAM 8GB, Apple M1 8-jadrová GPU, SSD 256GB, podsvietená klávesnica, webkamera, USB-C, čítačka odtlačkov prstov, WiFi 6, 58.2 Wh batéria, hmotnosť 1.37kg, MAC OS',
         vendors: [
-          {
-            name: "Vendor 1",
-            productInStock: 1
-          },
-          {
-            name: "Vendor 2",
-            productInStock: 0
-          },
-          {
-            name: "Vendor 3",
-            productInStock: 3
-          },
-          {
-            name: "Vendor 4",
-            productInStock: 32
-          },
-          {
-            name: "Vendor 5",
-            productInStock: 22
-          }
+          {name: 'Alza', stockCount: 0},
+          {name: 'Agem', stockCount: 0},
+          {name: 'MediaMarkt', stockCount: 0},
+          {name: 'Asbis', stockCount: 2},
+          {name: 'Nay', stockCount: 1},
         ]
       },
       {
-        name: "Addidas",
-        category: "shoes",
+        name: 'Dell Vostro 3500',
+        category: 'Kancelária',
         price: 0,
-        stock: 8,
-        description: "Very nice and good shoes, I promise.",
+        stockCount: 18,
+        description: 'Notebook – Intel Core i3 1115G4 Tiger Lake, 15" IPS matný 1920 × 1080, RAM 8GB DDR4, Intel UHD Graphics, SSD 256GB, numerická klávesnica, podsvietená klávesnica, webkamera, USB 3.2 Gen 1, čítačka odtlačkov prstov, WiFi 5, 42 Wh batéria, hmotnosť 1.98kg, Windows 10 Pro (NBD)',
         vendors: [
-          {
-            name: "Vendor 1",
-            productInStock: 1
-          },
-          {
-            name: "Vendor 2",
-            productInStock: 0
-          },
-          {
-            name: "Vendor 3",
-            productInStock: 3
-          }
+          {name: 'Alza', stockCount: 0},
+          {name: 'Agem', stockCount: 0},
+          {name: 'MediaMarkt', stockCount: 0},
+          {name: 'Asbis', stockCount: 0},
+          {name: 'Nay', stockCount: 0},
         ]
       },
       {
-        name: "Watch",
-        category: "Clocks",
-        price: 8990.55,
-        stock: 2,
-        description: "Watches are important to observing time.",
+        name: 'Asus Zenbook 13',
+        category: 'Ultrabook',
+        description: '',
+        price: 1149,
+        stockCount: 6,
         vendors: [
-          {
-            name: "Vendor 1",
-            productInStock: 1
-          }
+          {name: 'Alza', stockCount: 2},
+          {name: 'Agem', stockCount: 1},
+          {name: 'MediaMarkt', stockCount: 1},
+          {name: 'Asbis', stockCount: 1},
+          {name: 'Nay', stockCount: 1},
         ]
       },
       {
-        name: "Bananas",
-        category: "Food",
-        price: 1.25,
-        stock: 102,
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the\n" +
-          "              industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of\n" +
-          "              type and scrambled it to make a type specimen book.",
+        name: 'Product',
+        category: 'Product',
+        description: '',
+        price: 0,
+        stockCount: 0,
         vendors: [
-          {
-            name: "Vendor 1",
-            productInStock: 1
-          },
-          {
-            name: "Vendor 2",
-            productInStock: 1
-          },
-          {
-            name: "Vendor 3",
-            productInStock: 3
-          },
-          {
-            name: "Vendor 4",
-            productInStock: 1
-          },
-          {
-            name: "Vendor 5",
-            productInStock: 22
-          },
-          {
-            name: "Vendor 6",
-            productInStock: 1
-          },
-          {
-            name: "Vendor 7",
-            productInStock: 22
-          },
-          {
-            name: "Vendor 8",
-            productInStock: 1
-          },
-          {
-            name: "Vendor 9",
-            productInStock: 132
-          },
-          {
-            name: "Vendor 10",
-            productInStock: 22
-          }
-        ]
-      },
-      {
-        name: "Coat",
-        category: "Clothes",
-        price: 125.00,
-        stock: 12,
-        description: "Coat for cold nights.",
-        vendors: [
-          {
-            name: "Vendor 1",
-            productInStock: 1
-          },
-          {
-            name: "Vendor 2",
-            productInStock: 0
-          },
-          {
-            name: "Vendor 3",
-            productInStock: 3
-          },
-          {
-            name: "Vendor 4",
-            productInStock: 0
-          },
-          {
-            name: "Vendor 5",
-            productInStock: 22
-          },
-          {
-            name: "Vendor 6",
-            productInStock: 0
-          },
-          {
-            name: "Vendor 7",
-            productInStock: 0
-          },
-          {
-            name: "Vendor 8",
-            productInStock: 0
-          },
-          {
-            name: "Vendor 9",
-            productInStock: 132
-          },
-          {
-            name: "Vendor 10",
-            productInStock: 22
-          }
+          {name: 'Alza', stockCount: 0},
+          {name: 'Agem', stockCount: 0},
+          {name: 'MediaMarkt', stockCount: 0},
+          {name: 'Asbis', stockCount: 0},
+          {name: 'Nay', stockCount: 0},
         ]
       }
-    ]
+    ];
   }
 }

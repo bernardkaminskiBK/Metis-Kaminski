@@ -12,8 +12,8 @@
     </ng-container>
 
     <ng-container stock>
-      <span *ngIf="product.stock === 0" class="sold-out">Sold Out</span>
-      <span *ngIf="product.stock > 0">Stock: {{product.stock}}x</span>
+      <span *ngIf="product.stockCount === 0" class="sold-out">Sold Out</span>
+      <span *ngIf="product.stockCount > 0">Stock: {{product.stockCount}}x</span>
     </ng-container>
 
     <ng-container *ngIf="product.description.length > 0" description>
@@ -25,7 +25,7 @@
     <ng-container vendors>
       <div class="wrapper">
         <ng-container *ngFor="let vendor of product.vendors">
-          <div *ngIf="vendor.productInStock > 0" class="vendor">{{vendor.name}}</div>
+          <div *ngIf="vendor.stockCount > 0" class="vendor">{{vendor.name}}</div>
         </ng-container>
       </div>
     </ng-container>
