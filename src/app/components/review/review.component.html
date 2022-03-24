@@ -4,10 +4,11 @@
   <hr>
 
   <ul>
-    <li *ngFor="let comment of listOfComments">
-      {{comment}}
-      <br>
+    <li *ngFor="let userReview of listOfComments">
+      {{userReview.reviewComment}}
     </li>
+    <br>
+
   </ul>
 
   <textarea #input placeholder="Add your comment here..." class="textarea-wrapper"></textarea>

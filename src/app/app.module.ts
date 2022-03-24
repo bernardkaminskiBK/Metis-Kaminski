@@ -10,6 +10,7 @@ import { ProductDescriptionComponent } from './components/product-description/pr
 import { ProductsComponent } from './components/products/products.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import {ReviewComponent} from "./components/review/review.component";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import {ReviewComponent} from "./components/review/review.component";
     WelcomeComponent,
     ReviewComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FontAwesomeModule],
+    imports: [BrowserModule, AppRoutingModule, FontAwesomeModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

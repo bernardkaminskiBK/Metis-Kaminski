@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {UserReview} from "../../models/UserReview";
 
 @Component({
   selector: 'app-products',
@@ -8,6 +9,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 export class ProductsComponent implements OnInit {
 
   productList?: any[];
+  mostRecentReview : UserReview;
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -31,9 +33,9 @@ export class ProductsComponent implements OnInit {
           {name: 'Nay', stockCount: 5},
         ],
         reviews: [
-          {date: "22.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-          {date: "23.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-          {date: "24.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "22.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "23.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "24.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
         ]
       },
       {
@@ -50,9 +52,9 @@ export class ProductsComponent implements OnInit {
           {name: 'Nay', stockCount: 10},
         ],
         reviews: [
-          {date: "22.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-          {date: "23.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-          {date: "24.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "22.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "23.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "24.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
         ]
       },
       {
@@ -69,9 +71,9 @@ export class ProductsComponent implements OnInit {
           {name: 'Nay', stockCount: 1},
         ],
         reviews: [
-          {date: "22.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-          {date: "23.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-          {date: "24.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "22.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "23.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "24.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
         ]
       },
       {
@@ -87,9 +89,9 @@ export class ProductsComponent implements OnInit {
           {name: 'Nay', stockCount: 0},
         ],
         reviews: [
-          {date: "22.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-          {date: "23.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-          {date: "24.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "22.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "23.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "24.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
         ]
       },
       {
@@ -105,11 +107,15 @@ export class ProductsComponent implements OnInit {
           {name: 'Nay', stockCount: 1}
         ],
         reviews: [
-          {date: "22.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-          {date: "23.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-          {date: "24.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "22.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "23.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "24.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
         ]
       }
     ];
+  }
+
+  getMostRecentData(userReview: UserReview) {
+    this.mostRecentReview = userReview;
   }
 }

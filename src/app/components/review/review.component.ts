@@ -1,4 +1,6 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {UserReview} from "../../models/UserReview";
+import Utils from "../../utils/Utils";
 
 @Component({
   selector: 'app-review',
@@ -8,9 +10,9 @@ import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} f
 export class ReviewComponent implements OnInit {
 
   @Input() reviewsData: any[];
-  @Output() addedNewComment: EventEmitter<any> = new EventEmitter<any>();
+  @Output() addedNewComments: EventEmitter<any> = new EventEmitter<any>();
 
-  listOfComments: string[] = [];
+  listOfComments: UserReview[] = [];
 
   @ViewChild('input') textArea: ElementRef;
 
@@ -20,15 +22,33 @@ export class ReviewComponent implements OnInit {
   ngOnInit(): void {
     if (this.reviewsData && this.listOfComments) {
       for (let reviewData of this.reviewsData) {
-        this.listOfComments.push(reviewData.comment);
+        this.listOfComments.push(new UserReview(reviewData.date, reviewData.comment));
       }
     }
   }
 
   addComment() {
-
-    this.listOfComments.push(this.textArea.nativeElement.value);
-    this.textArea.nativeElement.value = '';
-    this.reviewsData.push();
+    if(this.textArea.nativeElement.value) {
+      this.listOfComments
+        .push(new UserReview(Utils.getFormattedCurrentDate(), this.textArea.nativeElement.value));
+      this.textArea.nativeElement.value = '';
+      this.addedNewComments.emit(this.listOfComments);
+      // this.saveToLocaleStorage(this.listOfComments)
+    } else {
+      alert('The text area of comment is empty.');
+    }
   }
+
+  // saveToLocaleStorage(listOfComments: UserReview[]) : void {
+  //   localStorage.setItem(Utils.STORAGE_KEY, JSON.stringify(listOfComments));
+  // }
+  //
+  // loadFromLocaleStorage() : UserReview[] {
+  //   const rawData = localStorage.getItem(Utils.STORAGE_KEY);
+  //   if(rawData) {
+  //     return JSON.parse(rawData);
+  //   }
+  //   return [];
+  // }
+
 }

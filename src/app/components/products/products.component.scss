@@ -1,3 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
+
+.wrapper-most-recent {
+
+  * {
+    font-family: "Poppins", sans-serif;
+    color: brown;
+  }
+
+  margin-top: 25px;
+
+  .last-added-comment {
+    border: 2px solid brown;
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    justify-content: center;
+    position: relative;
+    width: 565px;
+    margin: auto;
+    display: grid;
+    align-items: center;
+
+    p {
+      margin-bottom: 15px;
+    }
+
+    .review-date {
+      float: right;
+      font-weight: bold;
+    }
+
+  }
+
+  .line {
+    border: 0.5px solid brown;
+    width: 565px;
+    position: relative;
+  }
+}
+
 .vendor {
   border-radius: 5px;
   padding: 5px 15px 5px 15px;
