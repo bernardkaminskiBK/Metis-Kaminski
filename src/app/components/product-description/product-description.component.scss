@@ -22,6 +22,7 @@
 
 h2 {
   color: brown;
+  font-size: 21px;
 }
 
 .column-product {
@@ -38,6 +39,10 @@ h2 {
 .column-category {
   float: right;
   margin-right: 55px;
+}
+
+.column-description {
+  font-size: 14px;
 }
 
 .column-price {
@@ -92,7 +97,7 @@ hr {
 }
 
 .content {
-  margin: 2px 2px 2px 115px;
+  margin: 1.5px 1.5px 1.5px 115.5px;
   width: 483px;
   border-radius: 0 0 5px 0;
   background-color: white;
