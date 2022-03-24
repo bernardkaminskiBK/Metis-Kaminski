@@ -1,5 +1,5 @@
 <div *ngFor="let product of productList">
-  <app-product-description>
+  <app-product-description [reviews]="product.reviews">
     <span productName>{{product.name}}</span>
 
     <ng-container category>

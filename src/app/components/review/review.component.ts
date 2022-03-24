@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-review',
@@ -7,9 +7,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReviewComponent implements OnInit {
 
-  constructor() { }
+  @Input() reviewsData: any[];
+  @Output() addedNewComment: EventEmitter<any> = new EventEmitter<any>();
 
-  ngOnInit(): void {
+  listOfComments: string[] = [];
+
+  @ViewChild('input') textArea: ElementRef;
+
+  constructor() {
   }
 
+  ngOnInit(): void {
+    if (this.reviewsData && this.listOfComments) {
+      for (let reviewData of this.reviewsData) {
+        this.listOfComments.push(reviewData.comment);
+      }
+    }
+  }
+
+  addComment() {
+
+    this.listOfComments.push(this.textArea.nativeElement.value);
+    this.textArea.nativeElement.value = '';
+    this.reviewsData.push();
+  }
 }

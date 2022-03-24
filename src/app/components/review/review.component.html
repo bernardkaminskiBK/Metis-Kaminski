@@ -1,39 +1,15 @@
 <div class="review-row">
   <h2>Reviews</h2>
+
   <hr>
+
   <ul>
-    <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-      standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-      type specimen book. It has survived not only five centuries,
+    <li *ngFor="let comment of listOfComments">
+      {{comment}}
+      <br>
     </li>
-<!--    <br>-->
-<!--    <li>Test review</li>-->
-<!--    <br>-->
-<!--    <li>Test review</li>-->
-<!--    <br>-->
-<!--    <li>Test review</li>-->
-<!--    <br>-->
-<!--    <li>Test review</li>-->
-<!--    <br>-->
-<!--    <li>Test review</li>-->
-<!--    <br>-->
-<!--    <li>Test review</li>-->
-<!--    <br>-->
-<!--    <li>Test review</li>-->
-<!--    <br>-->
-<!--    <li>Test review</li>-->
-<!--    <br>-->
-<!--    <li>Test review</li>-->
-<!--    <br>-->
-<!--    <li>Test review</li>-->
-<!--    <br>-->
-<!--    <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's-->
-<!--      standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a-->
-<!--      type specimen book. It has survived not only five centuries,-->
-<!--    </li>-->
   </ul>
 
-  <textarea placeholder="Add your comment here..." class="textarea-wrapper" name="comments"
-            id="comments"></textarea>
-  <button class="button-28">Submit</button>
+  <textarea #input placeholder="Add your comment here..." class="textarea-wrapper"></textarea>
+  <button (click)="addComment()" class="button-28">Submit</button>
 </div>

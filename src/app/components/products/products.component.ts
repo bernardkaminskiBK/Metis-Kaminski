@@ -29,6 +29,11 @@ export class ProductsComponent implements OnInit {
           {name: 'MediaMarkt', stockCount: 1},
           {name: 'Asbis', stockCount: 0},
           {name: 'Nay', stockCount: 5},
+        ],
+        reviews: [
+          {date: "22.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "23.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "24.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
         ]
       },
       {
@@ -43,6 +48,11 @@ export class ProductsComponent implements OnInit {
           {name: 'MediaMarkt', stockCount: 10},
           {name: 'Asbis', stockCount: 10},
           {name: 'Nay', stockCount: 10},
+        ],
+        reviews: [
+          {date: "22.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "23.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "24.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
         ]
       },
       {
@@ -57,6 +67,11 @@ export class ProductsComponent implements OnInit {
           {name: 'MediaMarkt', stockCount: 0},
           {name: 'Asbis', stockCount: 2},
           {name: 'Nay', stockCount: 1},
+        ],
+        reviews: [
+          {date: "22.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "23.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "24.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
         ]
       },
       {
@@ -70,6 +85,11 @@ export class ProductsComponent implements OnInit {
           {name: 'MediaMarkt', stockCount: 0},
           {name: 'Asbis', stockCount: 0},
           {name: 'Nay', stockCount: 0},
+        ],
+        reviews: [
+          {date: "22.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "23.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "24.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
         ]
       },
       {
@@ -83,6 +103,11 @@ export class ProductsComponent implements OnInit {
           {name: 'MediaMarkt', stockCount: 1},
           {name: 'Asbis', stockCount: 1},
           {name: 'Nay', stockCount: 1}
+        ],
+        reviews: [
+          {date: "22.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "23.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "24.03.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
         ]
       }
     ];
