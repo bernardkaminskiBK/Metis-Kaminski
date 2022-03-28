@@ -11,6 +11,8 @@ import { ProductsComponent } from './components/products/products.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import {ReviewComponent} from "./components/review/review.component";
 import {FormsModule} from "@angular/forms";
+import { AppFilterOptionsComponent } from './components/app-filter-options/app-filter-options.component';
+import { AppFilterComponent } from './components/app-filter/app-filter.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import {FormsModule} from "@angular/forms";
     ProductsComponent,
     WelcomeComponent,
     ReviewComponent,
+    AppFilterComponent,
+    AppFilterOptionsComponent,
   ],
     imports: [BrowserModule, AppRoutingModule, FontAwesomeModule, FormsModule],
   providers: [],
