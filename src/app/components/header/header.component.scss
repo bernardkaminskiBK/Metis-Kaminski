@@ -4,9 +4,15 @@
   font-family: "Poppins", sans-serif;
 }
 
+.header {
+  position: fixed;
+  width: 100%;
+  Top: 0;
+}
+
 nav {
   background-color: brown;
-  padding: 20px;
+  padding: 10px;
 }
 
 h2 {
@@ -35,12 +41,12 @@ ul li {
   display: inline-block;
   padding: 10px;
   margin-top: 5px;
+  margin-right: 50px;
   font-size: 16px;
 }
 
 ul li a {
-  box-shadow: inset 0 0 0 0 white;
-  border-radius: 2.5px;
+  box-shadow: inset 0 0 0 0 brown;
   color: white;
   text-decoration: none;
   cursor: pointer;
