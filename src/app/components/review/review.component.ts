@@ -10,7 +10,7 @@ import Utils from "../../utils/Utils";
 export class ReviewComponent implements OnInit {
 
   @Input() reviewsData: any[];
-  @Output() addedNewComments: EventEmitter<any> = new EventEmitter<any>();
+  @Output() mostRecentReview: EventEmitter<any> = new EventEmitter<any>();
 
   listOfComments: UserReview[] = [];
 
@@ -32,23 +32,16 @@ export class ReviewComponent implements OnInit {
       this.listOfComments
         .push(new UserReview(Utils.getFormattedCurrentDate(), this.textArea.nativeElement.value));
       this.textArea.nativeElement.value = '';
-      this.addedNewComments.emit(this.listOfComments);
-      // this.saveToLocaleStorage(this.listOfComments)
+      this.getMostRecentReview(this.listOfComments);
     } else {
       alert('The text area of comment is empty.');
     }
   }
 
-  // saveToLocaleStorage(listOfComments: UserReview[]) : void {
-  //   localStorage.setItem(Utils.STORAGE_KEY, JSON.stringify(listOfComments));
-  // }
-  //
-  // loadFromLocaleStorage() : UserReview[] {
-  //   const rawData = localStorage.getItem(Utils.STORAGE_KEY);
-  //   if(rawData) {
-  //     return JSON.parse(rawData);
-  //   }
-  //   return [];
-  // }
+  private getMostRecentReview(userReviews: UserReview []) {
+    const mostRecentDate = userReviews[userReviews.length - 1].reviewDate;
+    const mostRecentComment = userReviews[userReviews.length - 1].reviewComment;
+    this.mostRecentReview.emit(new UserReview(mostRecentDate, mostRecentComment));
+  }
 
 }

@@ -1,7 +1,4 @@
 export default class Utils {
-
-  public static STORAGE_KEY = 'reviewList';
-
   static getFormattedCurrentDate(): string {
     const date = new Date();
     const time = date.toLocaleTimeString([], { hour: '2-digit', minute: "2-digit", hour12: false });

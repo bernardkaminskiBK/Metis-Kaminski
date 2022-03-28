@@ -11,8 +11,6 @@ export class ProductDescriptionComponent implements OnInit {
   @Input('reviews') data: any;
   @Output() mostRecentData : EventEmitter<any> = new EventEmitter<any>();
 
-  mostRecentReview : UserReview;
-
   constructor() {
   }
 
@@ -20,10 +18,7 @@ export class ProductDescriptionComponent implements OnInit {
 
   }
 
-  getListOfComments(userReviews: UserReview []) {
-   const mostRecentDate = userReviews[userReviews.length - 1].reviewDate;
-   const mostRecentComment = userReviews[userReviews.length - 1].reviewComment;
-   this.mostRecentReview = new UserReview(mostRecentDate, mostRecentComment);
-   this.mostRecentData.emit(this.mostRecentReview);
+  getMostRecentData(userReview: UserReview) {
+   this.mostRecentData.emit(userReview);
   }
 }

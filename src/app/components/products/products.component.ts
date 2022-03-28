@@ -14,6 +14,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.getProductList();
+      this.getMostRecentFromProductList()
     }, 500);
   }
 
@@ -33,9 +34,10 @@ export class ProductsComponent implements OnInit {
           {name: 'Nay', stockCount: 5},
         ],
         reviews: [
-          {date: "22.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-          {date: "23.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-          {date: "24.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
+          {date: "12:22 23.3.2022", comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"},
+          {date: "12:22 24.3.2022", comment: "from repetition, injected humour, or non-characteristic words etc."},
+          {date: "12:22 24.3.2022", comment: "typesetting, remaining essentially unchanged. It was popularised in the"}
         ]
       },
       {
@@ -52,9 +54,8 @@ export class ProductsComponent implements OnInit {
           {name: 'Nay', stockCount: 10},
         ],
         reviews: [
-          {date: "22.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-          {date: "23.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-          {date: "24.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
+          {date: "12:22 23.3.2022", comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"}
         ]
       },
       {
@@ -71,9 +72,14 @@ export class ProductsComponent implements OnInit {
           {name: 'Nay', stockCount: 1},
         ],
         reviews: [
-          {date: "22.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-          {date: "23.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-          {date: "24.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
+          {date: "12:22 23.3.2022", comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"},
+          {date: "12:22 24.3.2022", comment: "from repetition, injected humour, or non-characteristic words etc."},
+          {date: "12:22 24.3.2022", comment: "typesetting, remaining essentially unchanged. It was popularised in the"},
+          {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
+          {date: "12:22 23.3.2022", comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"},
+          {date: "12:22 24.3.2022", comment: "from repetition, injected humour, or non-characteristic words etc."},
+          {date: "12:22 24.3.2022", comment: "typesetting, remaining essentially unchanged. It was popularised in the"}
         ]
       },
       {
@@ -89,9 +95,12 @@ export class ProductsComponent implements OnInit {
           {name: 'Nay', stockCount: 0},
         ],
         reviews: [
-          {date: "22.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-          {date: "23.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-          {date: "24.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "12:22 24.3.2022", comment: "typesetting, remaining essentially unchanged. It was popularised in the"},
+          {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
+          {date: "12:22 23.3.2022", comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"},
+          {date: "12:22 24.3.2022", comment: "from repetition, injected humour, or non-characteristic words etc."},
+          {date: "12:22 24.3.2022", comment: "typesetting, remaining essentially unchanged. It was popularised in the"}
+
         ]
       },
       {
@@ -107,9 +116,9 @@ export class ProductsComponent implements OnInit {
           {name: 'Nay', stockCount: 1}
         ],
         reviews: [
-          {date: "22.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-          {date: "23.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
-          {date: "24.3.2022", comment: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+          {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
+          {date: "12:22 23.3.2022", comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"},
+          {date: "12:22 24.3.2022", comment: "from repetition, injected humour, or non-characteristic words etc."},
         ]
       }
     ];
@@ -117,5 +126,14 @@ export class ProductsComponent implements OnInit {
 
   getMostRecentData(userReview: UserReview) {
     this.mostRecentReview = userReview;
+  }
+
+  // Kvazi fake data len na skusku na init pre most recent comment
+  getMostRecentFromProductList() {
+    if(this.productList) {
+      const mostRecentComment = this.productList[0].reviews[3].comment;
+      const mostRecentDate = this.productList[0].reviews[3].date;
+      this.mostRecentReview = new UserReview(mostRecentDate, mostRecentComment);
+    }
   }
 }

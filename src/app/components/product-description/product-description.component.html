@@ -42,7 +42,7 @@
         </div>
       </div>
 
-      <app-review [reviewsData]="data" (addedNewComments)="getListOfComments($event)"></app-review>
+      <app-review [reviewsData]="data" (mostRecentReview)="getMostRecentData($event)"></app-review>
 
     </div>
   </div>
