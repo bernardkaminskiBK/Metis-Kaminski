@@ -1,13 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
 
+.center {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .wrapper-most-recent {
+  margin-bottom: 30px;
 
   * {
     font-family: "Poppins", sans-serif;
     color: brown;
   }
-
-  margin-top: 150px;
 
   .last-added-comment {
     border: 2px solid brown;

@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
+
+.form-control {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.1;
+  color: brown;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 104px;
+  margin-left: 35px;
+  margin-bottom: 50px;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  color: brown;
+  width: 35px;
+  height: 35px;
+  border: 0.15em solid brown;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+  display: grid;
+  margin-right: 20px;
+  place-content: center;
+}
+
+.form-control + .form-control {
+  margin-top: 1em;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 25px;
+  height: 25px;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+  transform-origin: bottom left;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+  background-color: brown;
+}
+

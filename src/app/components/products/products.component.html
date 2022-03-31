@@ -1,3 +1,20 @@
+<div class="center">
+  <div class="flex-container">
+
+    <app-app-filter
+      [listOfProducts]="productList"
+      [copyListOfProducts]="copyProductList"
+      [copyInStockOfProductList]="inStockProductList"
+      [isCheckBoxChecked]="checkBoxState"
+      (filteredList)="filteredProductList($event)">
+    </app-app-filter>
+
+    <app-app-filter-options (isCheckedCheckbox)="giveFurtherCheckBoxState($event)">
+    </app-app-filter-options>
+
+  </div>
+</div>
+
 <div class="wrapper-most-recent">
   <div class="last-added-comment" *ngIf="mostRecentReview">
     <h2>Most recent comment</h2>
@@ -8,7 +25,7 @@
 </div>
 
 <div *ngFor="let product of productList">
-  <app-product-description [reviews]="product.reviews" (mostRecentData)="getMostRecentData($event)">
+  <app-product-description [reviewsDataPDC]="product.reviews" (mostRecentData)="getMostRecentData($event)">
     <span productName>{{product.name}}</span>
 
     <ng-container category>

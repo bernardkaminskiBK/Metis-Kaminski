@@ -6,17 +6,10 @@ import {UserReview} from "../../models/UserReview";
   templateUrl: './product-description.component.html',
   styleUrls: ['./product-description.component.scss']
 })
-export class ProductDescriptionComponent implements OnInit {
+export class ProductDescriptionComponent {
 
-  @Input('reviews') data: any;
+  @Input('reviewsDataPDC') data: any;
   @Output() mostRecentData : EventEmitter<any> = new EventEmitter<any>();
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-
-  }
 
   getMostRecentData(userReview: UserReview) {
    this.mostRecentData.emit(userReview);

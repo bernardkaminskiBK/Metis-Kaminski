@@ -1,1 +1,13 @@
-<p>app-filter works!</p>
+  <div class="wrapper">
+    <div class="search_box">
+      <div  class="search_btn" (click)="clickSearchBtn()">
+        <img
+          class="img-search-resize"
+          src="assets\IMG\search-svgrepo-com.png"
+          alt=""
+        />
+      </div>
+      <input #input type="text" class="input_search" placeholder="Search..."
+             [(ngModel)]="searchInputText">
+    </div>
+  </div>
