@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {UserReview} from "../../models/UserReview";
 
 @Component({
@@ -7,19 +7,44 @@ import {UserReview} from "../../models/UserReview";
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
+  checkBoxState: boolean;
 
-  productList?: any[];
-  mostRecentReview : UserReview;
+  productList: any[];
+  copyProductList: any[];
+  mostRecentReview: UserReview;
 
   ngOnInit(): void {
     setTimeout(() => {
       this.getProductList();
       this.getMostRecentFromProductList()
+      this.copyProductList = this.productList;
     }, 500);
+
   }
 
   private getProductList(): void {
     this.productList = [
+      {
+        name: 'Product 1',
+        category: 'Product 1',
+        price: 0,
+        stockCount: 0,
+        vendors: [
+          {name: 'Alza', stockCount: 2},
+          {name: 'Agem', stockCount: 1},
+          {name: 'MediaMarkt', stockCount: 1},
+          {name: 'Asbis', stockCount: 1},
+          {name: 'Nay', stockCount: 1}
+        ],
+        reviews: [
+          {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
+          {
+            date: "12:22 23.3.2022",
+            comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"
+          },
+          {date: "12:22 24.3.2022", comment: "from repetition, injected humour, or non-characteristic words etc."},
+        ]
+      },
       {
         name: 'Acer Nitro 5 Obsidian',
         category: 'Gaming',
@@ -35,7 +60,10 @@ export class ProductsComponent implements OnInit {
         ],
         reviews: [
           {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
-          {date: "12:22 23.3.2022", comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"},
+          {
+            date: "12:22 23.3.2022",
+            comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"
+          },
           {date: "12:22 24.3.2022", comment: "from repetition, injected humour, or non-characteristic words etc."},
           {date: "12:22 24.3.2022", comment: "typesetting, remaining essentially unchanged. It was popularised in the"}
         ]
@@ -55,7 +83,10 @@ export class ProductsComponent implements OnInit {
         ],
         reviews: [
           {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
-          {date: "12:22 23.3.2022", comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"}
+          {
+            date: "12:22 23.3.2022",
+            comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"
+          }
         ]
       },
       {
@@ -73,11 +104,17 @@ export class ProductsComponent implements OnInit {
         ],
         reviews: [
           {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
-          {date: "12:22 23.3.2022", comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"},
+          {
+            date: "12:22 23.3.2022",
+            comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"
+          },
           {date: "12:22 24.3.2022", comment: "from repetition, injected humour, or non-characteristic words etc."},
           {date: "12:22 24.3.2022", comment: "typesetting, remaining essentially unchanged. It was popularised in the"},
           {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
-          {date: "12:22 23.3.2022", comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"},
+          {
+            date: "12:22 23.3.2022",
+            comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"
+          },
           {date: "12:22 24.3.2022", comment: "from repetition, injected humour, or non-characteristic words etc."},
           {date: "12:22 24.3.2022", comment: "typesetting, remaining essentially unchanged. It was popularised in the"}
         ]
@@ -97,7 +134,10 @@ export class ProductsComponent implements OnInit {
         reviews: [
           {date: "12:22 24.3.2022", comment: "typesetting, remaining essentially unchanged. It was popularised in the"},
           {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
-          {date: "12:22 23.3.2022", comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"},
+          {
+            date: "12:22 23.3.2022",
+            comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"
+          },
           {date: "12:22 24.3.2022", comment: "from repetition, injected humour, or non-characteristic words etc."},
           {date: "12:22 24.3.2022", comment: "typesetting, remaining essentially unchanged. It was popularised in the"}
 
@@ -117,7 +157,10 @@ export class ProductsComponent implements OnInit {
         ],
         reviews: [
           {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
-          {date: "12:22 23.3.2022", comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"},
+          {
+            date: "12:22 23.3.2022",
+            comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"
+          },
           {date: "12:22 24.3.2022", comment: "from repetition, injected humour, or non-characteristic words etc."},
         ]
       }
@@ -130,10 +173,21 @@ export class ProductsComponent implements OnInit {
 
   // Kvazi fake data len na skusku na init pre most recent comment
   getMostRecentFromProductList() {
-    if(this.productList) {
-      const mostRecentComment = this.productList[0].reviews[3].comment;
-      const mostRecentDate = this.productList[0].reviews[3].date;
+    if (this.productList) {
+      const mostRecentComment = this.productList[0].reviews[0].comment;
+      const mostRecentDate = this.productList[0].reviews[0].date;
       this.mostRecentReview = new UserReview(mostRecentDate, mostRecentComment);
     }
   }
+
+  filteredProductList(filteredProductList: any[]) {
+    if (filteredProductList && filteredProductList.length > 0) {
+      this.productList = filteredProductList;
+    }
+  }
+
+  giveFurtherCheckBoxState(isCheckBoxChecked: boolean) {
+    this.checkBoxState = isCheckBoxChecked;
+  }
+
 }
