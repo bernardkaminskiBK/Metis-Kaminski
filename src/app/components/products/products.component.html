@@ -25,7 +25,7 @@
 </div>
 
 <div *ngFor="let product of productList">
-  <app-product-description [nameOfProduct]="product" [reviewsDataPDC]="product.reviews" (mostRecentData)="getMostRecentData($event)">
+  <app-product-description [nameOfProduct]="product" (mostRecentData)="getMostRecentData($event)">
     <span productName>{{product.name}}</span>
 
     <ng-container category>
@@ -47,7 +47,6 @@
       <hr>
       <span>{{product.description}}</span>
     </ng-container>
-
 
     <ng-container vendors>
       <div class="wrapper">

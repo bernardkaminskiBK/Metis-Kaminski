@@ -15,7 +15,6 @@ import {UserReview} from "../../models/UserReview";
   styleUrls: ['./product-description.component.scss']
 })
 export class ProductDescriptionComponent implements DoCheck, AfterViewInit {
-  @Input('reviewsDataPDC') data: any;
   @Input('nameOfProduct') product: any;
   @Output() mostRecentData: EventEmitter<any> = new EventEmitter<any>();
 

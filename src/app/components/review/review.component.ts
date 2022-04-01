@@ -9,10 +9,10 @@ import Utils from "../../utils/Utils";
 })
 export class ReviewComponent implements OnInit {
 
-  @Input() reviewsData: any[];
+  @Input() inputProduct: any;
   @Output() mostRecentReview: EventEmitter<any> = new EventEmitter<any>();
 
-  listOfComments: UserReview[] = [];
+  listOfComments: any[] = [];
 
   @ViewChild('input') textArea: ElementRef;
 
@@ -20,17 +20,17 @@ export class ReviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.reviewsData && this.listOfComments) {
-      for (let reviewData of this.reviewsData) {
-        this.listOfComments.push(new UserReview(reviewData.date, reviewData.comment));
-      }
-    }
+    this.listOfComments = this.inputProduct.reviews;
   }
 
   addComment() {
-    if(this.textArea.nativeElement.value) {
-      this.listOfComments
-        .push(new UserReview(Utils.getFormattedCurrentDate(), this.textArea.nativeElement.value));
+    if (this.textArea.nativeElement.value) {
+      this.inputProduct.reviews.push({
+        date: Utils.getFormattedCurrentDate(),
+        comment: this.textArea.nativeElement.value
+      });
+      this.listOfComments = this.inputProduct.reviews;
+
       this.textArea.nativeElement.value = '';
       this.getMostRecentReview(this.listOfComments);
     } else {
@@ -38,9 +38,9 @@ export class ReviewComponent implements OnInit {
     }
   }
 
-  private getMostRecentReview(userReviews: UserReview []) {
-    const mostRecentDate = userReviews[userReviews.length - 1].reviewDate;
-    const mostRecentComment = userReviews[userReviews.length - 1].reviewComment;
+  private getMostRecentReview(userReviews: any []) {
+    const mostRecentDate = userReviews[userReviews.length - 1].date;
+    const mostRecentComment = userReviews[userReviews.length - 1].comment;
     this.mostRecentReview.emit(new UserReview(mostRecentDate, mostRecentComment));
   }
 
