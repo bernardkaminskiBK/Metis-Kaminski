@@ -4,6 +4,17 @@
   font-family: "Poppins", sans-serif;
 }
 
+.offset-style {
+  display: flex;
+  justify-content: flex-end;
+  top: 5px;
+  right: 15px;
+  position: relative;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+}
+
 .main-product {
   border-radius: 5px;
   width: 600px;
@@ -32,7 +43,7 @@ h2 {
   float: left;
 }
 
-.column-product h2{
+.column-product h2 {
   font-size: 20px;
 }
 
