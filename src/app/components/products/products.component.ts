@@ -11,14 +11,13 @@ export class ProductsComponent implements OnInit {
 
   productList: any[];
   copyProductList: any[];
-  inStockProductList: any[];
+
   mostRecentReview: UserReview;
 
   ngOnInit(): void {
     this.getProductList();
     this.getMostRecentFromProductList()
     this.copyProductList = this.productList;
-    this.inStockProductList = this.productList;
   }
 
   private getProductList(): void {

@@ -13,6 +13,8 @@ import {ReviewComponent} from "./components/review/review.component";
 import {FormsModule} from "@angular/forms";
 import { AppFilterOptionsComponent } from './components/app-filter-options/app-filter-options.component';
 import { AppFilterComponent } from './components/app-filter/app-filter.component';
+import { OffSetCheckerComponent } from './off-set-checker/off-set-checker.component';
+import { OffsetCheckerComponent } from './components/offset-checker/offset-checker.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { AppFilterComponent } from './components/app-filter/app-filter.component
     ReviewComponent,
     AppFilterComponent,
     AppFilterOptionsComponent,
+    OffSetCheckerComponent,
+    OffsetCheckerComponent,
   ],
     imports: [BrowserModule, AppRoutingModule, FontAwesomeModule, FormsModule],
   providers: [],

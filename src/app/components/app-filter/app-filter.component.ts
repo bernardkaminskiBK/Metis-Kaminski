@@ -16,7 +16,6 @@ export class AppFilterComponent implements DoCheck {
 
   @Input('listOfProducts') data: any[];
   @Input('copyListOfProducts') copyData: any[];
-  @Input('copyInStockOfProductList') copyInStockData: any[];
   @Input('isCheckBoxChecked') isCheckBoxChecked: boolean;
   @Output('filteredList') filteredData: EventEmitter<any> = new EventEmitter<any>();
 
@@ -29,25 +28,34 @@ export class AppFilterComponent implements DoCheck {
   }
 
   private inStockFilter(): void {
-      const filteredData = this.copyInStockData.filter((searchItem) => {
-        if (searchItem.name.toLowerCase().includes(this.searchInputText.toLowerCase()) &&
-          searchItem.stockCount > 1) {
-          return searchItem;
-        }
-      });
-      this.filteredData.emit(filteredData);
+    const filteredData = this.data.filter((searchItem) => {
+      if (searchItem.name.toLowerCase().includes(this.searchInputText.toLowerCase()) &&
+        searchItem.stockCount > 1) {
+        return searchItem;
+      }
+    });
+    this.filteredData.emit(filteredData);
+
+    if (this.searchInputText.length == 0) {
+      const copyFilteredData =
+        this.copyData.filter((searchItem) => {
+          if (searchItem.stockCount > 1) {
+            return searchItem;
+          }
+        });
+      this.filteredData.emit(copyFilteredData);
+    }
 
   }
 
   private filter(): void {
     if (this.searchInputText.length > 1) {
-      const filterData = this.data.filter((searchItem) => {
+      const filteredData = this.data.filter((searchItem) => {
         if (searchItem.name.toLowerCase().includes(this.searchInputText.toLowerCase())) {
-          console.log('filter: offSetLeft and Top: ' + searchItem.offSetLeft + ' and ' + searchItem.offSetTop);
           return searchItem;
         }
       });
-      this.filteredData.emit(filterData);
+      this.filteredData.emit(filteredData);
     } else {
       this.filteredData.emit(this.copyData);
     }
