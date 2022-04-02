@@ -1,5 +1,6 @@
 import {
-  Component, DoCheck, ElementRef, EventEmitter, Input, OnInit, Output,
+  AfterContentChecked, AfterContentInit, AfterViewChecked,
+  Component, DoCheck, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output,
   ViewChild
 } from '@angular/core';
 
@@ -8,7 +9,7 @@ import {
   templateUrl: './app-filter.component.html',
   styleUrls: ['./app-filter.component.scss']
 })
-export class AppFilterComponent implements OnInit, DoCheck {
+export class AppFilterComponent implements DoCheck {
   searchInputText: string = '';
 
   @ViewChild('input') search: ElementRef;
@@ -19,45 +20,44 @@ export class AppFilterComponent implements OnInit, DoCheck {
   @Input('isCheckBoxChecked') isCheckBoxChecked: boolean;
   @Output('filteredList') filteredData: EventEmitter<any> = new EventEmitter<any>();
 
-  ngOnInit(): void {
-  }
-
   ngDoCheck(): void {
     if (this.isCheckBoxChecked) {
       this.inStockFilter();
     } else {
-      this.filteredData.emit(this.copyData);
       this.filter();
     }
   }
 
   private inStockFilter(): void {
-    const result: any = [];
-    this.copyInStockData.forEach((searchItem) => {
-      if (searchItem.name.toLowerCase().includes(this.searchInputText.toLowerCase()) &&
-        searchItem.stockCount > 1) {
-        result.push(searchItem);
-      }
-    });
-    this.filteredData.emit(result);
+      const filteredData = this.copyInStockData.filter((searchItem) => {
+        if (searchItem.name.toLowerCase().includes(this.searchInputText.toLowerCase()) &&
+          searchItem.stockCount > 1) {
+          return searchItem;
+        }
+      });
+      this.filteredData.emit(filteredData);
+
   }
 
   private filter(): void {
-    const result: any = [];
-    this.data.forEach((searchItem) => {
-      if (searchItem.name.toLowerCase().includes(this.searchInputText.toLowerCase())
-        && this.searchInputText.length > 1) {
-        result.push(searchItem);
-      }
-    });
-    this.filteredData.emit(result);
+    if (this.searchInputText.length > 1) {
+      const filterData = this.data.filter((searchItem) => {
+        if (searchItem.name.toLowerCase().includes(this.searchInputText.toLowerCase())) {
+          console.log('filter: offSetLeft and Top: ' + searchItem.offSetLeft + ' and ' + searchItem.offSetTop);
+          return searchItem;
+        }
+      });
+      this.filteredData.emit(filterData);
+    } else {
+      this.filteredData.emit(this.copyData);
+    }
   }
 
   clickSearchBtn() {
     this.showTextInAlertWindow(this.search.nativeElement.value);
   }
 
-  private showTextInAlertWindow(text: string) {
+  private showTextInAlertWindow(text: string): void {
     if (text.length != 0) {
       alert('Your chosen item was: ' + text);
     }

@@ -25,7 +25,10 @@
 </div>
 
 <div *ngFor="let product of productList">
-  <app-product-description [nameOfProduct]="product" (mostRecentData)="getMostRecentData($event)">
+  <app-product-description
+    [nameOfProduct]="product"
+    (mostRecentData)="getMostRecentData($event)"
+  >
     <span productName>{{product.name}}</span>
 
     <ng-container category>

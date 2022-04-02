@@ -15,14 +15,10 @@ export class ProductsComponent implements OnInit {
   mostRecentReview: UserReview;
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.getProductList();
-      this.getMostRecentFromProductList()
-
-      this.copyProductList = this.productList;
-      this.inStockProductList = this.productList;
-    }, 500);
-
+    this.getProductList();
+    this.getMostRecentFromProductList()
+    this.copyProductList = this.productList;
+    this.inStockProductList = this.productList;
   }
 
   private getProductList(): void {

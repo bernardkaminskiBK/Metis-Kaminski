@@ -1,7 +1,7 @@
 <div class="center">
   <div #main class="main-product">
     <div class="offset-style">
-      x: {{offsetLeft}} y: {{offsetTop}}
+      x: {{offSetLeftProduct}} y: {{offSetTopProduct}}
     </div>
     <div class="title">
 
@@ -45,7 +45,8 @@
         </div>
       </div>
 
-      <app-review [inputProduct]="product" (mostRecentReview)="getMostRecentData($event)"></app-review>
+      <app-review [inputProduct]="product"
+                  (mostRecentReview)="getMostRecentData($event)"></app-review>
 
     </div>
   </div>
