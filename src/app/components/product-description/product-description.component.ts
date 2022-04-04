@@ -1,14 +1,13 @@
 import {
-  AfterContentInit, AfterViewChecked,
-  AfterViewInit,
   Component, DoCheck,
   ElementRef,
   EventEmitter,
-  Input, OnChanges, OnDestroy, OnInit,
+  Input, OnChanges,
   Output,
   ViewChild
 } from '@angular/core';
 import {UserReview} from "../../models/UserReview";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-product-description',
@@ -23,6 +22,10 @@ export class ProductDescriptionComponent implements DoCheck, OnChanges {
 
   offSetTopProduct = 0;
   offSetLeftProduct = 0;
+
+  constructor(private router: Router) {
+
+  }
 
   ngDoCheck() {
     if (this.main) {
@@ -44,4 +47,7 @@ export class ProductDescriptionComponent implements DoCheck, OnChanges {
     this.mostRecentData.emit(userReview);
   }
 
+  navigateToProductDetail() {
+    this.router.navigate(['product-detail', this.product.id]);
+  }
 }

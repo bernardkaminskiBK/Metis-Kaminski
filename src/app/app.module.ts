@@ -8,24 +8,24 @@ import {FooterComponent} from './components/footer/footer.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {ProductDescriptionComponent} from './components/product-description/product-description.component';
 import {ProductsComponent} from './components/products/products.component';
-import {WelcomeComponent} from './components/welcome/welcome.component';
 import {ReviewComponent} from "./components/review/review.component";
 import {FormsModule} from "@angular/forms";
 import {AppFilterOptionsComponent} from './components/app-filter-options/app-filter-options.component';
 import {AppFilterComponent} from './components/app-filter/app-filter.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    routingComponents,
     HeaderComponent,
     FooterComponent,
-    routingComponents,
     ProductDescriptionComponent,
     ProductsComponent,
-    WelcomeComponent,
     ReviewComponent,
     AppFilterComponent,
-    AppFilterOptionsComponent
+    AppFilterOptionsComponent,
+    ProductDetailComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FontAwesomeModule, FormsModule],
   providers: [],
