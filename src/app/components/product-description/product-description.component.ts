@@ -15,7 +15,7 @@ import {UserReview} from "../../models/UserReview";
   templateUrl: './product-description.component.html',
   styleUrls: ['./product-description.component.scss']
 })
-export class ProductDescriptionComponent implements DoCheck, AfterViewInit, OnChanges, AfterViewChecked {
+export class ProductDescriptionComponent implements DoCheck, OnChanges {
   @Input('Product') product: any;
   @Output() mostRecentData: EventEmitter<any> = new EventEmitter<any>();
 
@@ -24,36 +24,20 @@ export class ProductDescriptionComponent implements DoCheck, AfterViewInit, OnCh
   offSetTopProduct = 0;
   offSetLeftProduct = 0;
 
-  ngOnChanges() {
-    if (this.main) {
-      this.offSetTopProduct = this.main.nativeElement.offsetTop;
-      this.offSetLeftProduct = this.main.nativeElement.offsetLeft;
-    }
-  }
-
   ngDoCheck() {
     if (this.main) {
-      // this.product.offSetTop = this.main.nativeElement.offsetTop;
-      // this.product.offSetLeft = this.main.nativeElement.offsetLeft;
-        this.offSetTopProduct = this.main.nativeElement.offsetTop;
-        this.offSetLeftProduct = this.main.nativeElement.offsetLeft;
-
-      // console.log('offSetLeft: ' + this.main.nativeElement.offsetLeft + ' and ' + 'offSetTop: ' + this.main.nativeElement.offsetTop);
+      this.offSetTopProduct = this.main.nativeElement.offsetTop;
+      this.offSetLeftProduct = this.main.nativeElement.offsetLeft;
+      console.log('ngDoCheck(): ' + this.product.name);
     }
   }
 
-  ngAfterViewInit() {
-    if (this.main) {
-      this.offSetTopProduct = this.main.nativeElement.offsetTop;
-      this.offSetLeftProduct = this.main.nativeElement.offsetLeft;
-    }
-  }
-
-  ngAfterViewChecked() {
-    if (this.main) {
-      this.offSetTopProduct = this.main.nativeElement.offsetTop;
-      this.offSetLeftProduct = this.main.nativeElement.offsetLeft;
-    }
+  ngOnChanges() {
+    // if (this.main) {
+    //   this.offSetTopProduct = this.main.nativeElement.offsetTop;
+    //   this.offSetLeftProduct = this.main.nativeElement.offsetLeft;
+    //   console.log('ngOnChanges(): ' + this.product.name);
+    // }
   }
 
   getMostRecentData(userReview: UserReview) {
