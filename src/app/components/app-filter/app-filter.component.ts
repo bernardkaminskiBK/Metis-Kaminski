@@ -20,11 +20,13 @@ export class AppFilterComponent implements DoCheck {
   @Output('filteredList') filteredData: EventEmitter<any> = new EventEmitter<any>();
 
   ngDoCheck(): void {
-    if (this.isCheckBoxChecked) {
-      this.inStockFilter();
-    } else {
-      this.filter();
-    }
+    setTimeout(() => {
+      if (this.isCheckBoxChecked) {
+        this.inStockFilter();
+      } else {
+        this.filter();
+      }
+    });
   }
 
   private inStockFilter(): void {
@@ -45,7 +47,6 @@ export class AppFilterComponent implements DoCheck {
         });
       this.filteredData.emit(copyFilteredData);
     }
-
   }
 
   private filter(): void {

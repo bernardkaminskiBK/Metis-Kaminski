@@ -14,7 +14,7 @@ import {Router} from "@angular/router";
   templateUrl: './product-description.component.html',
   styleUrls: ['./product-description.component.scss']
 })
-export class ProductDescriptionComponent implements DoCheck, OnChanges {
+export class ProductDescriptionComponent implements DoCheck {
   @Input('Product') product: any;
   @Output() mostRecentData: EventEmitter<any> = new EventEmitter<any>();
 
@@ -28,19 +28,15 @@ export class ProductDescriptionComponent implements DoCheck, OnChanges {
   }
 
   ngDoCheck() {
-    if (this.main) {
-      this.offSetTopProduct = this.main.nativeElement.offsetTop;
-      this.offSetLeftProduct = this.main.nativeElement.offsetLeft;
-      console.log('ngDoCheck(): ' + this.product.name);
-    }
-  }
+    if (this.main && this.main.nativeElement) {
+      if(this.offSetTopProduct !== this.main.nativeElement.offsetTop) {
+        this.offSetTopProduct = this.main.nativeElement.offsetTop;
+      }
 
-  ngOnChanges() {
-    // if (this.main) {
-    //   this.offSetTopProduct = this.main.nativeElement.offsetTop;
-    //   this.offSetLeftProduct = this.main.nativeElement.offsetLeft;
-    //   console.log('ngOnChanges(): ' + this.product.name);
-    // }
+      if(this.offSetLeftProduct !== this.main.nativeElement.offsetLeft) {
+        this.offSetLeftProduct = this.main.nativeElement.offsetLeft;
+      }
+    }
   }
 
   getMostRecentData(userReview: UserReview) {

@@ -10,7 +10,6 @@ import TestData from "../../utils/TestData";
 })
 export class ProductDetailComponent implements OnInit {
 
-  params: any;
   productId: number;
   product: any;
 
@@ -18,16 +17,19 @@ export class ProductDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.params = this.route.snapshot;
-    if (this.params) {
-      this.productId = parseInt(<string>this.params.paramMap.get('id'));
-    }
-
+  this.route.paramMap.subscribe( (param) => {
+    this.productId = parseInt(<string>this.route.snapshot.paramMap.get('id'));
     this.product = TestData.getProductById(this.productId);
+  });
   }
 
+  // Ponechal som tu to ako priklad :-)
+  // navigateTo() {
+  //   this.router.navigate(['/product-detail/6']);
+  // }
+
   goBack() {
-    this.router.navigate(['/products', {id: this.productId, test: 'TestValue'}]);
+    this.router.navigate(['/products']);
   }
 
 }
