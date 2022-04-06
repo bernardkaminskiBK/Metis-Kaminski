@@ -3,7 +3,6 @@
 
     <app-app-filter
       [listOfProducts]="productList"
-      [copyListOfProducts]="copyProductList"
       [isCheckBoxChecked]="checkBoxState"
       (filteredList)="filteredProductList($event)">
     </app-app-filter>
@@ -23,7 +22,7 @@
   </div>
 </div>
 
-<div *ngFor="let product of productList">
+<div *ngFor="let product of viewList">
   <app-product-description
     [Product]="product"
     (mostRecentData)="getMostRecentData($event)"

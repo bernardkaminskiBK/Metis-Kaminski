@@ -8,6 +8,6 @@
         />
       </div>
       <input #input type="text" class="input_search" placeholder="Search..."
-             [(ngModel)]="searchInputText">
+             [(ngModel)]="searchInputText" (ngModelChange)="filter()">
     </div>
   </div>

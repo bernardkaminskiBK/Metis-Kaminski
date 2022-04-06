@@ -29,12 +29,16 @@ export class ProductDescriptionComponent implements DoCheck {
 
   ngDoCheck() {
     if (this.main && this.main.nativeElement) {
-      if(this.offSetTopProduct !== this.main.nativeElement.offsetTop) {
-        this.offSetTopProduct = this.main.nativeElement.offsetTop;
+      if (this.offSetTopProduct !== this.main.nativeElement.offsetTop) {
+        setTimeout(() => {
+          this.offSetTopProduct = this.main.nativeElement.offsetTop;
+        });
       }
 
-      if(this.offSetLeftProduct !== this.main.nativeElement.offsetLeft) {
-        this.offSetLeftProduct = this.main.nativeElement.offsetLeft;
+      if (this.offSetLeftProduct !== this.main.nativeElement.offsetLeft) {
+        setTimeout(() => {
+          this.offSetLeftProduct = this.main.nativeElement.offsetLeft;
+        });
       }
     }
   }

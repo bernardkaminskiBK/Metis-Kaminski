@@ -11,14 +11,13 @@ export class ProductsComponent implements OnInit {
   checkBoxState: boolean;
 
   productList: any[];
-  copyProductList: any[];
+  viewList: any[];
 
   mostRecentReview: UserReview;
 
   ngOnInit(): void {
     this.getProductList();
     this.getMostRecentFromProductList()
-    this.copyProductList = this.productList;
   }
 
   private getProductList(): void {
@@ -39,9 +38,7 @@ export class ProductsComponent implements OnInit {
   }
 
   filteredProductList(filteredProductList: any[]) {
-    if (filteredProductList && filteredProductList.length > 0) {
-      this.productList = filteredProductList;
-    }
+    this.viewList = filteredProductList;
   }
 
   pushFurtherCheckBoxState(isCheckBoxChecked: boolean) {
