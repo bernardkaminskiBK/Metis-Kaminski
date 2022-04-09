@@ -55,19 +55,24 @@
   padding: 5px 15px 5px 15px;
   color: white;
   font-weight: bold;
+  margin: 5px;
   background-color: brown;
+  width: -moz-fit-content;
   width: fit-content;
+  font-size: 13px;
 }
 
 .wrapper {
-  display: grid;
-  grid-template-columns: repeat(3, [col-start] fit-content(200px) [col-end]);
-  gap: 10px;
+  //display: grid;
+  //grid-template-columns: repeat(3, [col-start] fit-content(200px) [col-end]);
+  //gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 h2 {
   color: brown;
-  font-size: 21px;
+  font-size: 14px;
 }
 
 hr {
