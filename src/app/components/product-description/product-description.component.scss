@@ -156,3 +156,21 @@ hr {
   box-shadow: inset 100px 0 0 0 white;
   color: brown;
 }
+
+@media(max-width: 400px) {
+  .main-product {
+    width: 360px;
+  }
+  .content {
+    width: 268px;
+  }
+}
+
+@media(max-width: 365px) {
+  .main-product {
+    width: 350px;
+  }
+  .content {
+    width: 258px;
+  }
+}
