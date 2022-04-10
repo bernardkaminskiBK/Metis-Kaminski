@@ -6,9 +6,11 @@ import {ProductsComponent} from "./components/products/products.component";
 import {WelcomeComponent} from "./components/welcome/welcome.component";
 import {ProductDetailComponent} from "./components/product-detail/product-detail.component";
 import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.component";
+import {ProfilComponent} from "./components/profil/profil.component";
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
+  {path: 'profil', component: ProfilComponent},
   {path: 'referencie', component: ReferenciaComponent},
   {path: 'prihlaska', component: PrihlaskaComponent},
   {path: 'products', component: ProductsComponent},
@@ -25,6 +27,7 @@ export class AppRoutingModule {
 
 export const routingComponents = [
   WelcomeComponent,
+  ProfilComponent,
   ReferenciaComponent,
   PrihlaskaComponent,
   ProductsComponent,

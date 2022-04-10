@@ -68,6 +68,11 @@ hr {
   }
 }
 
+@media(max-width: 380px) {
+  .main-product {
+    width: 280px;
+  }
+}
 .center {
   display: grid;
   justify-content: center;

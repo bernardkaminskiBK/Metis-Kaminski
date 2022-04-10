@@ -25,7 +25,11 @@
   align-items: center;
 }
 
-
+@media (max-width: 690px) {
+  .flex-container {
+    margin-top: 100px;
+  }
+}
 
 .wrapper-most-recent {
   margin-bottom: 30px;
@@ -68,6 +72,15 @@
   @media (max-width: 400px) {
     .last-added-comment {
       width: 300px;
+    }
+    .line {
+      width: 250px;
+    }
+  }
+
+  @media (max-width: 365px) {
+    .last-added-comment {
+      width: 285px;
     }
     .line {
       width: 250px;

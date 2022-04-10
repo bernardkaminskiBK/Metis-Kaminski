@@ -44,12 +44,6 @@ ul li::before {
   border-radius: 5px;
 }
 
-@media(max-width: 400px) {
-  .textarea-wrapper {
-    min-width: 215px;
-  }
-}
-
 textarea {
   padding: 10px;
   resize: none;
@@ -105,3 +99,15 @@ textarea:focus {
     box-shadow: none;
     transform: translateY(0);
   }
+
+@media(max-width: 400px) {
+  .textarea-wrapper {
+    min-width: 215px;
+  }
+}
+
+@media(max-width: 363px) {
+  .textarea-wrapper {
+    min-width: 175px;
+  }
+}

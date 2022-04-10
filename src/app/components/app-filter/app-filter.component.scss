@@ -14,12 +14,6 @@
   align-items: center;
 }
 
-@media (max-width: 600px) {
-  .wrapper{
-    margin-top: 200px;
-  }
-}
-
 .search_box{
   background: brown;
   position: relative;
@@ -58,11 +52,13 @@
 @media (max-width: 400px) {
   .search_box{
     width: 235px;
+    margin-left: 10px;
   }
   .search_box .input_search{
     width: 199px;
   }
 }
+
 
 ::placeholder {
   color: brown;

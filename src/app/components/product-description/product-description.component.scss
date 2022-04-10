@@ -168,9 +168,13 @@ hr {
 
 @media(max-width: 365px) {
   .main-product {
-    width: 350px;
+    width: 320px;
   }
   .content {
-    width: 258px;
+    width: 228px;
+  }
+
+  .column-product h2 {
+    font-size: 12px;
   }
 }
