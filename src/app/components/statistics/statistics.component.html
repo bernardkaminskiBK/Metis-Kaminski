@@ -1,36 +1,163 @@
-<div class="center">
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div class="table-first">
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
-    <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-
-    <!-- Weight Column -->
-    <ng-container matColumnDef="weight">
-      <th mat-header-cell *matHeaderCellDef> Weight </th>
-      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="symbol">
-      <th mat-header-cell *matHeaderCellDef> Symbol </th>
-      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
-
+<div class="title">
+  <h1>Last sales states</h1>
 </div>
+
+  <div class="form-field">
+    <mat-form-field>
+      <input (keyup)="applyFilterFirst($event)" matInput placeholder="Filter">
+    </mat-form-field>
+  </div>
+
+  <div class="center">
+    <table mat-table [dataSource]="tableSourceFirst" matSort #firstTableMatSort="matSort" class="mat-elevation-z8">
+      <!-- id Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Id</th>
+        <td mat-cell *matCellDef="let product"> {{product.id}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Name</th>
+        <td mat-cell *matCellDef="let product"> {{product.name}} </td>
+      </ng-container>
+
+      <!-- price Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Price</th>
+        <td mat-cell *matCellDef="let product"> {{product.price}} </td>
+      </ng-container>
+
+      <!-- stockCount Column -->
+      <ng-container matColumnDef="stockCount">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Stock count</th>
+        <td mat-cell *matCellDef="let product"> {{product.stockCount}} </td>
+      </ng-container>
+
+      <!-- quantitySoldWholePeriod Column -->
+      <ng-container matColumnDef="quantitySoldWholePeriod">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Quantity Sold Whole Period</th>
+        <td mat-cell *matCellDef="let product"> {{product.quantitySoldWholePeriod}} </td>
+      </ng-container>
+
+      <!-- quantitySoldLastMonth Column -->
+      <ng-container matColumnDef="quantitySoldLastMonth">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Quantity Sold Last Month</th>
+        <td mat-cell *matCellDef="let product"> {{product.quantitySoldLastMonth}} </td>
+      </ng-container>
+
+      <!-- cash flow Column -->
+      <ng-container matColumnDef="cashFlow">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Cash flow</th>
+        <td mat-cell *matCellDef="let product"> {{product.cashFlow}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsFirst"></tr>
+      <tr mat-row (click)="logData(row)" *matRowDef="let row; columns: displayedColumnsFirst;"></tr>
+    </table>
+  </div>
+
+  <div class="form-field">
+    <mat-paginator #paginatorFirst [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+
+<div class="table-second">
+
+  <div class="title">
+    <h1>Cash flow state last month</h1>
+  </div>
+
+  <div class="form-field">
+    <mat-form-field>
+      <input (keyup)="applyFilterSecond($event)" matInput placeholder="Filter">
+    </mat-form-field>
+  </div>
+
+  <div class="center">
+    <table mat-table [dataSource]="tableSourceSecond" matSort #secondTableMatSort="matSort" class="mat-elevation-z8">
+
+      <!-- id Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let product"> {{product.id}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Name</th>
+        <td mat-cell *matCellDef="let product"> {{product.name}} </td>
+      </ng-container>
+
+      <!-- price Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Price</th>
+        <td mat-cell *matCellDef="let product"> {{product.price}} </td>
+      </ng-container>
+
+      <!-- stockCount Column -->
+      <ng-container matColumnDef="stockCount">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Stock count</th>
+        <td mat-cell *matCellDef="let product"> {{product.stockCount}} </td>
+      </ng-container>
+
+      <!-- CashFlowLastMonth Column -->
+      <ng-container matColumnDef="CashFlowLastMonth">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Cash Flow Last Month </th>
+        <td mat-cell *matCellDef="let product"> {{product.cashFlowLastMonth}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsSecond"></tr>
+      <tr mat-row (click)="logData(row)" *matRowDef="let row; columns: displayedColumnsSecond;"></tr>
+    </table>
+  </div>
+
+  <div class="form-field">
+    <mat-paginator #paginatorSecond [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+
+<div class="table-third">
+
+  <div class="title">
+    <h1>Suggesting to order</h1>
+  </div>
+
+  <div class="form-field">
+    <mat-form-field>
+      <input (keyup)="applyFilterThird($event)" matInput placeholder="Filter">
+    </mat-form-field>
+  </div>
+
+  <div class="center">
+    <table mat-table [dataSource]="tableSourceThird" matSort #thirdTableMatSort="matSort" class="mat-elevation-z8">
+      <!-- id Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let product"> {{product.id}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Name</th>
+        <td mat-cell *matCellDef="let product"> {{product.name}} </td>
+      </ng-container>
+
+      <!-- stockCount Column -->
+      <ng-container matColumnDef="stockCount">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Stock count</th>
+        <td mat-cell *matCellDef="let product"> {{product.stockCount}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsThird"></tr>
+      <tr mat-row (click)="logData(row)" *matRowDef="let row; columns: displayedColumnsThird;"></tr>
+    </table>
+  </div>
+
+  <div class="form-field">
+    <mat-paginator #paginatorThird [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+

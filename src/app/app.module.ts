@@ -7,14 +7,12 @@ import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {ProductDescriptionComponent} from './components/product-description/product-description.component';
-import {ProductsComponent} from './components/products/products.component';
 import {ReviewComponent} from "./components/review/review.component";
 import {FormsModule} from "@angular/forms";
 import {AppFilterOptionsComponent} from './components/app-filter-options/app-filter-options.component';
 import {AppFilterComponent} from './components/app-filter/app-filter.component';
 import {MaterialModule} from "./material/material.module";
 import { SideNavComponent } from './components/side-nav/side-nav.component';
-import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -33,8 +31,7 @@ import {MatIconModule} from "@angular/material/icon";
     AppRoutingModule,
     FontAwesomeModule,
     FormsModule,
-    MaterialModule,
-    MatIconModule
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent],
