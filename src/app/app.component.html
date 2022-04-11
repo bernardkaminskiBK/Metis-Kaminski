@@ -1,4 +1,17 @@
-<router-outlet></router-outlet>
-<app-header></app-header>
+<app-header [inputSideNav]="sideNav"></app-header>
+
+<mat-sidenav-container>
+
+  <mat-sidenav #sideNav mode="over">
+    <app-side-nav></app-side-nav>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
 <app-footer></app-footer>
+
 

@@ -12,7 +12,10 @@ import {ReviewComponent} from "./components/review/review.component";
 import {FormsModule} from "@angular/forms";
 import {AppFilterOptionsComponent} from './components/app-filter-options/app-filter-options.component';
 import {AppFilterComponent} from './components/app-filter/app-filter.component';
-import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import {ProductDetailComponent} from './components/product-detail/product-detail.component';
+import {MaterialModule} from "./material/material.module";
+import { SideNavComponent } from './components/side-nav/side-nav.component';
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -25,9 +28,17 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
     ReviewComponent,
     AppFilterComponent,
     AppFilterOptionsComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    SideNavComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, FontAwesomeModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FontAwesomeModule,
+    FormsModule,
+    MaterialModule,
+    MatIconModule
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

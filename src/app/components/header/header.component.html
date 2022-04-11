@@ -1,17 +1,20 @@
 <nav class="header">
   <a href="">
     <div routerLink="/" class="logo">
-      <img
+      <img class="logo"
         alt="logo"
         src="https://angular.io/assets/images/logos/angularjs/AngularJS-Shield.svg"
       />
       <h2>{{ name }}</h2>
     </div>
   </a>
-  <ul>
-    <li><a routerLink="/profil">Profil</a></li>
-    <li><a routerLink="/referencie">Referencie</a></li>
-    <li><a routerLink="/prihlaska">Prihláška</a></li>
-    <li><a routerLink="/products">Products</a></li>
-  </ul>
+
+  <div class="menu-btn">
+    <div (click)="inputSideNav.toggle()" class="menu-btn_burger">
+      <img
+        alt="menu"
+        src="assets/IMG/menu-4-48.png"
+      />
+    </div>
+  </div>
 </nav>

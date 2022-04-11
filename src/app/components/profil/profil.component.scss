@@ -34,6 +34,7 @@ h4 {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  margin-bottom: 75px;
 }
 
 .container {
@@ -290,9 +291,6 @@ p {
 }
 
 @media(max-width: 1000px) {
-  .profil-wrapper {
-    margin-top: 150px;
-  }
   .container {
     margin: 10px;
     grid-template-columns: repeat(1, 1fr);
@@ -303,9 +301,6 @@ p {
 }
 
 @media(max-width: 600px) {
-  .profil-wrapper {
-    margin-top: 150px;
-  }
   .about .box {
     flex-direction: column;
   }
@@ -319,11 +314,5 @@ p {
 
   .skills .box {
     grid-template-columns: repeat(1,1fr);
-  }
-}
-
-@media(max-width: 448px) {
-  .profil-wrapper {
-    margin-top: 200px;
   }
 }
