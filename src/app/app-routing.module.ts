@@ -7,6 +7,7 @@ import {WelcomeComponent} from "./components/welcome/welcome.component";
 import {ProductDetailComponent} from "./components/product-detail/product-detail.component";
 import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.component";
 import {ProfilComponent} from "./components/profil/profil.component";
+import {StatisticsComponent} from "./components/statistics/statistics.component";
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'referencie', component: ReferenciaComponent},
   {path: 'prihlaska', component: PrihlaskaComponent},
   {path: 'products', component: ProductsComponent},
+  {path: 'statistics', component: StatisticsComponent},
   {path: 'product-detail/:id', component: ProductDetailComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
@@ -32,5 +34,6 @@ export const routingComponents = [
   PrihlaskaComponent,
   ProductsComponent,
   ProductDetailComponent,
+  StatisticsComponent,
   PageNotFoundComponent
 ];

@@ -59,6 +59,7 @@ h2 {
 .column-category {
   float: right;
   margin-right: 15px;
+  margin-top: 10px;
 }
 
 .column-description {
@@ -85,9 +86,10 @@ h2 {
 
 .column-category h2 {
   border-radius: 5px;
-  padding: 5px 15px 5px 15px;
+  padding: 1px 20px 1px 20px;
   color: white;
   background-color: brown;
+  font-weight: bold;
 }
 
 .column-description .row-description {
