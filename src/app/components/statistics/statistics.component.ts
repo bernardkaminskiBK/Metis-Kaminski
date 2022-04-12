@@ -12,10 +12,10 @@ import {MatPaginator} from "@angular/material/paginator";
 export class StatisticsComponent implements OnInit, AfterViewInit {
 
   displayedColumnsFirst: string[] =
-    ['id', 'name', 'price', 'stockCount', 'quantitySoldWholePeriod', 'quantitySoldLastMonth'];
+    ['id', 'name', 'price', 'stockCount', 'quantitySoldLastMonth', 'quantitySoldWholePeriod'];
 
   displayedColumnsSecond: string[] =
-    ['id', 'name', 'price', 'stockCount', 'CashFlowLastMonth'];
+    ['id', 'name', 'price', 'stockCount', 'CashFlowLastMonth', 'CashFlowWholePeriod'];
 
   displayedColumnsThird: string[] =
     ['id', 'name', 'stockCount'];
@@ -38,9 +38,8 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
   mostSoldProductName: string;
 
   ngOnInit(): void {
-    // TODO: Obraty pre každý produkt separátne (celkový, za posledný mesiac)
     this.tableSourceFirst = new MatTableDataSource<any>(TestData.getTestData());
-    this.tableSourceSecond = new MatTableDataSource<any>(TestData.getCashFlowStateOfProductsByLastMonth());
+    this.tableSourceSecond = new MatTableDataSource<any>(TestData.getProductCashFlowStates());
     this.tableSourceThird = new MatTableDataSource<any>(TestData.getProductsNotInStock());
 
     this.totalCashFlowByLastMonth = TestData.getTotalCashFlowByLastMonth();

@@ -13,6 +13,7 @@ import {AppFilterOptionsComponent} from './components/app-filter-options/app-fil
 import {AppFilterComponent} from './components/app-filter/app-filter.component';
 import {MaterialModule} from "./material/material.module";
 import { SideNavComponent } from './components/side-nav/side-nav.component';
+import { BackToTopComponent } from './components/back-to-top/back-to-top.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
     ReviewComponent,
     AppFilterComponent,
     AppFilterOptionsComponent,
-    SideNavComponent
+    SideNavComponent,
+    BackToTopComponent
   ],
   imports: [
     BrowserModule,
