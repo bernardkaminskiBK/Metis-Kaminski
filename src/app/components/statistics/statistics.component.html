@@ -1,12 +1,12 @@
 <div class="table-first">
 
-<div class="title">
-  <h1>Last sales states</h1>
-</div>
+  <div class="title">
+    <h1>Last sales states</h1>
+  </div>
 
   <div class="form-field">
     <mat-form-field>
-      <input (keyup)="applyFilterFirst($event)" matInput placeholder="Filter">
+      <input (keyup)="applyFilterFirstTable($event)" matInput placeholder="Filter">
     </mat-form-field>
   </div>
 
@@ -49,10 +49,10 @@
       </ng-container>
 
       <!-- cash flow Column -->
-      <ng-container matColumnDef="cashFlow">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef> Cash flow</th>
-        <td mat-cell *matCellDef="let product"> {{product.cashFlow}} </td>
-      </ng-container>
+      <!--      <ng-container matColumnDef="cashFlow">-->
+      <!--        <th mat-header-cell mat-sort-header *matHeaderCellDef> Cash flow</th>-->
+      <!--        <td mat-cell *matCellDef="let product"> {{product.cashFlow}} </td>-->
+      <!--      </ng-container>-->
 
       <tr mat-header-row *matHeaderRowDef="displayedColumnsFirst"></tr>
       <tr mat-row (click)="logData(row)" *matRowDef="let row; columns: displayedColumnsFirst;"></tr>
@@ -72,7 +72,7 @@
 
   <div class="form-field">
     <mat-form-field>
-      <input (keyup)="applyFilterSecond($event)" matInput placeholder="Filter">
+      <input (keyup)="applyFilterSecondTable($event)" matInput placeholder="Filter">
     </mat-form-field>
   </div>
 
@@ -81,7 +81,7 @@
 
       <!-- id Column -->
       <ng-container matColumnDef="id">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef> Id </th>
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Id</th>
         <td mat-cell *matCellDef="let product"> {{product.id}} </td>
       </ng-container>
 
@@ -105,7 +105,7 @@
 
       <!-- CashFlowLastMonth Column -->
       <ng-container matColumnDef="CashFlowLastMonth">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef> Cash Flow Last Month </th>
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Cash Flow Last Month</th>
         <td mat-cell *matCellDef="let product"> {{product.cashFlowLastMonth}} </td>
       </ng-container>
 
@@ -127,7 +127,7 @@
 
   <div class="form-field">
     <mat-form-field>
-      <input (keyup)="applyFilterThird($event)" matInput placeholder="Filter">
+      <input (keyup)="applyFilterThirdTable($event)" matInput placeholder="Filter">
     </mat-form-field>
   </div>
 
@@ -135,7 +135,7 @@
     <table mat-table [dataSource]="tableSourceThird" matSort #thirdTableMatSort="matSort" class="mat-elevation-z8">
       <!-- id Column -->
       <ng-container matColumnDef="id">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef> Id </th>
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Id</th>
         <td mat-cell *matCellDef="let product"> {{product.id}} </td>
       </ng-container>
 
@@ -159,5 +159,51 @@
   <div class="form-field">
     <mat-paginator #paginatorThird [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   </div>
+
+  <div class="general-statistics">
+    <div class="title">
+      <h1>General sale statistics</h1>
+    </div>
+    <div class="cards">
+      <mat-card>
+        <mat-card-title>
+          Total cash flow <br> last month
+        </mat-card-title>
+        <mat-card-content>
+          {{ totalCashFlowByLastMonth }} EUR
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-title>
+          The Total amount of <br> cash flow whole period
+        </mat-card-title>
+        <mat-card-content>
+          {{ totalCashFlowByWholePeriod }} EUR
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-title>
+          The Average price <br> of sale products
+        </mat-card-title>
+        <mat-card-content>
+          {{ avgPriceSoldProducts }} EUR
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-title>
+          Most sold product
+        </mat-card-title>
+        <mat-card-content>
+          {{ mostSoldProductName }}
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
 </div>
+
+
 

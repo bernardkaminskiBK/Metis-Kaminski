@@ -12,7 +12,7 @@ import {MatPaginator} from "@angular/material/paginator";
 export class StatisticsComponent implements OnInit, AfterViewInit {
 
   displayedColumnsFirst: string[] =
-    ['id', 'name', 'price', 'stockCount', 'quantitySoldWholePeriod', 'quantitySoldLastMonth', 'cashFlow'];
+    ['id', 'name', 'price', 'stockCount', 'quantitySoldWholePeriod', 'quantitySoldLastMonth'];
 
   displayedColumnsSecond: string[] =
     ['id', 'name', 'price', 'stockCount', 'CashFlowLastMonth'];
@@ -32,10 +32,21 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
   @ViewChild('paginatorSecond') paginatorSecond: MatPaginator;
   @ViewChild('paginatorThird') paginatorThird: MatPaginator;
 
+  totalCashFlowByLastMonth: number;
+  totalCashFlowByWholePeriod: number;
+  avgPriceSoldProducts: number;
+  mostSoldProductName: string;
+
   ngOnInit(): void {
+    // TODO: Obraty pre každý produkt separátne (celkový, za posledný mesiac)
     this.tableSourceFirst = new MatTableDataSource<any>(TestData.getTestData());
-    this.tableSourceSecond = new MatTableDataSource<any>(TestData.getTestData());
+    this.tableSourceSecond = new MatTableDataSource<any>(TestData.getCashFlowStateOfProductsByLastMonth());
     this.tableSourceThird = new MatTableDataSource<any>(TestData.getProductsNotInStock());
+
+    this.totalCashFlowByLastMonth = TestData.getTotalCashFlowByLastMonth();
+    this.totalCashFlowByWholePeriod = TestData.getTotalCashFlowByWholePeriod();
+    this.avgPriceSoldProducts = TestData.getAveragePriceSoldProducts();
+    this.mostSoldProductName = TestData.getMostSoldProductName();
   }
 
   ngAfterViewInit(): void {
@@ -53,15 +64,15 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
     console.log(row);
   }
 
-  applyFilterFirst(filterValue: any) {
+  applyFilterFirstTable(filterValue: any) {
     this.tableSourceFirst.filter = filterValue.target.value.trim().toLocaleLowerCase();
   }
 
-  applyFilterSecond(filterValue: any) {
+  applyFilterSecondTable(filterValue: any) {
     this.tableSourceSecond.filter = filterValue.target.value.trim().toLocaleLowerCase();
   }
 
-  applyFilterThird(filterValue: any) {
+  applyFilterThirdTable(filterValue: any) {
     this.tableSourceThird.filter = filterValue.target.value.trim().toLocaleLowerCase();
   }
 
