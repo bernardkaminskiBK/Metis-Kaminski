@@ -184,6 +184,21 @@ export default class TestData {
     return result;
   }
 
+  static getFirstVendorList() : any[] {
+    return this.getTestData()[0].vendors;
+  }
+
+
+  static getVendorsByProductName(productName : string) : any[] {
+    let vendors : any[] = [];
+    this.getTestData().forEach((product: any) => {
+      if(product.name == productName) {
+        vendors = product.vendors;
+      }
+    });
+    return vendors;
+  }
+
   /*
        Ďalší zoznam, ktorý bude slúžiť na zoznam produktov, ktoré majú nulové množstvo na sklade.
        Zoznam umožní rýchli prehľad tovaru, ktorý treba urgentne do objednať.

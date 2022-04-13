@@ -183,26 +183,74 @@
         </mat-card-content>
       </mat-card>
 
-      <mat-card>
-        <mat-card-title>
-          The Average price <br> of sale products
-        </mat-card-title>
-        <mat-card-content>
-          {{ avgPriceSoldProducts }} EUR
-        </mat-card-content>
-      </mat-card>
+      <ng-container *ngIf="totalCashFlowByLastMonth != 0 ">
+        <mat-card>
+          <mat-card-title>
+            The Average price <br> of sold products
+          </mat-card-title>
+          <mat-card-content>
+            {{ avgPriceSoldProducts }} EUR
+          </mat-card-content>
+        </mat-card>
+      </ng-container>
 
-      <mat-card>
-        <mat-card-title>
-          Most sold product
-        </mat-card-title>
-        <mat-card-content>
-          {{ mostSoldProductName }}
-        </mat-card-content>
-      </mat-card>
+      <ng-container *ngIf="mostSoldProductName">
+        <mat-card>
+          <mat-card-title>
+            Most sold product
+          </mat-card-title>
+          <mat-card-content>
+            {{ mostSoldProductName }}
+          </mat-card-content>
+        </mat-card>
+      </ng-container>
     </div>
   </div>
 
+</div>
+
+<div class="table-fourth">
+
+  <div class="title">
+    <h1>Vendors by products</h1>
+  </div>
+
+  <div class="form-field-select">
+    <mat-form-field>
+      <input (keyup)="applyFilterFourthTable($event)" matInput placeholder="Filter">
+    </mat-form-field>
+
+    <mat-form-field appearance="standard">
+      <mat-label>{{selected}}</mat-label>
+      <mat-select [(value)]="selected" (selectionChange)="fillFourthTableWithContent()">
+        <mat-option *ngFor="let product of products" [value]="product">{{product.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="center">
+    <table mat-table [dataSource]="tableSourceFourth" matSort #fourthTableMatSort="matSort" class="mat-elevation-z8">
+
+      <!-- name Column -->
+      <ng-container matColumnDef="vendor">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Vendor </th>
+        <td mat-cell *matCellDef="let vendor"> {{vendor.name}} </td>
+      </ng-container>
+
+      <!-- stockCount Column -->
+      <ng-container matColumnDef="stockCount">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Stock Count</th>
+        <td mat-cell *matCellDef="let vendor"> {{vendor.stockCount}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsFourth"></tr>
+      <tr mat-row (click)="logData(row)" *matRowDef="let row; columns: displayedColumnsFourth;"></tr>
+    </table>
+  </div>
+
+  <div class="form-field">
+    <mat-paginator #paginatorFourth [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
 </div>
 
 

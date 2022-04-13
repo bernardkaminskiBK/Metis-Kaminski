@@ -51,6 +51,16 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   justify-content: center;
 }
 
+.form-field-select {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: space-around;
+  align-items: center;
+  flex-direction: column-reverse;
+}
+
 .table-first {
   margin-top: 100px;
 }

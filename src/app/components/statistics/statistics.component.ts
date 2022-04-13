@@ -20,32 +20,44 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
   displayedColumnsThird: string[] =
     ['id', 'name', 'stockCount'];
 
+  displayedColumnsFourth: string[] =
+    ['vendor', 'stockCount'];
+
   tableSourceFirst: MatTableDataSource<any>;
   tableSourceSecond: MatTableDataSource<any>;
   tableSourceThird: MatTableDataSource<any>;
+  tableSourceFourth: MatTableDataSource<any>;
 
   @ViewChild('firstTableMatSort') sortFirst: MatSort;
   @ViewChild('secondTableMatSort') sortSecond: MatSort;
   @ViewChild('thirdTableMatSort') sortThird: MatSort;
+  @ViewChild('fourthTableMatSort') sortFourth: MatSort;
 
   @ViewChild('paginatorFirst') paginatorFirst: MatPaginator;
   @ViewChild('paginatorSecond') paginatorSecond: MatPaginator;
   @ViewChild('paginatorThird') paginatorThird: MatPaginator;
+  @ViewChild('paginatorFourth') paginatorFourth: MatPaginator;
 
   totalCashFlowByLastMonth: number;
   totalCashFlowByWholePeriod: number;
   avgPriceSoldProducts: number;
   mostSoldProductName: string;
 
+  selected;
+  products: any[] = [];
+
   ngOnInit(): void {
     this.tableSourceFirst = new MatTableDataSource<any>(TestData.getTestData());
     this.tableSourceSecond = new MatTableDataSource<any>(TestData.getProductCashFlowStates());
     this.tableSourceThird = new MatTableDataSource<any>(TestData.getProductsNotInStock());
+    this.tableSourceFourth = new MatTableDataSource<any>(TestData.getFirstVendorList());
 
     this.totalCashFlowByLastMonth = TestData.getTotalCashFlowByLastMonth();
     this.totalCashFlowByWholePeriod = TestData.getTotalCashFlowByWholePeriod();
     this.avgPriceSoldProducts = TestData.getAveragePriceSoldProducts();
     this.mostSoldProductName = TestData.getMostSoldProductName();
+
+    this.products = TestData.getTestData();
   }
 
   ngAfterViewInit(): void {
@@ -57,22 +69,39 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
 
     this.tableSourceThird.sort = this.sortThird;
     this.tableSourceThird.paginator = this.paginatorThird;
+
+    this.tableSourceFourth.sort = this.sortFourth;
+    this.tableSourceFourth.paginator = this.paginatorFourth;
+
+    this.selected = TestData.getTestData()[0].name;
   }
 
   logData(row) {
     console.log(row);
   }
 
-  applyFilterFirstTable(filterValue: any) {
+  applyFilterFirstTable(filterValue: any): void {
     this.tableSourceFirst.filter = filterValue.target.value.trim().toLocaleLowerCase();
   }
 
-  applyFilterSecondTable(filterValue: any) {
+  applyFilterSecondTable(filterValue: any): void {
     this.tableSourceSecond.filter = filterValue.target.value.trim().toLocaleLowerCase();
   }
 
-  applyFilterThirdTable(filterValue: any) {
+  applyFilterThirdTable(filterValue: any): void {
     this.tableSourceThird.filter = filterValue.target.value.trim().toLocaleLowerCase();
   }
 
+  applyFilterFourthTable(filterValue: any): void {
+    this.tableSourceFourth.filter = filterValue.target.value.trim().toLocaleLowerCase();
+  }
+
+  fillFourthTableWithContent(): void {
+    this.tableSourceFourth =
+      new MatTableDataSource<any>(TestData.getVendorsByProductName(this.selected.name));
+    this.selected = this.selected.name;
+
+    this.tableSourceFourth.sort = this.sortFourth;
+    this.tableSourceFourth.paginator = this.paginatorFourth;
+  }
 }
