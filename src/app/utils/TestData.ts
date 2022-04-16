@@ -239,7 +239,7 @@ export default class TestData {
 
   // Celkový obrat za celé obdobie (sumarizácie cez všetky produkty v jednom čísle)
   static getTotalCashFlowByWholePeriod(): number {
-    let sumWholePeriod: number = 0
+    let sumWholePeriod: number = 0;
     this.getProductCashFlowStates().forEach((product) => {
       if (product.price) {
         sumWholePeriod += product.price * product.quantitySoldWholePeriod;
@@ -262,15 +262,15 @@ export default class TestData {
 
   // Najpredávanejší produkt
   static getMostSoldProductName(): string {
-    let avg: number = 0;
+    let sum: number = 0;
     let temp: number = 0;
     let nameOfProduct: string = '';
 
     this.getTestData().forEach((product) => {
       if (product.price) {
-        avg = product.quantitySoldLastMonth + product.quantitySoldWholePeriod;
-        if (temp < avg) {
-          temp = avg;
+        sum = product.quantitySoldLastMonth + product.quantitySoldWholePeriod;
+        if (temp < sum) {
+          temp = sum;
           nameOfProduct = product.name;
         }
       }
