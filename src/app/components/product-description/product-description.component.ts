@@ -2,12 +2,12 @@ import {
   Component, DoCheck,
   ElementRef,
   EventEmitter,
-  Input, OnChanges,
+  Input,
   Output,
   ViewChild
 } from '@angular/core';
 import {UserReview} from "../../models/UserReview";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-product-description',
@@ -23,7 +23,7 @@ export class ProductDescriptionComponent implements DoCheck {
   offSetTopProduct = 0;
   offSetLeftProduct = 0;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private route: ActivatedRoute) {
 
   }
 
@@ -48,6 +48,6 @@ export class ProductDescriptionComponent implements DoCheck {
   }
 
   navigateToProductDetail() {
-    this.router.navigate(['product-detail', this.product.id]);
+    this.router.navigate(['product-detail', this.product.id], { relativeTo: this.route});
   }
 }
