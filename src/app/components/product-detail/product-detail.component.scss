@@ -33,7 +33,7 @@ hr {
 }
 
 .main-product {
-  margin-top: 150px;
+  margin-top: 50px;
   border-radius: 5px;
   width: 600px;
   background-color:white;
@@ -44,14 +44,14 @@ hr {
 
 @media(max-width: 675px) {
   .main-product {
-    margin-top: 200px;
+    margin-top: 50px;
     width: 500px;
   }
 }
 
 @media(max-width: 585px) {
   .main-product {
-    margin-top: 200px;
+    margin-top: 50px;
     width: 400px;
   }
 }
