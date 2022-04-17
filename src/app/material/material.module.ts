@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from "@angular/material/button";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatTableModule} from "@angular/material/table";
@@ -13,7 +12,6 @@ import {MatSelectModule} from "@angular/material/select";
 
 const material = [
   MatButtonModule,
-  BrowserAnimationsModule,
   MatSidenavModule,
   MatTableModule,
   MatIconModule,

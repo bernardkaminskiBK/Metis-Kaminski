@@ -12,8 +12,9 @@ import {FormsModule} from "@angular/forms";
 import {AppFilterOptionsComponent} from './components/app-filter-options/app-filter-options.component';
 import {AppFilterComponent} from './components/app-filter/app-filter.component';
 import {MaterialModule} from "./material/material.module";
-import { SideNavComponent } from './components/side-nav/side-nav.component';
-import { BackToTopComponent } from './components/back-to-top/back-to-top.component';
+import {SideNavComponent} from './components/side-nav/side-nav.component';
+import {BackToTopComponent} from './components/back-to-top/back-to-top.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { BackToTopComponent } from './components/back-to-top/back-to-top.compone
     BackToTopComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
