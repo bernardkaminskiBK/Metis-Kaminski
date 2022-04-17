@@ -3,7 +3,7 @@
 <mat-sidenav-container>
 
   <mat-sidenav #sideNav mode="over">
-    <app-side-nav></app-side-nav>
+    <app-side-nav (click)="sideNav.toggle()"></app-side-nav>
   </mat-sidenav>
 
   <mat-sidenav-content>
