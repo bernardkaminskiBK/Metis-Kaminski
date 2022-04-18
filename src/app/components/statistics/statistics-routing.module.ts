@@ -11,5 +11,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class StatisticsRoutingModule {
-// TODO: 1:32:30 pokracovanie tu
 }

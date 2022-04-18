@@ -170,6 +170,58 @@ export default class TestData {
           },
           {date: "12:22 24.3.2022", comment: "from repetition, injected humour, or non-characteristic words etc."},
         ]
+      },
+      {
+        id: 7,
+        name: 'Test',
+        category: 'Test',
+        price: 500,
+        stockCount: 2,
+        quantitySoldWholePeriod: 2,
+        quantitySoldLastMonth: 2,
+        cashFlowLastMonth: 0,
+        cashFlowWholePeriod: 0,
+        vendors: [
+          {name: 'Alza', stockCount: 1},
+          {name: 'Agem', stockCount: 1},
+          {name: 'MediaMarkt', stockCount: 1},
+          {name: 'Asbis', stockCount: 1},
+          {name: 'Nay', stockCount: 1}
+        ],
+        reviews: [
+          {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
+          {
+            date: "12:22 23.3.2022",
+            comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"
+          },
+          {date: "12:22 24.3.2022", comment: "from repetition, injected humour, or non-characteristic words etc."},
+        ]
+      },
+      {
+        id: 8,
+        name: 'Test2',
+        category: 'Test2',
+        price: 500,
+        stockCount: 1,
+        quantitySoldWholePeriod: 1,
+        quantitySoldLastMonth: 1,
+        cashFlowLastMonth: 0,
+        cashFlowWholePeriod: 0,
+        vendors: [
+          {name: 'Alza', stockCount: 1},
+          {name: 'Agem', stockCount: 1},
+          {name: 'MediaMarkt', stockCount: 1},
+          {name: 'Asbis', stockCount: 1},
+          {name: 'Nay', stockCount: 1}
+        ],
+        reviews: [
+          {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
+          {
+            date: "12:22 23.3.2022",
+            comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"
+          },
+          {date: "12:22 24.3.2022", comment: "from repetition, injected humour, or non-characteristic words etc."},
+        ]
       }
     ];
   }

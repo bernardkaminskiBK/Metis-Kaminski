@@ -7,5 +7,5 @@ import {MatSidenav} from "@angular/material/sidenav";
   styleUrls: ['./side-nav.component.scss']
 })
 export class SideNavComponent {
-  
+
 }
