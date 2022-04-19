@@ -6,7 +6,7 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import {UserReview} from "../../models/UserReview";
+import {UserReview} from "../../../models/UserReview";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({

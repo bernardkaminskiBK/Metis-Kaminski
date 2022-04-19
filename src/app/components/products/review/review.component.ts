@@ -1,6 +1,6 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {UserReview} from "../../models/UserReview";
-import Utils from "../../utils/Utils";
+import {UserReview} from "../../../models/UserReview";
+import Utils from "../../../utils/Utils";
 
 @Component({
   selector: 'app-review',

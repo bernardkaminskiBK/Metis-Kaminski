@@ -43,8 +43,8 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
   avgPriceSoldProducts: number;
   mostSoldProductName: string;
 
-  products: any[] = TestData.getTestData();
-  selected = this.products[0].name;
+  products: any[];
+  selected: any;
 
   ngOnInit(): void {
     this.tableSourceFirst = new MatTableDataSource<any>(TestData.getTestData());
@@ -56,6 +56,9 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
     this.totalCashFlowByWholePeriod = TestData.getTotalCashFlowByWholePeriod();
     this.avgPriceSoldProducts = TestData.getAveragePriceSoldProducts();
     this.mostSoldProductName = TestData.getMostSoldProductName();
+
+    this.products = TestData.getTestData();
+    this.selected = this.products[0].name;
   }
 
   ngAfterViewInit(): void {

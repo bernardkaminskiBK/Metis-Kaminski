@@ -1,6 +1,6 @@
 import {AfterContentChecked, Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import TestData from "../../utils/TestData";
+import TestData from "../../../utils/TestData";
 
 
 @Component({
