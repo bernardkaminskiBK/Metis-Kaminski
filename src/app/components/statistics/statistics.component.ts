@@ -15,7 +15,7 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
     ['id', 'name', 'price', 'stockCount', 'quantitySoldLastMonth', 'quantitySoldWholePeriod'];
 
   displayedColumnsSecond: string[] =
-    ['id', 'name', 'price', 'stockCount', 'CashFlowLastMonth', 'CashFlowWholePeriod'];
+    ['id', 'name', 'price', 'stockCount', 'cashFlowLastMonth', 'cashFlowWholePeriod'];
 
   displayedColumnsThird: string[] =
     ['id', 'name', 'stockCount'];
