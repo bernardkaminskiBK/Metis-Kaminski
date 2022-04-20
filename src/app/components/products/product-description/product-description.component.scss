@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
+@import './src/styles';
 
 * {
   font-family: "Poppins", sans-serif;
@@ -26,9 +27,9 @@
 }
 
 .main-product {
-  border-radius: 5px;
+  border-radius: $border-radius-size;
   width: 401px;
-  background-color: brown;
+  background-color: $main-primary-color;
   margin: 25px;
   position: relative;
 }
@@ -41,7 +42,7 @@
 }
 
 h2 {
-  color: brown;
+  color: $main-primary-color;
   font-size: 14px;
 }
 
@@ -69,7 +70,7 @@ h2 {
 .column-price {
   margin-left: 16px;
   float: left;
-  color: brown;
+  color: $main-primary-color;
   font-weight: bold;
   font-size: 14px;
   margin-top: 50px;
@@ -78,17 +79,17 @@ h2 {
 .column-stock {
   float: right;
   margin-right: 35px;
-  color: brown;
+  color: $main-primary-color;
   font-weight: bold;
   font-size: 13px;
   margin-top: 50px;
 }
 
 .column-category h2 {
-  border-radius: 5px;
+  border-radius: $border-radius-size;
   padding: 1px 20px 1px 20px;
   color: white;
-  background-color: brown;
+  background-color: $main-primary-color;
   font-weight: bold;
 }
 
@@ -105,7 +106,7 @@ h2 {
 }
 
 hr {
-  border: 0.5px solid brown;
+  border: 0.5px solid $main-primary-color;
 }
 
 .row-description p {
@@ -128,10 +129,10 @@ hr {
 .content {
   margin: 0 0 0 90.5px;
   width: 309px;
-  border-radius: 0 0 5px 0;
+  border-radius: 0 0 $border-radius-size 0;
   background-color: white;
   position: relative;
-  border: 1px solid brown;
+  border: 1px solid $main-primary-color;
 }
 
 .center {
@@ -156,7 +157,7 @@ hr {
 
 .details-button:hover {
   box-shadow: inset 100px 0 0 0 white;
-  color: brown;
+  color: $main-primary-color;
 }
 
 @media(max-width: 400px) {

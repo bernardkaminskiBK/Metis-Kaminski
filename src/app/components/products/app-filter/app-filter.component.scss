@@ -1,9 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
+@import './src/styles';
 
 *{
   margin-bottom:0;
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+  //font-family: 'Montserrat', sans-serif;
 }
 
 .wrapper{
@@ -15,7 +16,7 @@
 }
 
 .search_box{
-  background: brown;
+  background: $main-primary-color;
   position: relative;
   padding: 2px;
   border-radius: 5px;
@@ -26,12 +27,12 @@
 .search_box .search_btn{
   width: 30px;
   height: 30px;
-  border-radius: 5px;
+  border-radius: $border-radius-size;
   background: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: brown;
+  color: $main-primary-color;
   margin-right: 2px;
   cursor: pointer;
 }
@@ -40,11 +41,11 @@
   outline: none;
   border: 0;
   background: white;
-  border-radius: 5px;
+  border-radius: $border-radius-size;
   padding: 15px 20px;
   width: 234px;
   height: 30px;
-  color: brown;
+  color: $main-primary-color;
   font-size: 14px;
   font-weight: bold;
 }
@@ -61,18 +62,18 @@
 
 
 ::placeholder {
-  color: brown;
+  color: $main-primary-color;
 }
 
 ::-webkit-input-placeholder {
-  color: brown;
+  color: $main-primary-color;
 }
 
 :-ms-input-placeholder {
-  color: brown;
+  color: $main-primary-color;
 }
 
 .img-search-resize {
-  height: 20px;
-  width: 20px;
+  height: $image-search-size;
+  width: $image-search-size;
 }

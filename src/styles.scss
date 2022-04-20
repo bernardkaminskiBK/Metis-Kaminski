@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import './app/stylesheets/global';
+
 html {
   scroll-behavior: smooth;
 }
@@ -17,7 +19,7 @@ body {
 }
 
 .mat-drawer-container {
-  background-color: white;
+  background-color: $main-primary-background-color;
 }
 
 html, body { height: 100%; }

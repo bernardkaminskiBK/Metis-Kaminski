@@ -1,11 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
+@import './src/styles';
 
 .form-control {
   font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   font-weight: bold;
   line-height: 1.1;
-  color: brown;
+  color: $main-primary-color;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,11 +19,11 @@ input[type="checkbox"] {
   appearance: none;
   background-color: #fff;
   font: inherit;
-  color: brown;
+  color: $main-primary-color;
   width: 20px;
   height: 20px;
-  border: 1px solid brown;
-  border-radius: 0.15em;
+  border: 1px solid $main-primary-color;
+  border-radius: $border-radius-size;
   transform: translateY(-0.075em);
   display: grid;
   margin-right: 20px;
@@ -51,6 +52,6 @@ input[type="checkbox"]::before {
 
 input[type="checkbox"]:checked::before {
   transform: scale(1);
-  background-color: brown;
+  background-color: $main-primary-color;
 }
 

@@ -1,5 +1,7 @@
+@import './src/styles';
+
 .sidenav {
-  background: #962727;
+  background: $main-side-nav-color;
   height: 100%;
   width: 240px;
   display: flex;
@@ -18,7 +20,7 @@ ul li {
 }
 
 ul li a {
-  box-shadow: inset 0 0 0 0 brown;
+  box-shadow: inset 0 0 0 0 $main-primary-color;
   color: white;
   text-decoration: none;
   cursor: pointer;
@@ -29,5 +31,5 @@ ul li a {
 
 ul li a:hover {
   box-shadow: inset 100px 0 0 0 white;
-  color: brown;
+  color: $main-primary-color;
 }
