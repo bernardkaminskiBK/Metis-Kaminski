@@ -146,3 +146,7 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
     margin-left: 15px;
   }
 }
+
+:host ::ng-deep.mat-paginator .mat-paginator-container {
+  background: $main-paginator-container-color;
+}
