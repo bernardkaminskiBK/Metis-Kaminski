@@ -111,6 +111,15 @@ hr {
   @include bordered(0.5px, $main-primary-color);
 }
 
+.sold-out {
+  border-radius: 5px;
+  padding: 5px 15px 5px 15px;
+  color: white;
+  font-weight: bold;
+  background-color: brown;
+  width: fit-content;
+}
+
 .list-wrapper {
   margin: 0 auto
 }
