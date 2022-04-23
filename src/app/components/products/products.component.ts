@@ -48,6 +48,5 @@ export class ProductsComponent implements OnInit {
 
   clickSort(str: string) {
     this.sortBy = str;
-    console.log('sort: ' + this.sortBy);
   }
 }

@@ -60,6 +60,7 @@
   .sort-style {
     display: flex;
     justify-content: space-between;
+    height: 25px;
 
     .mat-icon {
       -webkit-user-select: none;
@@ -68,8 +69,14 @@
       background-repeat: no-repeat;
       display: inline-block;
       fill: currentColor;
-      height: 40px;
+      height: 22px;
       width: 25px;
+    }
+
+    .mat-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button {
+      min-width: 0;
+      line-height: 0;
+      padding: 0;
     }
   }
 
@@ -120,7 +127,7 @@
 
 h2 {
   color: $main-primary-color;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 hr {
