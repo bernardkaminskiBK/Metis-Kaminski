@@ -40,7 +40,7 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
 
   totalCashFlowByLastMonth: number;
   totalCashFlowByWholePeriod: number;
-  avgPriceSoldProducts: number;
+  avgPriceSoldProducts: string;
   mostSoldProductName: string;
 
   products: any[];

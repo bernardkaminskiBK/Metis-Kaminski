@@ -301,7 +301,7 @@ export default class TestData {
   }
 
   // Priemerná cena predávaných produktov
-  static getAveragePriceSoldProducts(): number {
+  static getAveragePriceSoldProducts(): string {
     let avg: number = 0;
     this.getTestData().forEach((product) => {
       if (product.price) {
@@ -309,7 +309,7 @@ export default class TestData {
       }
     });
     let result = (this.getTotalCashFlowByWholePeriod() + this.getTotalCashFlowByLastMonth()) / avg;
-    return this.round(result);
+    return result.toFixed(2).replace('.',',') + ' €';
   }
 
   // Najpredávanejší produkt
@@ -328,10 +328,6 @@ export default class TestData {
       }
     });
     return nameOfProduct;
-  }
-
-  private static round(num: number) {
-    return Math.round(num * 100) / 100;
   }
 
 }
