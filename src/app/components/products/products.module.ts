@@ -8,6 +8,8 @@ import {ProductDetailComponent} from "./product-detail/product-detail.component"
 import {AppFilterComponent} from "./app-filter/app-filter.component";
 import {AppFilterOptionsComponent} from "./app-filter-options/app-filter-options.component";
 import {ReviewComponent} from "./review/review.component";
+import {SortPipe} from "../../shared/pipes/sort.pipe";
+import {MaterialModule} from "../../material/material.module";
 
 const components = [
   ProductsComponent,
@@ -15,14 +17,16 @@ const components = [
   ProductDetailComponent,
   AppFilterComponent,
   AppFilterOptionsComponent,
-  ReviewComponent
+  ReviewComponent,
+  SortPipe
 ];
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ProductsRoutingModule
+    ProductsRoutingModule,
+    MaterialModule
   ],
   declarations: [
     components

@@ -12,6 +12,7 @@ export class ProductsComponent implements OnInit {
 
   productList: any[];
   viewList: any[];
+  sortBy: string;
 
   mostRecentReview: UserReview;
 
@@ -45,4 +46,8 @@ export class ProductsComponent implements OnInit {
     this.checkBoxState = isCheckBoxChecked;
   }
 
+  clickSort(str: string) {
+    this.sortBy = str;
+    console.log('sort: ' + this.sortBy);
+  }
 }
