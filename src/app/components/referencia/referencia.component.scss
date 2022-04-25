@@ -4,6 +4,32 @@
   @extend %center-content
 }
 
-.center h1 {
-  align-self: center;
+.snack-bar-style {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  input {
+    margin-bottom: 15px;
+  }
+
+  .mat-button {
+    background: $main-primary-color;
+    color: white;
+  }
+
+  h2 {
+    margin-top: 15px;
+    margin-bottom: 0;
+  }
+
+  .mat-fab {
+    background: $main-primary-color;
+  }
+
+  .fab {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+  }
 }

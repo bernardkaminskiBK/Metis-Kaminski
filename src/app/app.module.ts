@@ -7,7 +7,7 @@ import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FormsModule} from "@angular/forms";
-import {MaterialModule} from "./material/material.module";
+import {MaterialModule} from "./shared/material/material.module";
 import {SideNavComponent} from './components/side-nav/side-nav.component';
 import {BackToTopComponent} from './components/back-to-top/back-to-top.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";

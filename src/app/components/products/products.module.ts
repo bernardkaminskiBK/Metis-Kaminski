@@ -9,7 +9,7 @@ import {AppFilterComponent} from "./app-filter/app-filter.component";
 import {AppFilterOptionsComponent} from "./app-filter-options/app-filter-options.component";
 import {ReviewComponent} from "./review/review.component";
 import {SortPipe} from "../../shared/pipes/sort.pipe";
-import {MaterialModule} from "../../material/material.module";
+import {MaterialModule} from "../../shared/material/material.module";
 
 const components = [
   ProductsComponent,

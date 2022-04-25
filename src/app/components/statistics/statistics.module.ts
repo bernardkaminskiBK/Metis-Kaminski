@@ -1,8 +1,8 @@
 import {StatisticsComponent} from "./statistics.component";
 import {NgModule} from "@angular/core";
 import {StatisticsRoutingModule} from "./statistics-routing.module";
-import {MaterialModule} from "../../material/material.module";
 import {CommonModule} from "@angular/common";
+import {MaterialModule} from "../../shared/material/material.module";
 
 const components = [
   StatisticsComponent

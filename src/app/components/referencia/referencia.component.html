@@ -1,3 +1,21 @@
 <div class="center">
-  <h1>referencia works!</h1>
+  <div class="snack-bar-style">
+    <h1>referencia works!</h1>
+    <input [(ngModel)]="messageInput">
+    <button mat-button (click)="sendMessage()">Send Notification</button>
+
+    <h2>History</h2>
+
+    <ul *ngIf="localHistory && localHistory.length">
+      <li *ngFor="let item of localHistory">{{item}}</li>
+    </ul>
+    <p *ngIf="!localHistory || localHistory.length === 0">History is empty</p>
+
+    <div class="fab" *ngIf="localHistory.length > 0">
+      <button (click)="deleteHistory()" mat-fab color="primary" aria-label="Example icon button with a delete icon">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+
+  </div>
 </div>
