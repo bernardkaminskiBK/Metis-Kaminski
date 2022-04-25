@@ -1,4 +1,11 @@
-<div class="table-first">
+<div class="fragment-nav">
+  <button mat-button (click)="goToFragment('table1')">Last sales states</button>
+  <button mat-button (click)="goToFragment('table2')">Cash flow states</button>
+  <button mat-button (click)="goToFragment('table3')">Suggesting to order</button>
+  <button mat-button (click)="goToFragment('table4')">Vendors by products</button>
+</div>
+
+<div id="table1" class="table-first">
 
   <div class="title">
     <h1>Last sales states</h1>
@@ -58,7 +65,7 @@
   </div>
 </div>
 
-<div class="table-second">
+<div id="table2" class="table-second">
 
   <div class="title">
     <h1>Cash flow states</h1>
@@ -119,7 +126,7 @@
   </div>
 </div>
 
-<div class="table-third">
+<div id="table3" class="table-third">
 
   <div class="title">
     <h1>Suggesting to order</h1>
@@ -209,7 +216,7 @@
 
 </div>
 
-<div class="table-fourth">
+<div id="table4" class="table-fourth">
 
   <div class="title">
     <h1>Vendors by products</h1>

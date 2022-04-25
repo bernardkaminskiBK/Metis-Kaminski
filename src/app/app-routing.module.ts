@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {ExtraOptions, RouterModule, Routes} from '@angular/router';
 import {PrihlaskaComponent} from './components/prihlaska/prihlaska.component';
 import {ReferenciaComponent} from './components/referencia/referencia.component';
 import {WelcomeComponent} from "./components/welcome/welcome.component";
@@ -22,8 +22,13 @@ const routes: Routes = [
   {path: '**', component: PageNotFoundComponent}
 ];
 
+const routerOptions: ExtraOptions = {
+  scrollPositionRestoration: 'enabled',
+  anchorScrolling: 'enabled'
+};
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'top'})],
+  imports: [RouterModule.forRoot(routes, routerOptions)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {

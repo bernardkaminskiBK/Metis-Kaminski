@@ -9,6 +9,17 @@
   align-self: center;
 }
 
+.fragment-nav {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-evenly;
+
+  .mat-button {
+    color: $main-side-nav-color;
+  }
+
+}
+
 .title h1 {
   display: flex;
   justify-content: center;
@@ -65,7 +76,7 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 }
 
 .table-first {
-  margin-top: 100px;
+  margin-top: 60px;
 }
 
 .table-second {
@@ -149,4 +160,10 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 
 :host ::ng-deep.mat-paginator .mat-paginator-container {
   background: $main-paginator-container-color;
+}
+
+@media(max-width: 530px) {
+  .fragment-nav {
+    flex-direction: column;
+  }
 }

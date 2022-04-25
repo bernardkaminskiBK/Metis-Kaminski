@@ -3,6 +3,7 @@ import TestData from "../../utils/TestData";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-statistics',
@@ -45,6 +46,9 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
 
   products: any[];
   selected: any;
+
+  constructor(private router: Router) {
+  }
 
   ngOnInit(): void {
     this.tableSourceFirst = new MatTableDataSource<any>(TestData.getTestData());
@@ -102,5 +106,9 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
 
     this.tableSourceFourth.sort = this.sortFourth;
     this.tableSourceFourth.paginator = this.paginatorFourth;
+  }
+
+  goToFragment(fragment: string) : void {
+    this.router.navigateByUrl('statistics#' + fragment);
   }
 }
