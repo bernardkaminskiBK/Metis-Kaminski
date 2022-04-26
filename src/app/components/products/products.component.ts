@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserReview} from "../../models/UserReview";
-import TestData from "../../utils/TestData";
+import {ProductService} from "../../shared/services/product.service";
 
 @Component({
   selector: 'app-products',
@@ -16,13 +16,16 @@ export class ProductsComponent implements OnInit {
 
   mostRecentReview: UserReview;
 
+  constructor(private data: ProductService) {
+  }
+
   ngOnInit(): void {
     this.getProductList();
     this.getMostRecentFromProductList()
   }
 
   private getProductList(): void {
-    this.productList = TestData.getTestData();
+    this.productList = this.data.getProductList();
   }
 
   getMostRecentData(userReview: UserReview) {

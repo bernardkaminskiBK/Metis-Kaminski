@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import TestData from "../../utils/TestData";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
 import {Router} from "@angular/router";
+import {ProductService} from "../../shared/services/product.service";
 
 @Component({
   selector: 'app-statistics',
@@ -47,21 +47,21 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
   products: any[];
   selected: any;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private data: ProductService) {
   }
 
   ngOnInit(): void {
-    this.tableSourceFirst = new MatTableDataSource<any>(TestData.getTestData());
-    this.tableSourceSecond = new MatTableDataSource<any>(TestData.getProductCashFlowStates());
-    this.tableSourceThird = new MatTableDataSource<any>(TestData.getProductsNotInStock());
-    this.tableSourceFourth = new MatTableDataSource<any>(TestData.getFirstVendorList());
+    this.tableSourceFirst = new MatTableDataSource<any>(this.data.getProductList());
+    this.tableSourceSecond = new MatTableDataSource<any>(this.data.getProductCashFlowStates());
+    this.tableSourceThird = new MatTableDataSource<any>(this.data.getProductsNotInStock());
+    this.tableSourceFourth = new MatTableDataSource<any>(this.data.getFirstVendorList());
 
-    this.totalCashFlowByLastMonth = TestData.getTotalCashFlowByLastMonth();
-    this.totalCashFlowByWholePeriod = TestData.getTotalCashFlowByWholePeriod();
-    this.avgPriceSoldProducts = TestData.getAveragePriceSoldProducts();
-    this.mostSoldProductName = TestData.getMostSoldProductName();
+    this.totalCashFlowByLastMonth = this.data.getTotalCashFlowByLastMonth();
+    this.totalCashFlowByWholePeriod = this.data.getTotalCashFlowByWholePeriod();
+    this.avgPriceSoldProducts = this.data.getAveragePriceSoldProducts();
+    this.mostSoldProductName = this.data.getMostSoldProductName();
 
-    this.products = TestData.getTestData();
+    this.products = this.data.getProductList();
     this.selected = this.products[0].name;
   }
 
@@ -101,7 +101,7 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
 
   fillFourthTableWithContent(): void {
     this.tableSourceFourth =
-      new MatTableDataSource<any>(TestData.getVendorsByProductName(this.selected.name));
+      new MatTableDataSource<any>(this.data.getVendorsByProductName(this.selected.name));
     this.selected = this.selected.name;
 
     this.tableSourceFourth.sort = this.sortFourth;
