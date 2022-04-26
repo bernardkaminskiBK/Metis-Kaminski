@@ -19,6 +19,7 @@ const routes: Routes = [
     path: 'statistics',
     loadChildren: () => import('./components/statistics/statistics.module').then(m => m.StatisticsModule)
   },
+  {path: '404notFound', component: PageNotFoundComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 

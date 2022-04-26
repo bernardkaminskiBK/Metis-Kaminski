@@ -1,4 +1,4 @@
-import {AfterContentChecked, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import TestData from "../../../utils/TestData";
 
@@ -20,6 +20,12 @@ export class ProductDetailComponent implements OnInit {
   this.route.paramMap.subscribe( (param) => {
     this.productId = parseInt(<string>this.route.snapshot.paramMap.get('id'));
     this.product = TestData.getProductById(this.productId);
+
+    // Alternativa na upozornenie ze ups nie je taky produkt alebo radsej hodit tam hlasku ze
+    // product not found napriklad, okej to-do do buducna...
+    if(!this.product) {
+      this.router.navigate(['/404notFound']);
+    }
   });
   }
 
