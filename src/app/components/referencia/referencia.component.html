@@ -11,7 +11,7 @@
     </ul>
     <p *ngIf="!localHistory || localHistory.length === 0">History is empty</p>
 
-    <div class="fab" *ngIf="localHistory.length > 0">
+    <div class="fab" *ngIf="localHistory && localHistory.length">
       <button (click)="deleteHistory()" mat-fab color="primary" aria-label="Example icon button with a delete icon">
         <mat-icon>delete</mat-icon>
       </button>

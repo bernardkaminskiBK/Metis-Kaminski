@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SnackBarService} from "../../shared/services/snackBar.service";
 import {StorageService} from "../../shared/services/storage.service";
 
@@ -7,16 +7,21 @@ import {StorageService} from "../../shared/services/storage.service";
   templateUrl: './referencia.component.html',
   styleUrls: ['./referencia.component.scss']
 })
-export class ReferenciaComponent implements OnInit {
+export class ReferenciaComponent implements OnInit, OnDestroy {
 
   messageInput: string;
   localHistory: string [];
+
+  private subscription: any;
 
   constructor(private snackBar: SnackBarService) {
   }
 
   ngOnInit(): void {
-    this.localHistory = this.snackBar.getHistory()
+    // this.localHistory = this.snackBar.getHistory()
+    this.subscription = this.snackBar.historyObserver.subscribe((newValue) => {
+      this.localHistory = newValue;
+    });
   }
 
   sendMessage(): void {
@@ -28,6 +33,12 @@ export class ReferenciaComponent implements OnInit {
 
   deleteHistory(): void {
     this.snackBar.deleteHistory();
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 }

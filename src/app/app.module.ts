@@ -11,6 +11,7 @@ import {MaterialModule} from "./shared/material/material.module";
 import {SideNavComponent} from './components/side-nav/side-nav.component';
 import {BackToTopComponent} from './components/back-to-top/back-to-top.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {SnackBarService} from "./shared/services/snackBar.service";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     FormsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [SnackBarService],
   bootstrap: [AppComponent],
   exports: []
 
