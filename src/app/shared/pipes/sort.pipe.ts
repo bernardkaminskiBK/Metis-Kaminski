@@ -15,7 +15,12 @@ export class SortPipe implements PipeTransform {
     //   this.cacheResult = this.update(this.cacheValue, arg);
     // }
     // return this.cacheResult;
-    return this.update(value, arg);
+    if(value && value.length) {
+      return this.update(value, arg);
+    } else {
+      return [];
+    }
+
   }
 
   private update(value: any, arg: string): any[] {
