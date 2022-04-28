@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import {UserReview} from "../../../models/UserReview";
 import {ActivatedRoute, Router} from "@angular/router";
+import {ShoppingCartService} from "../../../shared/services/shopping-cart.service";
 
 @Component({
   selector: 'app-product-description',
@@ -23,7 +24,11 @@ export class ProductDescriptionComponent implements DoCheck {
   offSetTopProduct = 0;
   offSetLeftProduct = 0;
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private shopCartArr: ShoppingCartService
+  ) {
 
   }
 
@@ -48,10 +53,10 @@ export class ProductDescriptionComponent implements DoCheck {
   }
 
   navigateToProductDetail() {
-    this.router.navigate(['product-detail', this.product.id], { relativeTo: this.route});
+    this.router.navigate(['product-detail', this.product.id], {relativeTo: this.route});
   }
 
   addProductToShoppingCart() {
-    console.log('add to cart: ' + this.product.name);
+    this.shopCartArr.addProductToShoppingCart(this.product);
   }
 }

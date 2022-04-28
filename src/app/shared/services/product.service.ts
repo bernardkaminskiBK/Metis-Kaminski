@@ -17,6 +17,9 @@ export class ProductService {
         quantitySoldLastMonth: 0,
         cashFlowLastMonth: 0,
         cashFlowWholePeriod: 0,
+        display: 0,
+        ram: 4,
+        memory: 16,
         vendors: [
           {name: 'Alza', stockCount: 2},
           {name: 'Agem', stockCount: 1},
@@ -43,6 +46,9 @@ export class ProductService {
         quantitySoldLastMonth: 2,
         cashFlowLastMonth: 0,
         cashFlowWholePeriod: 0,
+        display: 15.6,
+        ram: 16,
+        memory: 512,
         description: 'Herný notebook – Intel Core i5 9300H Coffee Lake, 15.6" IPS matný 1920 × 1080 120Hz, RAM 8GB DDR4, NVIDIA GeForce GTX 1650 4GB, SSD 512GB, numerická klávesnica, podsvietená klávesnica, webkamera, USB-C, WiFi 6, 56 Wh batéria, hmotnosť 2.5kg, Windows 10 Home, HDD upgrade kit (AN515-54-54KC) ',
         vendors: [
           {name: 'Alza', stockCount: 10},
@@ -71,6 +77,9 @@ export class ProductService {
         quantitySoldLastMonth: 3,
         cashFlowLastMonth: 0,
         cashFlowWholePeriod: 0,
+        display: 16,
+        ram: 16,
+        memory: 1000,
         description: 'Herný notebook – AMD Ryzen 7 5800H, 16" IPS antireflexný 2560 × 1600 165Hz, RAM 16GB DDR4, NVIDIA GeForce RTX 3070 8GB 140 W, SSD 1000GB, numerická klávesnica, podsvietená RGB klávesnica, webkamera, USB-C, WiFi 6, 80 Wh batéria, hmotnosť 2.45kg, bez operačného systému',
         vendors: [
           {name: 'Alza', stockCount: 10},
@@ -97,6 +106,9 @@ export class ProductService {
         quantitySoldLastMonth: 1,
         cashFlowLastMonth: 0,
         cashFlowWholePeriod: 0,
+        display: 13.3,
+        ram: 8,
+        memory: 256,
         description: 'MacBook – Apple M1, 13.3" IPS lesklý 2560 × 1600 , RAM 8GB, Apple M1 8-jadrová GPU, SSD 256GB, podsvietená klávesnica, webkamera, USB-C, čítačka odtlačkov prstov, WiFi 6, 58.2 Wh batéria, hmotnosť 1.37kg, MAC OS',
         vendors: [
           {name: 'Alza', stockCount: 0},
@@ -131,6 +143,9 @@ export class ProductService {
         quantitySoldLastMonth: 4,
         cashFlowLastMonth: 0,
         cashFlowWholePeriod: 0,
+        display: 15,
+        ram: 8,
+        memory: 256,
         description: 'Notebook – Intel Core i3 1115G4 Tiger Lake, 15" IPS matný 1920 × 1080, RAM 8GB DDR4, Intel UHD Graphics, SSD 256GB, numerická klávesnica, podsvietená klávesnica, webkamera, USB 3.2 Gen 1, čítačka odtlačkov prstov, WiFi 5, 42 Wh batéria, hmotnosť 1.98kg, Windows 10 Pro (NBD)',
         vendors: [
           {name: 'Alza', stockCount: 0},
@@ -161,6 +176,9 @@ export class ProductService {
         quantitySoldLastMonth: 2,
         cashFlowLastMonth: 0,
         cashFlowWholePeriod: 0,
+        display: 16,
+        ram: 16,
+        memory: 1000,
         vendors: [
           {name: 'Alza', stockCount: 2},
           {name: 'Agem', stockCount: 1},
@@ -187,6 +205,9 @@ export class ProductService {
         quantitySoldLastMonth: 2,
         cashFlowLastMonth: 0,
         cashFlowWholePeriod: 0,
+        display: 15.6,
+        ram: 8,
+        memory: 500,
         vendors: [
           {name: 'Alza', stockCount: 1},
           {name: 'Agem', stockCount: 1},

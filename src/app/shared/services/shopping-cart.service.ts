@@ -6,17 +6,18 @@ import {BehaviorSubject} from "rxjs";
 })
 export class ShoppingCartService {
 
-  private shoppingCartArr: any[];
+  private shoppingCartArr: any[] = [];
   shoppingCartObserver = new BehaviorSubject<any[]>([]);
 
   addProductToShoppingCart(product: any) : void {
     this.shoppingCartArr.push(product);
+    this.shoppingCartObserver.next(this.shoppingCartArr);
   }
 
   deleteProductFromShoppingCart(product: any) : void {
     const index = this.shoppingCartArr.indexOf(product, 0);
       if(index > -1) {
-        this.shoppingCartArr.splice(product,1);
+        this.shoppingCartArr.splice(index,1);
       }
   }
 }

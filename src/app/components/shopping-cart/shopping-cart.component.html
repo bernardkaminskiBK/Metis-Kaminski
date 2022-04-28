@@ -1,9 +1,10 @@
-<!--<div class="center">-->
-<!--  <h1>No item found in cart!</h1>-->
-<!--</div>-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-<main class="page">
+<div *ngIf="products.length == 0" class="center">
+  <h1>No item found in cart!</h1>
+</div>
+
+<main *ngIf="products && products.length" class="page">
   <section class="shopping-cart dark">
     <div class="container">
       <div class="block-heading">
@@ -13,94 +14,43 @@
         <div class="row">
           <div class="col-md-12 col-lg-8">
             <div class="items">
-<!--              <div class="product">-->
-<!--                <div class="row">-->
-<!--                  <div class="col-md-3">-->
-<!--                    <img class="img-fluid mx-auto d-block image" src="assets/image.jpg">-->
-<!--                  </div>-->
-<!--                  <div class="col-md-8">-->
-<!--                    <div class="info">-->
-<!--                      <div class="row">-->
-<!--                        <div class="col-md-5 product-name">-->
-<!--                          <div class="product-name">-->
-<!--                            <a href="#">Lorem Ipsum dolor</a>-->
-<!--                            <div class="product-info">-->
-<!--                              <div>Display: <span class="value">5 inch</span></div>-->
-<!--                              <div>RAM: <span class="value">4GB</span></div>-->
-<!--                              <div>Memory: <span class="value">32GB</span></div>-->
-<!--                            </div>-->
-<!--                          </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-md-4 quantity">-->
-<!--                          <label for="quantity">Quantity:</label>-->
-<!--                          <input id="quantity" type="number" value ="1" class="form-control quantity-input">-->
-<!--                        </div>-->
-<!--                        <div class="col-md-3 price">-->
-<!--                          <span>$120</span>-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
 
-<!--              <div class="product">-->
-<!--                <div class="row">-->
-<!--                  <div class="col-md-3">-->
-<!--                    <img class="img-fluid mx-auto d-block image" src="image.jpg">-->
-<!--                  </div>-->
-<!--                  <div class="col-md-8">-->
-<!--                    <div class="info">-->
-<!--                      <div class="row">-->
-<!--                        <div class="col-md-5 product-name">-->
-<!--                          <div class="product-name">-->
-<!--                            <a href="#">Lorem Ipsum dolor</a>-->
-<!--                            <div class="product-info">-->
-<!--                              <div>Display: <span class="value">5 inch</span></div>-->
-<!--                              <div>RAM: <span class="value">4GB</span></div>-->
-<!--                              <div>Memory: <span class="value">32GB</span></div>-->
-<!--                            </div>-->
-<!--                          </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-md-4 quantity">-->
-<!--                          <label for="quantity">Quantity:</label>-->
-<!--                          <input id="quantity" type="number" value ="1" class="form-control quantity-input">-->
-<!--                        </div>-->
-<!--                        <div class="col-md-3 price">-->
-<!--                          <span>$120</span>-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-
-              <div class="product">
-                <div class="row">
-                  <div class="col-md-3">
-                    <img class="img-fluid mx-auto d-block image" src="assets/IMG/image.jpg">
-                  </div>
-                  <div class="col-md-8">
-                    <div class="info">
-                      <div class="row">
-                        <div class="col-md-5 product-name">
-                          <div class="product-name">
-                            <h2>Názov produktu</h2>
-                            <div class="product-info">
-                              <div>Display: <span class="value">5 inch</span></div>
-                              <div>RAM: <span class="value">4GB</span></div>
-                              <div>Memory: <span class="value">32GB</span></div>
+              <div *ngFor="let product of products">
+                <div class="product">
+                  <div class="row">
+                    <div class="remove-product">
+                      <div class="col-md-3">
+                        <img class="img-fluid mx-auto d-block image" src="assets/IMG/image.jpg">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="info">
+                          <div class="row">
+                            <div class="col-md-5 product-name">
+                              <div class="product-name">
+                                <h2>{{product.name}}</h2>
+                                <div class="product-info">
+                                  <div>Display: <span class="value">{{product.display}}"</span></div>
+                                  <div>RAM: <span class="value">{{product.ram}} GB</span></div>
+                                  <div>Memory: <span class="value">{{product.memory}} GB</span></div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-4 quantity">
+                              <label for="quantity">Quantity:</label>
+                              <input id="quantity" type="number" value="{{quantity}}"
+                                     class="form-control quantity-input">
+                            </div>
+                            <div class="col-md-3 price">
+                              <span>{{product.price}} €</span>
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-4 quantity">
-                          <label for="quantity">Quantity:</label>
-                          <input id="quantity" type="number" value ="1" class="form-control quantity-input">
-                        </div>
-                        <div class="col-md-3 price">
-                          <span>0 €</span>
-                        </div>
                       </div>
+
+                      <div (click)="removeProductFromCart(product)" class="remove">
+                        <mat-icon>delete_outline</mat-icon>
+                      </div>
+
                     </div>
                   </div>
                 </div>
