@@ -1,0 +1,13 @@
+.white-shop-cart {
+  color: white;
+}
+
+.shop-cart {
+  cursor: pointer;
+}
+
+::ng-deep.mat-badge-content {
+  background: #df2e31;
+  color: #f2f2f2;
+  cursor: pointer;
+}

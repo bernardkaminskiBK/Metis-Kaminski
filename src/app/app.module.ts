@@ -12,6 +12,7 @@ import {SideNavComponent} from './components/side-nav/side-nav.component';
 import {BackToTopComponent} from './components/back-to-top/back-to-top.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SnackBarService} from "./shared/services/snackBar.service";
+import { ShoppingCartBadgeComponent } from './components/shopping-cart-badge/shopping-cart-badge.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {SnackBarService} from "./shared/services/snackBar.service";
     HeaderComponent,
     FooterComponent,
     SideNavComponent,
-    BackToTopComponent
+    BackToTopComponent,
+    ShoppingCartBadgeComponent
   ],
   imports: [
     BrowserAnimationsModule,

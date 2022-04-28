@@ -50,4 +50,8 @@ export class ProductDescriptionComponent implements DoCheck {
   navigateToProductDetail() {
     this.router.navigate(['product-detail', this.product.id], { relativeTo: this.route});
   }
+
+  addProductToShoppingCart() {
+    console.log('add to cart: ' + this.product.name);
+  }
 }

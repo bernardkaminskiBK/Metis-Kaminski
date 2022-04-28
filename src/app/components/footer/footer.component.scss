@@ -12,7 +12,7 @@ h4 {
   box-sizing: border-box;
 }
 
-.footer {
+.product-footer {
   background-color: $main-primary-color;
   padding: 1px 0;
   position: relative;
@@ -20,21 +20,21 @@ h4 {
   bottom: 0;
 }
 
-.container {
+.product-bottom {
   margin: 15px;
 }
 
-.row {
+.footer-row {
   display: flex;
   flex-wrap: wrap;
 }
 
-.footer-col {
+.footer-column {
   width: 50%;
   padding: 0 15px;
 }
 
-.footer-col h4 {
+.footer-column h4 {
   font-size: 14px;
   color: white;
   text-transform: capitalize;
@@ -43,7 +43,7 @@ h4 {
   position: relative;
 }
 
-.footer-col h4::before {
+.footer-column h4::before {
   content: "";
   position: absolute;
   left: 0;
@@ -54,11 +54,11 @@ h4 {
   width: 50px;
 }
 
-.footer-col ul li:not(:last-child) {
+.footer-column ul li:not(:last-child) {
   margin-bottom: 10px;
 }
 
-.footer-col ul li a {
+.footer-column ul li a {
   font-size: 12px;
   font-family: "Poppins", sans-serif;
   color: white;
@@ -67,7 +67,7 @@ h4 {
   transition: all 0.3s ease;
 }
 
-.footer-col ul li a:hover {
+.footer-column ul li a:hover {
   padding-left: 8px;
 }
 
@@ -80,7 +80,7 @@ h4 {
   color: $main-primary-color;
 }
 
-.footer-col .social-links a {
+.footer-column .social-links a {
   display: inline-block;
   height: 40px;
   width: 40px;
@@ -97,7 +97,7 @@ ul {
 
 /*responsive*/
  @media (max-width: 767px) {
-   .footer-col {
+   .footer-column {
      width: 50%;
    }
 
@@ -115,7 +115,7 @@ ul {
 }
 
 @media (max-width: 574px) {
-  .footer-col {
+  .footer-column {
     width: 100%;
   }
 }
