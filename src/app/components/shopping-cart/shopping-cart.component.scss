@@ -22,6 +22,10 @@ mat-drawer-container {
   justify-content: space-between;
 }
 
+img.img-fluid.mx-auto.d-block.image {
+  margin-top: 15px;
+}
+
 .remove {
   cursor: pointer;
   display: flex;

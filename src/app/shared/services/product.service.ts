@@ -39,6 +39,7 @@ export class ProductService {
       {
         id: 2,
         name: 'Acer Nitro 5 Obsidian',
+        img_url: 'https://cdn.alza.sk/ImgW.ashx?fd=f16&cd=NC108c7i04n2',
         category: 'Gaming',
         price: 849,
         stockCount: 18,
@@ -70,6 +71,7 @@ export class ProductService {
       {
         id: 3,
         name: 'Lenovo Legion 5 Pro',
+        img_url: 'https://cdn.alza.sk/ImgW.ashx?fd=f16&cd=NT379u80o3',
         category: 'Gaming',
         price: 1539,
         stockCount: 50,
@@ -99,6 +101,7 @@ export class ProductService {
       {
         id: 4,
         name: 'Macbook Pro 13" M1 SK2020',
+        img_url: 'https://cdn.alza.sk/Foto/f16/NL/NL257a1b1.jpg',
         category: 'MacBook',
         price: 1459,
         stockCount: 3,
@@ -137,6 +140,7 @@ export class ProductService {
       {
         id: 5,
         name: 'Dell Vostro 3500',
+        img_url: 'https://cdn.alza.sk/ImgW.ashx?fd=f16&cd=ADC253z08i',
         category: 'Kancelária',
         stockCount: 18,
         quantitySoldWholePeriod: 8,
@@ -169,6 +173,7 @@ export class ProductService {
       {
         id: 6,
         name: 'Asus Zenbook 13',
+        img_url: 'https://cdn.alza.sk/ImgW.ashx?fd=f16&cd=NA618p71c2',
         category: 'Ultrabook',
         price: 1149,
         stockCount: 6,
@@ -199,6 +204,7 @@ export class ProductService {
         id: 7,
         name: 'Test',
         category: 'Test',
+        img_url: '',
         price: 500,
         stockCount: 2,
         quantitySoldWholePeriod: 2,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import {ShoppingCartService} from "../../shared/services/shopping-cart.service";
 
 @Component({
   selector: 'app-shopping-cart-badge',
@@ -8,14 +9,30 @@ import {Router} from "@angular/router";
 })
 export class ShoppingCartBadgeComponent implements OnInit {
 
-  hidden = false;
+  quantity: number = 0;
+  hiddenBadge = false;
+  products: any[] = [];
 
-  constructor(private router: Router) { }
+  private subscription: any;
+
+  constructor(private router: Router, private shopCartArr: ShoppingCartService) { }
 
   ngOnInit(): void {
+    this.subscription = this.shopCartArr.shoppingCartObserver.subscribe((newValue) =>{
+      this.products = newValue;
+
+      this.hiddenBadge = !this.products.length;
+      this.quantity = this.products.length;
+    });
   }
 
   navigateToShoppingCart() {
     this.router.navigate(['shopping-cart']);
+  }
+
+  ngOnDestroy(): void {
+    if(this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

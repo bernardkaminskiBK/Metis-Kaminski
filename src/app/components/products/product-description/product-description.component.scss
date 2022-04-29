@@ -182,8 +182,8 @@ hr {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  width: 120px;
-  margin-left: 95px;
+  width: 276px;
+  margin-left: 16px;
   will-change: transform;
   border: 1px solid $main-primary-color;
   margin-bottom: 20px;
@@ -211,6 +211,10 @@ hr {
   }
   .content {
     width: 268px;
+  }
+
+  .button-28 {
+    width: 238px;
   }
 }
 

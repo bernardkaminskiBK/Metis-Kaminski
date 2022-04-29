@@ -9,6 +9,7 @@ import {
 import {UserReview} from "../../../models/UserReview";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ShoppingCartService} from "../../../shared/services/shopping-cart.service";
+import {ProductService} from "../../../shared/services/product.service";
 
 @Component({
   selector: 'app-product-description',

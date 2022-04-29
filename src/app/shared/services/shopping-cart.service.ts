@@ -9,15 +9,26 @@ export class ShoppingCartService {
   private shoppingCartArr: any[] = [];
   shoppingCartObserver = new BehaviorSubject<any[]>([]);
 
-  addProductToShoppingCart(product: any) : void {
+  addProductToShoppingCart(product: any): void {
     this.shoppingCartArr.push(product);
     this.shoppingCartObserver.next(this.shoppingCartArr);
   }
 
-  deleteProductFromShoppingCart(product: any) : void {
+  deleteProductFromShoppingCart(product: any): void {
     const index = this.shoppingCartArr.indexOf(product, 0);
-      if(index > -1) {
-        this.shoppingCartArr.splice(index,1);
+    if (index > -1) {
+      this.shoppingCartArr.splice(index, 1);
+      this.shoppingCartObserver.next(this.shoppingCartArr);
+    }
+  }
+
+  sumSubtotalOfPrice(): number {
+    let total = 0;
+    this.shoppingCartArr.forEach((product) => {
+      if(product.price) {
+        total += product.price;
       }
+    });
+    return total;
   }
 }
