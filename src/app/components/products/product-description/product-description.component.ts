@@ -25,12 +25,19 @@ export class ProductDescriptionComponent implements DoCheck {
   offSetTopProduct = 0;
   offSetLeftProduct = 0;
 
+  checkStockCountState: number = 0;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private shopCartArr: ShoppingCartService
+    private shopCartArr: ShoppingCartService,
+    private productService: ProductService
   ) {
 
+  }
+
+  ngOnInit(): void {
+    this.checkStockCountState = this.product.stockCount;
   }
 
   ngDoCheck() {
@@ -58,6 +65,15 @@ export class ProductDescriptionComponent implements DoCheck {
   }
 
   addProductToShoppingCart() {
-    this.shopCartArr.addProductToShoppingCart(this.product);
+    if (this.checkStockCountState > 0) {
+      // console.log('tmp: ' + this.tmp);
+      this.shopCartArr.addProductToShoppingCart(this.product);
+      this.checkStockCountState -= 1;
+
+      let product = this.productService.getProductById(this.product.id);
+      console.log('product: ' + product.name + ', stockCount: ' +  (product.stockCount -= 1));
+
+    }
   }
+
 }
