@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ShoppingCartService} from "../../shared/services/shopping-cart.service";
 import {ProductService} from "../../shared/services/product.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-shopping-cart',
@@ -18,7 +19,10 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   private subscription: any;
 
-  constructor(private shoppingCartService: ShoppingCartService, private productService: ProductService) {
+  constructor(
+    private shoppingCartService: ShoppingCartService,
+    private productService: ProductService,
+    private router: Router) {
 
   }
 
@@ -27,7 +31,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
       this.products = newValue;
 
       this.subtotal = this.shoppingCartService.sumSubtotalOfPrice();
-      this. total = this.subtotal + this.shippingPrice;
+      this.total = this.subtotal + this.shippingPrice;
     });
   }
 
@@ -42,6 +46,10 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  navigateBackToProducts() {
+    this.router.navigate(['/products']);
   }
 
 }
