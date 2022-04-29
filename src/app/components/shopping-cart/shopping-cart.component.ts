@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ShoppingCartService} from "../../shared/services/shopping-cart.service";
+import {ProductService} from "../../shared/services/product.service";
 
 @Component({
   selector: 'app-shopping-cart',
@@ -17,17 +18,24 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   private subscription: any;
 
-  constructor(private shoppingCartArr: ShoppingCartService) {
+  constructor(private shoppingCartService: ShoppingCartService, private productService: ProductService) {
 
   }
 
   ngOnInit(): void {
-    this.subscription = this.shoppingCartArr.shoppingCartObserver.subscribe((newValue) => {
+    this.subscription = this.shoppingCartService.shoppingCartObserver.subscribe((newValue) => {
       this.products = newValue;
 
-      this.subtotal = this.shoppingCartArr.sumSubtotalOfPrice();
+      this.subtotal = this.shoppingCartService.sumSubtotalOfPrice();
       this. total = this.subtotal + this.shippingPrice;
     });
+  }
+
+  removeProductFromCart(product: any) {
+    this.shoppingCartService.deleteProductFromShoppingCart(product);
+
+    product.stockCount += 1;
+    this.productService.refreshProductStockCount(product);
   }
 
   ngOnDestroy(): void {
@@ -36,7 +44,4 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     }
   }
 
-  removeProductFromCart(product: any) {
-    this.shoppingCartArr.deleteProductFromShoppingCart(product);
-  }
 }

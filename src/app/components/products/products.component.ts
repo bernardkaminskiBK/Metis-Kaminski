@@ -16,10 +16,16 @@ export class ProductsComponent implements OnInit {
 
   mostRecentReview: UserReview;
 
+  private subscription: any;
+
   constructor(private data: ProductService) {
   }
 
   ngOnInit(): void {
+    this.subscription = this.data.productListObserver.subscribe( (newValue: any[]) => {
+       this.viewList = newValue;
+    });
+
     this.getProductList();
     this.getMostRecentFromProductList()
   }
@@ -52,4 +58,11 @@ export class ProductsComponent implements OnInit {
   clickSort(str: string) {
     this.sortBy = str;
   }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
 }

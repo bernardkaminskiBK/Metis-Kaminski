@@ -1,9 +1,16 @@
 import {Injectable} from "@angular/core";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+
+  productListObserver = new BehaviorSubject<any[]>(this.getProductList());
+
+  refreshProductStockCount(product: any): void {
+    this.getProductList().push(product);
+  }
 
   getProductList(): any[] {
     return [
