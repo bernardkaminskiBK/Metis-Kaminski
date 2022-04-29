@@ -2,7 +2,7 @@
 @import './src/styles';
 
 * {
- // font-family: "Poppins", sans-serif;
+  // font-family: "Poppins", sans-serif;
 }
 
 .header {
@@ -58,4 +58,10 @@ nav img {
 .menu-btn_burger img {
   width: $hamburger-size;
   height: $hamburger-size;
+}
+
+@media (max-width: 370px) {
+  h2 {
+    font-size: 15px;
+  }
 }
