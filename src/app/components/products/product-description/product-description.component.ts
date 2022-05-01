@@ -25,7 +25,7 @@ export class ProductDescriptionComponent implements DoCheck {
   offSetTopProduct = 0;
   offSetLeftProduct = 0;
 
-  checkStockCountState: number = 0;
+  stockCountState: number = 0;
 
   constructor(
     private router: Router,
@@ -37,7 +37,7 @@ export class ProductDescriptionComponent implements DoCheck {
   }
 
   ngOnInit(): void {
-    this.checkStockCountState = this.product.stockCount;
+    this.stockCountState = this.product.stockCount;
   }
 
   ngDoCheck() {
@@ -65,11 +65,11 @@ export class ProductDescriptionComponent implements DoCheck {
   }
 
   addProductToShoppingCart() {
-    if (this.checkStockCountState > 0) {
+    if (this.stockCountState > 0) {
       this.shopCartArr.addProductToShoppingCart(this.product);
 
-      this.checkStockCountState -= 1;
-      this.product.stockCount = this.checkStockCountState;
+      this.stockCountState -= 1;
+      this.product.stockCount = this.stockCountState;
       this.productService.refreshProductStockCount(this.product);
     }
   }

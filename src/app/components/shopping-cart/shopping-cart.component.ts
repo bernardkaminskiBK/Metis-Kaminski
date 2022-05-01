@@ -43,14 +43,14 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     this.productService.refreshProductStockCount(product);
   }
 
+  navigateBackToProducts() {
+    this.router.navigate(['/products']);
+  }
+
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-  }
-
-  navigateBackToProducts() {
-    this.router.navigate(['/products']);
   }
 
 }
