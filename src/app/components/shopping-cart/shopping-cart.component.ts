@@ -40,7 +40,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     this.shoppingCartService.deleteProductFromShoppingCart(product);
 
     product.stockCount += 1;
-    this.productService.refreshProductStockCount(product);
+    this.productService.refreshProductList(product);
   }
 
   navigateBackToProducts() {

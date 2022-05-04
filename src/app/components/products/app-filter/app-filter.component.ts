@@ -26,7 +26,7 @@ export class AppFilterComponent implements OnChanges {
   private subscription: any;
 
   ngOnChanges(changes: SimpleChanges) {
-    this.productService.productListObserver.subscribe((newValue) => {
+    this.subscription = this.productService.productListObserver.subscribe((newValue) => {
       this.array = newValue;
     });
     this.filter();

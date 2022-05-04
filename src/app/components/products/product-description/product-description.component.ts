@@ -70,7 +70,7 @@ export class ProductDescriptionComponent implements DoCheck {
 
       this.stockCountState -= 1;
       this.product.stockCount = this.stockCountState;
-      this.productService.refreshProductStockCount(this.product);
+      this.productService.refreshProductList(this.product);
     }
   }
 

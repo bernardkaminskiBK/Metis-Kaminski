@@ -8,7 +8,7 @@ export class ProductService {
 
   productListObserver = new BehaviorSubject<any[]>(this.getProductList());
 
-  refreshProductStockCount(product: any): void {
+  refreshProductList(product: any): void {
     this.getProductList().push(product);
   }
 
