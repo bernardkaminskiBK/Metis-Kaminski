@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {Stock} from "./models/Stock";
+import {Stock} from "./models/model-recursion/Stock";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'Metis-Kaminski';
 
   ngOnInit(): void {
