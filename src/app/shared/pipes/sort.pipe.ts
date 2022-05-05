@@ -1,4 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
+import {Product} from "../../models/Product";
 
 @Pipe({
   name: 'sort',
@@ -6,16 +7,8 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class SortPipe implements PipeTransform {
 
-  private cacheValue: any[];
-  private cacheResult: any[];
-
-  transform(value: any[], arg: string): any {
-    // if (value !== this.cacheValue) {
-    //   this.cacheValue = value;
-    //   this.cacheResult = this.update(this.cacheValue, arg);
-    // }
-    // return this.cacheResult;
-    if(value && value.length) {
+  transform(value: Product[], arg: string): any {
+    if (value && value.length) {
       return this.update(value, arg);
     } else {
       return [];
@@ -23,11 +16,11 @@ export class SortPipe implements PipeTransform {
 
   }
 
-  private update(value: any, arg: string): any[] {
+  private update(value: Product[], arg: string): Product[] {
     return this.sortArrayBy(value, arg);
   }
 
-  private sortArrayBy(arr: any [], sortBy: string): any[] {
+  private sortArrayBy(arr: Product[], sortBy: string): Product[] {
     return arr.sort((a, b) => {
 
       const nameA = a.name.toUpperCase();

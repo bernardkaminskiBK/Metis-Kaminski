@@ -4,6 +4,7 @@ import {
   ViewChild
 } from '@angular/core';
 import {ProductService} from "../../../shared/services/product.service";
+import {Product} from "../../../models/Product";
 
 @Component({
   selector: 'app-app-filter',
@@ -15,14 +16,14 @@ export class AppFilterComponent implements OnChanges {
 
   @ViewChild('input') search: ElementRef;
 
-  @Input('listOfProducts') data: any[];
+  @Input('listOfProducts') data: Product[];
   @Input('isCheckBoxChecked') isCheckBoxChecked: boolean;
-  @Output('filteredList') filteredData: EventEmitter<any> = new EventEmitter<any>();
+  @Output('filteredList') filteredData: EventEmitter<Product[]> = new EventEmitter<Product[]>();
 
   constructor(private productService: ProductService) {
   }
 
-  private array: any[];
+  private array: Product[];
   private subscription: any;
 
   ngOnChanges(changes: SimpleChanges) {
@@ -35,7 +36,7 @@ export class AppFilterComponent implements OnChanges {
   filter(): void {
     if (this.array.length >= 2 || this.isCheckBoxChecked) {
       if (this.array && this.array.length) {
-        return this.filteredData.emit(this.array.filter((product: any) => {
+        return this.filteredData.emit(this.array.filter((product: Product) => {
           return this.filterByTitle(product) && this.filterByInStock(product);
         }));
       }
@@ -45,11 +46,11 @@ export class AppFilterComponent implements OnChanges {
     }
   }
 
-  private filterByInStock(product: any): boolean {
+  private filterByInStock(product: Product): boolean {
     return !this.isCheckBoxChecked || product.stockCount > 0;
   }
 
-  private filterByTitle(product: any): boolean {
+  private filterByTitle(product: Product): boolean {
     if (this.searchInputText.length >= 2) {
       return product.name.toLowerCase().includes(this.searchInputText.toLowerCase());
     }

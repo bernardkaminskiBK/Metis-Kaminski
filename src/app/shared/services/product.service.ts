@@ -1,23 +1,26 @@
 import {Injectable} from "@angular/core";
 import {BehaviorSubject} from "rxjs";
+import {Product} from "../../models/Product";
+import {Vendor} from "../../models/Vendor";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  productListObserver = new BehaviorSubject<any[]>(this.getProductList());
+  productListObserver = new BehaviorSubject<Product[]>(this.getProductList());
 
-  refreshProductList(product: any): void {
+  refreshProductList(product: Product): void {
     this.getProductList().push(product);
   }
 
-  getProductList(): any[] {
+  getProductList(): Product[] {
     return [
       {
         id: 1,
         name: 'Product 1',
         category: 'Product 1',
+        img_url: '',
         price: 0,
         stockCount: 0,
         quantitySoldWholePeriod: 0,
@@ -27,6 +30,7 @@ export class ProductService {
         display: 0,
         ram: 4,
         memory: 16,
+        description: '',
         vendors: [
           {name: 'Alza', stockCount: 2},
           {name: 'Agem', stockCount: 1},
@@ -149,6 +153,7 @@ export class ProductService {
         name: 'Dell Vostro 3500',
         img_url: 'https://cdn.alza.sk/ImgW.ashx?fd=f16&cd=ADC253z08i',
         category: 'Kancelária',
+        price: 0,
         stockCount: 18,
         quantitySoldWholePeriod: 8,
         quantitySoldLastMonth: 4,
@@ -191,6 +196,7 @@ export class ProductService {
         display: 16,
         ram: 16,
         memory: 1000,
+        description: '',
         vendors: [
           {name: 'Alza', stockCount: 2},
           {name: 'Agem', stockCount: 1},
@@ -221,6 +227,7 @@ export class ProductService {
         display: 15.6,
         ram: 8,
         memory: 500,
+        description: '',
         vendors: [
           {name: 'Alza', stockCount: 1},
           {name: 'Agem', stockCount: 1},
@@ -241,12 +248,17 @@ export class ProductService {
         id: 8,
         name: 'Test2',
         category: 'Test2',
+        img_url: '',
         price: 500,
         stockCount: 1,
         quantitySoldWholePeriod: 1,
         quantitySoldLastMonth: 1,
         cashFlowLastMonth: 0,
         cashFlowWholePeriod: 0,
+        display: 15.6,
+        ram: 8,
+        memory: 500,
+        description: '',
         vendors: [
           {name: 'Alza', stockCount: 1},
           {name: 'Agem', stockCount: 1},
@@ -266,8 +278,8 @@ export class ProductService {
     ];
   }
 
-  getProductById(id: number): any {
-    let result: any;
+  getProductById(id: number): Product {
+    let result;
     this.getProductList().forEach((product) => {
       if (product.id === id) {
         result = product;
@@ -276,14 +288,14 @@ export class ProductService {
     return result;
   }
 
-  getFirstVendorList(): any[] {
+  getFirstVendorList(): Vendor[] {
     return this.getProductList()[0].vendors;
   }
 
 
-  getVendorsByProductName(productName: string): any[] {
-    let vendors: any[] = [];
-    this.getProductList().forEach((product: any) => {
+  getVendorsByProductName(productName: string): Vendor[] {
+    let vendors: Vendor[] = [];
+    this.getProductList().forEach((product: Product) => {
       if (product.name == productName) {
         vendors = product.vendors;
       }
@@ -295,15 +307,15 @@ export class ProductService {
        Ďalší zoznam, ktorý bude slúžiť na zoznam produktov, ktoré majú nulové množstvo na sklade.
        Zoznam umožní rýchli prehľad tovaru, ktorý treba urgentne do objednať.
    */
-  getProductsNotInStock(): any[] {
-    return this.getProductList().filter((product: any) => {
+  getProductsNotInStock(): Product[] {
+    return this.getProductList().filter((product: Product) => {
       return product.stockCount == 0
     });
   }
 
   // Obraty pre každý produkt separátne (celkový, za posledný mesiac)
-  getProductCashFlowStates(): any[] {
-    let result: any[] = [];
+  getProductCashFlowStates(): Product[] {
+    let result: Product [] = [];
     this.getProductList().forEach((product) => {
       if (product.price) {
         product.cashFlowLastMonth =

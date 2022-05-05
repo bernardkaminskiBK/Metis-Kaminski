@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserReview} from "../../models/UserReview";
 import {ProductService} from "../../shared/services/product.service";
+import {Product} from "../../models/Product";
 
 @Component({
   selector: 'app-products',
@@ -10,7 +11,7 @@ import {ProductService} from "../../shared/services/product.service";
 export class ProductsComponent implements OnInit {
   checkBoxState: boolean;
 
-  productList: any[];
+  productList: Product[];
   viewList: any[];
   sortBy: string;
 
@@ -22,7 +23,7 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subscription = this.data.productListObserver.subscribe( (newValue: any[]) => {
+    this.subscription = this.data.productListObserver.subscribe( (newValue: Product[]) => {
        this.viewList = newValue;
     });
 
@@ -47,7 +48,7 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  filteredProductList(filteredProductList: any[]) {
+  filteredProductList(filteredProductList: Product[]) {
     this.viewList = filteredProductList;
   }
 

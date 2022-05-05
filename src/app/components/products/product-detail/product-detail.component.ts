@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../../../shared/services/product.service";
+import {Product} from "../../../models/Product";
 
 
 @Component({
@@ -11,7 +12,7 @@ import {ProductService} from "../../../shared/services/product.service";
 export class ProductDetailComponent implements OnInit {
 
   productId: number;
-  product: any;
+  product: Product;
 
   constructor(private route: ActivatedRoute, private router: Router, private data: ProductService) {
   }

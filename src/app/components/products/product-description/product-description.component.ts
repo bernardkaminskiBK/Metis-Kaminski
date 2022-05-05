@@ -10,6 +10,7 @@ import {UserReview} from "../../../models/UserReview";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ShoppingCartService} from "../../../shared/services/shopping-cart.service";
 import {ProductService} from "../../../shared/services/product.service";
+import {Product} from "../../../models/Product";
 
 @Component({
   selector: 'app-product-description',
@@ -17,8 +18,8 @@ import {ProductService} from "../../../shared/services/product.service";
   styleUrls: ['./product-description.component.scss']
 })
 export class ProductDescriptionComponent implements DoCheck {
-  @Input('Product') product: any;
-  @Output() mostRecentData: EventEmitter<any> = new EventEmitter<any>();
+  @Input('Product') product: Product;
+  @Output() mostRecentData: EventEmitter<UserReview> = new EventEmitter<UserReview>();
 
   @ViewChild('main') main: ElementRef;
 
@@ -30,7 +31,7 @@ export class ProductDescriptionComponent implements DoCheck {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private shopCartArr: ShoppingCartService,
+    private shoppingCartService: ShoppingCartService,
     private productService: ProductService
   ) {
 
@@ -66,10 +67,9 @@ export class ProductDescriptionComponent implements DoCheck {
 
   addProductToShoppingCart() {
     if (this.stockCountState > 0) {
-      this.shopCartArr.addProductToShoppingCart(this.product);
+      this.shoppingCartService.addProductToShoppingCart(this.product);
 
-      this.stockCountState -= 1;
-      this.product.stockCount = this.stockCountState;
+      this.product.stockCount = this.stockCountState -= 1;
       this.productService.refreshProductList(this.product);
     }
   }

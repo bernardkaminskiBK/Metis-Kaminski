@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {ShoppingCartService} from "../../shared/services/shopping-cart.service";
+import {Product} from "../../models/Product";
 
 @Component({
   selector: 'app-shopping-cart-badge',
@@ -11,7 +12,7 @@ export class ShoppingCartBadgeComponent implements OnInit {
 
   quantity: number = 0;
   hiddenBadge = false;
-  products: any[] = [];
+  products: Product[] = [];
 
   private subscription: any;
 

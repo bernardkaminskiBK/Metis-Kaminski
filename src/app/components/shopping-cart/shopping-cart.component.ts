@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ShoppingCartService} from "../../shared/services/shopping-cart.service";
 import {ProductService} from "../../shared/services/product.service";
 import {Router} from "@angular/router";
+import {Product} from "../../models/Product";
 
 @Component({
   selector: 'app-shopping-cart',
@@ -15,7 +16,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   shippingPrice: number = 10;
   total: number;
 
-  products: any[] = [];
+  products: Product[] = [];
 
   private subscription: any;
 
@@ -36,7 +37,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     });
   }
 
-  removeProductFromCart(product: any) {
+  removeProductFromCart(product: Product) {
     this.shoppingCartService.deleteProductFromShoppingCart(product);
 
     product.stockCount += 1;

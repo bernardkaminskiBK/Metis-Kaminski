@@ -4,6 +4,8 @@ import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
 import {Router} from "@angular/router";
 import {ProductService} from "../../shared/services/product.service";
+import {Product} from "../../models/Product";
+import {Vendor} from "../../models/Vendor";
 
 @Component({
   selector: 'app-statistics',
@@ -24,10 +26,10 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
   displayedColumnsFourth: string[] =
     ['vendor', 'stockCount'];
 
-  tableSourceFirst: MatTableDataSource<any>;
-  tableSourceSecond: MatTableDataSource<any>;
-  tableSourceThird: MatTableDataSource<any>;
-  tableSourceFourth: MatTableDataSource<any>;
+  tableSourceFirst: MatTableDataSource<Product>;
+  tableSourceSecond: MatTableDataSource<Product>;
+  tableSourceThird: MatTableDataSource<Product>;
+  tableSourceFourth: MatTableDataSource<Vendor>;
 
   @ViewChild('firstTableMatSort') sortFirst: MatSort;
   @ViewChild('secondTableMatSort') sortSecond: MatSort;
@@ -44,17 +46,17 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
   avgPriceSoldProducts: string;
   mostSoldProductName: string;
 
-  products: any[];
+  products: Product[];
   selected: any;
 
   constructor(private router: Router, private data: ProductService) {
   }
 
   ngOnInit(): void {
-    this.tableSourceFirst = new MatTableDataSource<any>(this.data.getProductList());
-    this.tableSourceSecond = new MatTableDataSource<any>(this.data.getProductCashFlowStates());
-    this.tableSourceThird = new MatTableDataSource<any>(this.data.getProductsNotInStock());
-    this.tableSourceFourth = new MatTableDataSource<any>(this.data.getFirstVendorList());
+    this.tableSourceFirst = new MatTableDataSource<Product>(this.data.getProductList());
+    this.tableSourceSecond = new MatTableDataSource<Product>(this.data.getProductCashFlowStates());
+    this.tableSourceThird = new MatTableDataSource<Product>(this.data.getProductsNotInStock());
+    this.tableSourceFourth = new MatTableDataSource<Vendor>(this.data.getFirstVendorList());
 
     this.totalCashFlowByLastMonth = this.data.getTotalCashFlowByLastMonth();
     this.totalCashFlowByWholePeriod = this.data.getTotalCashFlowByWholePeriod();
@@ -101,7 +103,7 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
 
   fillFourthTableWithContent(): void {
     this.tableSourceFourth =
-      new MatTableDataSource<any>(this.data.getVendorsByProductName(this.selected.name));
+      new MatTableDataSource<Vendor>(this.data.getVendorsByProductName(this.selected.name));
     this.selected = this.selected.name;
 
     this.tableSourceFourth.sort = this.sortFourth;
