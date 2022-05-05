@@ -279,13 +279,8 @@ export class ProductService {
   }
 
   getProductById(id: number): Product {
-    let result;
-    this.getProductList().forEach((product) => {
-      if (product.id === id) {
-        result = product;
-      }
-    });
-    return result;
+    return this.getProductList()
+      .find((product) => product.id === id) as Product;
   }
 
   getFirstVendorList(): Vendor[] {
