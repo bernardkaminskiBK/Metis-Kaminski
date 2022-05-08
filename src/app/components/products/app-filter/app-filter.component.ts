@@ -1,16 +1,10 @@
 import {
-  AfterContentChecked,
-  AfterContentInit,
-  AfterViewChecked,
   Component,
-  DoCheck,
   ElementRef,
   EventEmitter,
   Input,
   OnChanges,
-  OnInit,
   Output,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { ProductService } from '../../../shared/services/product.service';
