@@ -1,34 +1,36 @@
-import {Component, OnInit} from '@angular/core';
-import {UserReview} from "../../models/UserReview";
-import {ProductService} from "../../shared/services/product.service";
-import {Product} from "../../models/Product";
+import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/models/Product';
+import { UserReview } from 'src/app/models/UserReview';
+import { ProductService } from 'src/app/shared/services/product.service';
+import { Constants } from 'src/app/utils/Constants';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
+  styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
   checkBoxState: boolean;
 
   productList: Product[];
   viewList: any[];
-  sortBy: string;
+  sortBy = Constants.AZ;
 
   mostRecentReview: UserReview;
 
   private subscription: any;
 
-  constructor(private data: ProductService) {
-  }
+  constructor(private data: ProductService) {}
 
   ngOnInit(): void {
-    this.subscription = this.data.productListObserver.subscribe( (newValue: Product[]) => {
-       this.viewList = newValue;
-    });
+    this.subscription = this.data.productListObserver.subscribe(
+      (newValue: Product[]) => {
+        this.viewList = newValue;
+      }
+    );
 
     this.getProductList();
-    this.getMostRecentFromProductList()
+    this.getMostRecentFromProductList();
   }
 
   private getProductList(): void {
@@ -65,5 +67,4 @@ export class ProductsComponent implements OnInit {
       this.subscription.unsubscribe();
     }
   }
-
 }
