@@ -19,7 +19,7 @@ export class ProductDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((param) => {
+    this.route.paramMap.subscribe(() => {
       this.productId = parseInt(<string>this.route.snapshot.paramMap.get('id'));
       this.product = this.data.getProductById(this.productId);
 
