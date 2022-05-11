@@ -287,6 +287,10 @@ export class ProductService {
     return this.getProductList()[0].vendors;
   }
 
+  getMockCategoryData(): string[] {
+    return ['Ultrabook', 'Kancelária', 'MacBook', 'Gaming'];
+  }
+
 
   getVendorsByProductName(productName: string): Vendor[] {
     let vendors: Vendor[] = [];

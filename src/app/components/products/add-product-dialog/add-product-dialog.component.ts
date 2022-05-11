@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ProductService} from "../../../shared/services/product.service";
+import {Product} from "../../../models/Product";
 
 @Component({
   selector: 'app-add-product-dialog',
@@ -9,10 +11,32 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class AddProductDialogComponent implements OnInit {
 
   productForm: FormGroup;
+  mockCategories: string[];
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private productService: ProductService) {
+  }
 
   ngOnInit(): void {
+    this.mockCategories = this.productService.getMockCategoryData();
+    this.prepareProductForm();
+    this.createNewProduct();
+  }
+
+  private createNewProduct(): void {
+    const rawValue = this.productForm.getRawValue();
+    const product = new Product();
+    product.id = rawValue.id;
+    product.name = rawValue.productName;
+    product.category = rawValue.category;
+    product.price = rawValue.price;
+    product.stockCount = rawValue.stockCount;
+    product.description = rawValue.description;
+
+    this.productService.refreshProductList(product);
+    console.log('Product name: ' + product.name + ', ' + this.productService.getProductList().length)
+  }
+
+  private prepareProductForm(): void {
     this.productForm = this.formBuilder.group({
       id: ['', Validators.required],
       productName: ['', Validators.required],
@@ -24,6 +48,6 @@ export class AddProductDialogComponent implements OnInit {
   }
 
   addProduct() {
-    console.log(this.productForm.getRawValue());
+    this.createNewProduct();
   }
 }
