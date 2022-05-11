@@ -40,5 +40,4 @@ export class ProductDetailComponent implements OnInit {
     this.router.navigate(['/products']);
   }
 
-  // TODO: 1:28:00 pokracovanie
 }

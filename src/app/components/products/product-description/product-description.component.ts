@@ -1,25 +1,27 @@
 import {
-  Component, DoCheck,
+  Component,
+  DoCheck,
   ElementRef,
   EventEmitter,
   Input,
   Output,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
-import {UserReview} from "../../../models/UserReview";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ShoppingCartService} from "../../../shared/services/shopping-cart.service";
-import {ProductService} from "../../../shared/services/product.service";
-import {Product} from "../../../models/Product";
+import {UserReview} from '../../../models/UserReview';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ShoppingCartService} from '../../../shared/services/shopping-cart.service';
+import {ProductService} from '../../../shared/services/product.service';
+import {Product} from '../../../models/Product';
 
 @Component({
   selector: 'app-product-description',
   templateUrl: './product-description.component.html',
-  styleUrls: ['./product-description.component.scss']
+  styleUrls: ['./product-description.component.scss'],
 })
 export class ProductDescriptionComponent implements DoCheck {
   @Input('Product') product: Product;
-  @Output() mostRecentData: EventEmitter<UserReview> = new EventEmitter<UserReview>();
+  @Output() mostRecentData: EventEmitter<UserReview> =
+    new EventEmitter<UserReview>();
 
   @ViewChild('main') main: ElementRef;
 
@@ -34,7 +36,6 @@ export class ProductDescriptionComponent implements DoCheck {
     private shoppingCartService: ShoppingCartService,
     private productService: ProductService
   ) {
-
   }
 
   ngOnInit(): void {
@@ -62,7 +63,9 @@ export class ProductDescriptionComponent implements DoCheck {
   }
 
   navigateToProductDetail() {
-    this.router.navigate(['product-detail', this.product.id], {relativeTo: this.route});
+    this.router.navigate(['product-detail', this.product.id], {
+      relativeTo: this.route,
+    });
   }
 
   addProductToShoppingCart() {
@@ -73,5 +76,4 @@ export class ProductDescriptionComponent implements DoCheck {
       this.productService.refreshProductList(this.product);
     }
   }
-
 }
