@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/models/Product';
-import { UserReview } from 'src/app/models/UserReview';
-import { ProductService } from 'src/app/shared/services/product.service';
-import { Constants } from 'src/app/utils/Constants';
+import {Component, Inject, OnInit} from '@angular/core';
+import {Product} from 'src/app/models/Product';
+import {UserReview} from 'src/app/models/UserReview';
+import {ProductService} from 'src/app/shared/services/product.service';
+import {Constants} from 'src/app/utils/Constants';
+import {MatDialog} from '@angular/material/dialog';
+import {AddProductDialogComponent} from "./add-product-dialog/add-product-dialog.component";
 
 @Component({
   selector: 'app-products',
@@ -20,7 +22,8 @@ export class ProductsComponent implements OnInit {
 
   private subscription: any;
 
-  constructor(private data: ProductService) {}
+  constructor(private data: ProductService, private dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
     this.subscription = this.data.productListObserver.subscribe(
@@ -31,6 +34,12 @@ export class ProductsComponent implements OnInit {
 
     this.getProductList();
     this.getMostRecentFromProductList();
+  }
+
+  openDialog() {
+    this.dialog.open(AddProductDialogComponent, {
+      width: '30%'
+    });
   }
 
   private getProductList(): void {

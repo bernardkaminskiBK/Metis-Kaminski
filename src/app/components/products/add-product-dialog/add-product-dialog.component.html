@@ -1,0 +1,51 @@
+<h1 mat-dialog-title>Add new Product</h1>
+
+<div mat-dialog-content>
+  <form [formGroup]="productForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Id</mat-label>
+      <input formControlName="id" matInput placeholder="Id">
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Product Name</mat-label>
+      <input formControlName="productName" matInput placeholder="Name">
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Product Category</mat-label>
+      <mat-select formControlName="category" placeholder="Category">
+        <mat-option value="Gaming">Gaming</mat-option>
+        <mat-option value="Office">Office</mat-option>
+        <mat-option value="Home">Home</mat-option>
+      </mat-select>
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Price</mat-label>
+      <input type="number" formControlName="price" matInput placeholder="Price">
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>StockCount</mat-label>
+      <input type="number" formControlName="stockCount" matInput placeholder="stock count">
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"  placeholder="description"></textarea>
+    </mat-form-field>
+
+
+  </form>
+</div>
+
+<div mat-dialog-action [align]="'end'">
+  <button mat-button (click)="addProduct()">Add</button>
+  <button mat-button mat-dialog-close>Close</button>
+</div>
