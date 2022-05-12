@@ -10,9 +10,33 @@ export class ProductService {
 
   productListObserver = new BehaviorSubject<Product[]>(ProductService.products);
 
-  refreshProductList(product: Product): void {
-    ProductService.products.push(product);
+  increaseProductStockCountStateByOne(product: Product): void {
+    const index = ProductService.products.indexOf(product, 0);
+    if (index > -1) {
+      ProductService.products[index].stockCount = ProductService.products[index].stockCount + 1;
+    }
   }
+
+  decreaseProductStockCountStateByOne(product: Product): void {
+    const index = ProductService.products.indexOf(product, 0);
+    if (index > -1) {
+      ProductService.products[index].stockCount = ProductService.products[index].stockCount - 1;
+    }
+  }
+
+  addNewProduct(newProduct: Product): void {
+    ProductService.products.push(newProduct);
+    this.productListObserver.next(ProductService.products);
+  }
+
+  deleteProduct(product: Product): void {
+    const index = ProductService.products.indexOf(product, 0);
+    if (index > -1) {
+      ProductService.products.splice(index, 1);
+      this.productListObserver.next(ProductService.products);
+    }
+  }
+
 
   static products: Product[] = [
     {

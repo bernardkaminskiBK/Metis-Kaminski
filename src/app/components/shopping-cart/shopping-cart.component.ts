@@ -39,9 +39,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   removeProductFromCart(product: Product) {
     this.shoppingCartService.deleteProductFromShoppingCart(product);
-
-    product.stockCount += 1;
-    this.productService.refreshProductList(product);
+    this.productService.increaseProductStockCountStateByOne(product);
   }
 
   navigateBackToProducts() {

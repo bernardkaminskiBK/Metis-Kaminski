@@ -31,8 +31,7 @@ export class AddProductDialogComponent implements OnInit {
     product.stockCount = rawValue.stockCount;
     product.description = rawValue.description;
 
-    this.productService.refreshProductList(product);
-    console.log('Product name: ' + product.name + ', ' + ProductService.products.length)
+    this.productService.addNewProduct(product);
   }
 
   private prepareProductForm(): void {

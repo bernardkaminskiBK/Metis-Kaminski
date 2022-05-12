@@ -71,9 +71,11 @@ export class ProductDescriptionComponent implements DoCheck {
   addProductToShoppingCart() {
     if (this.stockCountState > 0) {
       this.shoppingCartService.addProductToShoppingCart(this.product);
-
-      this.product.stockCount = this.stockCountState -= 1;
-      this.productService.refreshProductList(this.product);
+      this.productService.decreaseProductStockCountStateByOne(this.product);
     }
+  }
+
+  deleteProduct() {
+    this.productService.deleteProduct(this.product);
   }
 }

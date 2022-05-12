@@ -28,23 +28,18 @@ export class ReviewComponent implements OnInit {
   addComment() {
     if (this.textArea.nativeElement.value) {
 
-      this.inputProduct.reviews.push({
-        date: Utils.getFormattedCurrentDate(),
-        comment: this.textArea.nativeElement.value
-      });
+      const review = new Review();
+      review.date = Utils.getFormattedCurrentDate();
+      review.comment = this.textArea.nativeElement.value;
+
+      this.listOfComments.push(review);
+      this.mostRecentReview.emit(new UserReview(review.date,  review.comment));
 
       this.textArea.nativeElement.value = '';
-      this.getMostRecentReview(this.inputProduct.reviews);
 
     } else {
       alert('The text area of comment is empty.');
     }
-  }
-
-  private getMostRecentReview(userReviews: Review[]) {
-    const mostRecentDate = userReviews[userReviews.length - 1].date;
-    const mostRecentComment = userReviews[userReviews.length - 1].comment;
-    this.mostRecentReview.emit(new UserReview(mostRecentDate, mostRecentComment));
   }
 
 }

@@ -5,6 +5,7 @@ import {ProductService} from 'src/app/shared/services/product.service';
 import {Constants} from 'src/app/utils/Constants';
 import {MatDialog} from '@angular/material/dialog';
 import {AddProductDialogComponent} from "./add-product-dialog/add-product-dialog.component";
+import {Review} from "../../models/Review";
 
 @Component({
   selector: 'app-products',
@@ -29,11 +30,11 @@ export class ProductsComponent implements OnInit {
     this.subscription = this.data.productListObserver.subscribe(
       (newValue: Product[]) => {
         this.viewList = newValue;
+
+        this.getProductList();
+        this.getMostRecentFromProductList();
       }
     );
-
-    this.getProductList();
-    this.getMostRecentFromProductList();
   }
 
   openDialog() {
@@ -52,10 +53,19 @@ export class ProductsComponent implements OnInit {
 
   // Kvazi fake data len na skusku na init pre most recent comment
   getMostRecentFromProductList() {
-    if (this.productList) {
-      const mostRecentComment = this.productList[0].reviews[0].comment;
-      const mostRecentDate = this.productList[0].reviews[0].date;
-      this.mostRecentReview = new UserReview(mostRecentDate, mostRecentComment);
+    if (this.productList && this.productList.length &&
+      this.productList[this.productList.length - 1].reviews &&
+      this.productList[this.productList.length - 1].reviews.length) {
+
+      const firstProduct = this.productList.shift();
+      const firstReview = this.productList[this.productList.length - 1].reviews.shift();
+
+      if (firstReview) {
+        this.mostRecentReview = new UserReview(firstReview.date, firstReview.comment);
+      }
+
+    } else {
+      this.mostRecentReview = new UserReview('', '');
     }
   }
 
