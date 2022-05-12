@@ -19,19 +19,19 @@
     <div class="sort-style">
       <h2>Most recent comment</h2>
 
-     <div class="buttons-recent-comment">
-       <mat-icon matSuffix (click)="openDialog()">add</mat-icon>
+      <div class="buttons-recent-comment">
+        <mat-icon matSuffix (click)="openDialog()">add</mat-icon>
 
-       <button mat-button [matMenuTriggerFor]="menu">
-         <mat-icon>sort</mat-icon>
-       </button>
-       <mat-menu #menu="matMenu">
-         <button mat-menu-item (click)="clickSort('A-Z')">A-Z</button>
-         <button mat-menu-item (click)="clickSort('Z-A')">Z-A</button>
-       </mat-menu>
-     </div>
+        <button mat-button [matMenuTriggerFor]="menu">
+          <mat-icon>sort</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="clickSort('A-Z')">A-Z</button>
+          <button mat-menu-item (click)="clickSort('Z-A')">Z-A</button>
+        </mat-menu>
+      </div>
     </div>
-    <hr class="line" />
+    <hr class="line"/>
     <p class="review-date">Added {{ mostRecentReview.reviewDate }}</p>
     <p>{{ mostRecentReview.reviewComment }}</p>
   </div>
@@ -53,16 +53,15 @@
         <ng-container price>
           <span *ngIf="product.price && product.price === 0"></span>
           <span *ngIf="product.price && product.price !== 0"
-            >Price: {{ product.price }}€</span
-          >
+          >Price: {{ product.price }}€</span>
         </ng-container>
 
         <ng-container stock>
           <span *ngIf="product.stockCount === 0" class="sold-out"
-            >Sold Out</span
+          >Sold Out</span
           >
           <span *ngIf="product.stockCount > 0"
-            >Stock: {{ product.stockCount }}x</span
+          >Stock: {{ product.stockCount }}x</span
           >
         </ng-container>
 
@@ -71,7 +70,7 @@
           description
         >
           <h2>Description</h2>
-          <hr />
+          <hr/>
           <span>{{ product.description }}</span>
         </ng-container>
 

@@ -53,7 +53,7 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.tableSourceFirst = new MatTableDataSource<Product>(this.data.getProductList());
+    this.tableSourceFirst = new MatTableDataSource<Product>(ProductService.products);
     this.tableSourceSecond = new MatTableDataSource<Product>(this.data.getProductCashFlowStates());
     this.tableSourceThird = new MatTableDataSource<Product>(this.data.getProductsNotInStock());
     this.tableSourceFourth = new MatTableDataSource<Vendor>(this.data.getFirstVendorList());
@@ -63,7 +63,7 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
     this.avgPriceSoldProducts = this.data.getAveragePriceSoldProducts();
     this.mostSoldProductName = this.data.getMostSoldProductName();
 
-    this.products = this.data.getProductList();
+    this.products = ProductService.products;
     this.selected = this.products[0].name;
   }
 

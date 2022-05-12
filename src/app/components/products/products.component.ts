@@ -43,7 +43,7 @@ export class ProductsComponent implements OnInit {
   }
 
   private getProductList(): void {
-    this.productList = this.data.getProductList();
+    this.productList = ProductService.products;
   }
 
   getMostRecentData(userReview: UserReview) {

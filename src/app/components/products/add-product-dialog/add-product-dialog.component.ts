@@ -19,7 +19,6 @@ export class AddProductDialogComponent implements OnInit {
   ngOnInit(): void {
     this.mockCategories = this.productService.getMockCategoryData();
     this.prepareProductForm();
-    this.createNewProduct();
   }
 
   private createNewProduct(): void {
@@ -33,7 +32,7 @@ export class AddProductDialogComponent implements OnInit {
     product.description = rawValue.description;
 
     this.productService.refreshProductList(product);
-    console.log('Product name: ' + product.name + ', ' + this.productService.getProductList().length)
+    console.log('Product name: ' + product.name + ', ' + ProductService.products.length)
   }
 
   private prepareProductForm(): void {
