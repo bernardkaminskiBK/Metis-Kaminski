@@ -1,11 +1,14 @@
 <div class="center">
   <div #main class="main-product">
 
-    <div class="main-top">
-      <button (click)="deleteProduct()">Delete</button>
-      <div (click)="navigateToProductDetail()" class="product_detail_btn">
-        <a class="details-button">Details</a>
-      </div>
+     <div class="main-top">
+       <div (click)="deleteProduct()">
+         <a class="details-button">Delete</a>
+       </div>
+
+       <div (click)="navigateToProductDetail()" class="product_detail_btn">
+         <a class="details-button">Details</a>
+       </div>
 
       <div class="offset-style">
         x: {{offSetLeftProduct}} y: {{offSetTopProduct}}
@@ -57,7 +60,9 @@
       <app-review [inputProduct]="product"
                   (mostRecentReview)="getMostRecentData($event)"></app-review>
 
-      <button *ngIf="product.price && product.stockCount" (click)="addProductToShoppingCart()" class="button-28">Add to cart</button>
+      <button *ngIf="product.price && product.stockCount" (click)="addProductToShoppingCart()" class="button-28">Add to
+        cart
+      </button>
     </div>
 
   </div>
