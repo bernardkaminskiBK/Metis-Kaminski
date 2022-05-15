@@ -3,6 +3,7 @@ import {BehaviorSubject} from "rxjs";
 import {Product} from "../../models/Product";
 import {Vendor} from "../../models/Vendor";
 import {MockData} from "../../utils/MockData";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,10 @@ export class ProductService {
 
   private cacheProductList: Product[] = [];
   productListObserver = new BehaviorSubject<Product[]>(this.cacheProductList);
+
+  constructor(private router: Router) {
+
+  }
 
   increaseProductStockCountStateByOne(product: Product): void {
     const index = this.cacheProductList.indexOf(product, 0);
@@ -58,9 +63,29 @@ export class ProductService {
     return MockData.products;
   }
 
-  getProductById(id: number): Product {
-    return this.cacheProductList
-      .find((product) => product.id === id) as Product;
+  getProductById(id: number): Promise<Product> {
+    return new Promise<Product>((resolve, reject) => {
+      if (this.cacheProductList) {
+        this.findId(resolve, reject, id, this.cacheProductList);
+      } else {
+        this.cacheProductList = this.getAPIRequest();
+        this.findId(resolve, reject, id, this.cacheProductList);
+      }
+    });
+  }
+
+  private findId(resolve, reject, productId: number, cacheProducts: Product[]) {
+    const data = cacheProducts.find((product) => product.id === productId) as Product;
+    if (data) {
+      resolve(data);
+    } else {
+      this.error404();
+      reject();
+    }
+  }
+
+  private error404(): void {
+    this.router.navigateByUrl('404notFound');
   }
 
   getFirstVendorList(): Vendor[] {

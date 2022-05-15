@@ -21,13 +21,16 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
       this.productId = parseInt(<string>this.route.snapshot.paramMap.get('id'));
-      this.product = this.data.getProductById(this.productId);
 
-      // Alternativa na upozornenie ze ups nie je taky produkt alebo radsej hodit tam hlasku ze
-      // product not found napriklad, okej to-do do buducna...
-      if (!this.product) {
-        this.router.navigate(['/404notFound']);
-      }
+      this.data.getProductById(this.productId).then((product) => {
+        this.product = product;
+
+        // Alternativa na upozornenie ze ups nie je taky produkt alebo radsej hodit tam hlasku ze
+        // product not found napriklad, okej to-do do buducna...
+        if (!this.product) {
+          this.router.navigate(['/404notFound']);
+        }
+      });
     });
   }
 

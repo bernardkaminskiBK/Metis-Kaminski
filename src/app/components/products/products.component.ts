@@ -1,9 +1,9 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Product} from 'src/app/models/Product';
 import {UserReview} from 'src/app/models/UserReview';
 import {ProductService} from 'src/app/shared/services/product.service';
 import {Constants} from 'src/app/utils/Constants';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {AddProductDialogComponent} from "./add-product-dialog/add-product-dialog.component";
 
 @Component({
@@ -37,9 +37,11 @@ export class ProductsComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(AddProductDialogComponent, {
-      width: '30%'
-    });
+    let config: MatDialogConfig = {
+      panelClass: "dialog-responsive"
+    }
+
+    this.dialog.open(AddProductDialogComponent, config);
   }
 
   private getProductList(): void {

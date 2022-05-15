@@ -76,6 +76,8 @@ export class ProductDescriptionComponent implements DoCheck {
   }
 
   deleteProduct() {
-    this.productService.deleteProduct(this.product);
+    if(confirm('Are you sure you want to delete ' + this.product.name + '?')) {
+      this.productService.deleteProduct(this.product);
+    }
   }
 }
