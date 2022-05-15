@@ -52,4 +52,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     }
   }
 
+  back() {
+    this.router.navigateByUrl('products');
+  }
 }

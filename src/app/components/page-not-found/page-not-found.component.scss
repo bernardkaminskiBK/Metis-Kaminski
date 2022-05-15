@@ -13,3 +13,23 @@
   justify-content: center;
   flex-direction: column;
 }
+
+.button-28 {
+  @extend %button-twenty-eight;
+}
+
+.button-28:disabled {
+  pointer-events: none;
+}
+
+.button-28:hover {
+  color: $main-primary-color;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.button-28:active {
+  box-shadow: none;
+  transform: translateY(0);
+}

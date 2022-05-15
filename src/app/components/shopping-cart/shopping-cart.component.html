@@ -1,7 +1,10 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
 <div *ngIf="products && products.length == 0" class="center">
-  <h1>No item found in cart!</h1>
+  <div class="no-item-in-cart">
+    <h1>No item found in cart!</h1>
+    <button class="button-28" (click)="back()">Back to products</button>
+  </div>
 </div>
 
 <main *ngIf="products && products.length" class="page">
