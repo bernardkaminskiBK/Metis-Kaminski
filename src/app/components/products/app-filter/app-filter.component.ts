@@ -31,12 +31,12 @@ export class AppFilterComponent implements OnChanges {
   private subscription: any;
 
   ngOnChanges() {
-    this.subscription = this.productService.productListObserver.subscribe(
-      (newValue) => {
-        this.array = newValue;
-      }
-    );
-    this.filter();
+    this.productService.getProductList().then((products) => {
+      this.array = products;
+    });
+    if(this.array) {
+      this.filter();
+    }
   }
 
   filter(): void {

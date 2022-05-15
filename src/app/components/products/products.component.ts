@@ -22,11 +22,11 @@ export class ProductsComponent implements OnInit {
 
   private subscription: any;
 
-  constructor(private data: ProductService, private dialog: MatDialog) {
+  constructor(private productService: ProductService, private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.subscription = this.data.productListObserver.subscribe(
+    this.subscription = this.productService.productListObserver.subscribe(
       (newValue: Product[]) => {
         this.viewList = newValue;
 
@@ -43,7 +43,9 @@ export class ProductsComponent implements OnInit {
   }
 
   private getProductList(): void {
-    this.productList = ProductService.products;
+   this.productService.getProductList().then((products) => {
+     this.productList = products;
+   });
   }
 
   getMostRecentData(userReview: UserReview) {

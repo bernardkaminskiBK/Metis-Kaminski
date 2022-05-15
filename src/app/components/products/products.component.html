@@ -37,13 +37,12 @@
   </div>
 </div>
 
-<div class="list-wrapper">
-  <div class="list-contacts">
+<div class="list-wrapper" *ngIf="viewList && viewList.length">
+  <div class="list-products">
     <div *ngFor="let product of viewList | sort: sortBy">
       <app-product-description
         [Product]="product"
-        (mostRecentData)="getMostRecentData($event)"
-      >
+        (mostRecentData)="getMostRecentData($event)">
         <span productName>{{ product.name }}</span>
 
         <ng-container category>
@@ -84,4 +83,8 @@
       </app-product-description>
     </div>
   </div>
+</div>
+
+<div *ngIf="viewList.length == 0" class="empty-list">
+  <h2>List of products is empty.</h2>
 </div>

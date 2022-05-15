@@ -12,7 +12,7 @@ import {Vendor} from "../../models/Vendor";
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.scss']
 })
-export class StatisticsComponent implements OnInit, AfterViewInit {
+export class StatisticsComponent implements OnInit{
 
   displayedColumnsFirst: string[] =
     ['id', 'name', 'price', 'stockCount', 'quantitySoldLastMonth', 'quantitySoldWholePeriod'];
@@ -49,25 +49,32 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
   products: Product[];
   selected: any;
 
-  constructor(private router: Router, private data: ProductService) {
+  constructor(private router: Router, private productService: ProductService) {
   }
 
   ngOnInit(): void {
-    this.tableSourceFirst = new MatTableDataSource<Product>(ProductService.products);
-    this.tableSourceSecond = new MatTableDataSource<Product>(this.data.getProductCashFlowStates());
-    this.tableSourceThird = new MatTableDataSource<Product>(this.data.getProductsNotInStock());
-    this.tableSourceFourth = new MatTableDataSource<Vendor>(this.data.getFirstVendorList());
+    this.productService.getProductList().then((products) => {
+      this.products = products;
+      this.setTables();
+      this.setTablesFilters();
+    });
+  }
 
-    this.totalCashFlowByLastMonth = this.data.getTotalCashFlowByLastMonth();
-    this.totalCashFlowByWholePeriod = this.data.getTotalCashFlowByWholePeriod();
-    this.avgPriceSoldProducts = this.data.getAveragePriceSoldProducts();
-    this.mostSoldProductName = this.data.getMostSoldProductName();
+  private setTables(): void {
+    this.tableSourceFirst = new MatTableDataSource<Product>(this.products);
+    this.tableSourceSecond = new MatTableDataSource<Product>(this.productService.getProductCashFlowStates());
+    this.tableSourceThird = new MatTableDataSource<Product>(this.productService.getProductsNotInStock());
+    this.tableSourceFourth = new MatTableDataSource<Vendor>(this.productService.getFirstVendorList());
 
-    this.products = ProductService.products;
+    this.totalCashFlowByLastMonth = this.productService.getTotalCashFlowByLastMonth();
+    this.totalCashFlowByWholePeriod = this.productService.getTotalCashFlowByWholePeriod();
+    this.avgPriceSoldProducts = this.productService.getAveragePriceSoldProducts();
+    this.mostSoldProductName = this.productService.getMostSoldProductName();
+
     this.selected = this.products[0].name;
   }
 
-  ngAfterViewInit(): void {
+  private setTablesFilters(): void {
     this.tableSourceFirst.sort = this.sortFirst;
     this.tableSourceFirst.paginator = this.paginatorFirst;
 
@@ -103,7 +110,7 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
 
   fillFourthTableWithContent(): void {
     this.tableSourceFourth =
-      new MatTableDataSource<Vendor>(this.data.getVendorsByProductName(this.selected.name));
+      new MatTableDataSource<Vendor>(this.productService.getVendorsByProductName(this.selected.name));
     this.selected = this.selected.name;
 
     this.tableSourceFourth.sort = this.sortFourth;
