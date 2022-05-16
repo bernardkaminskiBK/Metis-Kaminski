@@ -29,6 +29,8 @@ export class AddProductDialogComponent implements OnInit {
     product.category = rawValue.category;
     product.price = rawValue.price;
     product.stockCount = rawValue.stockCount;
+    product.quantitySoldWholePeriod = rawValue.soldTotal;
+    product.quantitySoldLastMonth = rawValue.soldLastMonth;
     product.description = rawValue.description;
 
     this.productService.addNewProduct(product);
@@ -41,6 +43,8 @@ export class AddProductDialogComponent implements OnInit {
       category: ['', Validators.required],
       price: ['', Validators.required],
       stockCount: ['', Validators.required],
+      soldTotal: ['', Validators.required],
+      soldLastMonth: ['', Validators.required],
       description: ['']
     })
   }
