@@ -45,7 +45,7 @@ export class AddProductDialogComponent implements OnInit {
       stockCount: ['', Validators.required],
       soldTotal: ['', Validators.required],
       soldLastMonth: ['', Validators.required],
-      description: ['']
+      description: [''],
     })
   }
 
