@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProductService} from "../../../shared/services/product.service";
 import {Product} from "../../../models/Product";
+import Utils from "../../../utils/Utils";
+import {Vendor} from "../../../models/Vendor";
+import {Review} from "../../../models/Review";
 
 @Component({
   selector: 'app-add-product-dialog',
@@ -10,7 +13,24 @@ import {Product} from "../../../models/Product";
 })
 export class AddProductDialogComponent implements OnInit {
 
-  productForm: FormGroup;
+  productGroup = new FormGroup({
+    productName: new FormControl(''),
+    category: new FormControl(''),
+    price: new FormControl(''),
+    stockCount: new FormControl(''),
+    quantitySoldLastMonth: new FormControl(''),
+    quantitySoldWholePeriod: new FormControl(''),
+    description: new FormControl(''),
+  });
+
+  reviewGroup = new FormGroup({
+    reviews: new FormArray([])
+  });
+
+  vendorGroup = new FormGroup({
+    vendors: new FormArray([])
+  });
+
   mockCategories: string[];
 
   constructor(private formBuilder: FormBuilder, private productService: ProductService) {
@@ -18,35 +38,70 @@ export class AddProductDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.mockCategories = this.productService.getMockCategoryData();
-    this.prepareProductForm();
+    this.addToFormArray(this.reviewArray());
+    this.addToFormArray(this.vendorArray());
   }
 
   private createNewProduct(): void {
-    const rawValue = this.productForm.getRawValue();
+    const rawValue = this.productGroup.getRawValue();
+
     const product = new Product();
-    product.id = rawValue.id;
+    product.uuid = Utils.generateUUID();
     product.name = rawValue.productName;
     product.category = rawValue.category;
     product.price = rawValue.price;
     product.stockCount = rawValue.stockCount;
-    product.quantitySoldWholePeriod = rawValue.soldTotal;
-    product.quantitySoldLastMonth = rawValue.soldLastMonth;
+    product.quantitySoldLastMonth = rawValue.quantitySoldLastMonth;
+    product.quantitySoldWholePeriod = rawValue.quantitySoldWholePeriod;
     product.description = rawValue.description;
+    product.vendors = this.getVendorsFromFormArray();
+    product.reviews = this.getReviewsFromFormArray();
 
     this.productService.addNewProduct(product);
   }
 
-  private prepareProductForm(): void {
-    this.productForm = this.formBuilder.group({
-      id: ['', Validators.required],
-      productName: ['', Validators.required],
-      category: ['', Validators.required],
-      price: ['', Validators.required],
-      stockCount: ['', Validators.required],
-      soldTotal: ['', Validators.required],
-      soldLastMonth: ['', Validators.required],
-      description: [''],
-    })
+  reviewArray(): FormArray {
+    return this.reviewGroup.get('reviews') as FormArray;
+  }
+
+  vendorArray(): FormArray {
+    return this.vendorGroup.get('vendors') as FormArray;
+  }
+
+  addToFormArray(formArray: FormArray): void {
+    formArray.push(new FormControl());
+  }
+
+  removeFromFormArray(formArray: FormArray, index: number): void {
+    formArray.removeAt(index);
+  }
+
+  private getVendorsFromFormArray() : Vendor[] {
+    const vendorsRawValue = this.vendorGroup.getRawValue();
+    let vendorList: Vendor[] = [];
+
+    vendorsRawValue.vendors.forEach((vendorName) => {
+      let vendor = new Vendor();
+      vendor.name = vendorName;
+      vendor.stockCount = 1;
+
+      vendorList.push(vendor);
+    });
+    return vendorList;
+  }
+
+  private getReviewsFromFormArray() : Review[] {
+    const reviewsRawValue = this.reviewGroup.getRawValue();
+    let reviewList: Review[] = [];
+
+    reviewsRawValue.reviews.forEach((reviewItem) => {
+      let review = new Review();
+      review.date = Utils.getFormattedCurrentDate();
+      review.comment = reviewItem;
+
+      reviewList.push(review);
+    });
+    return reviewList;
   }
 
   addProduct() {

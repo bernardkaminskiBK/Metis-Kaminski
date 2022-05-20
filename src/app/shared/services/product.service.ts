@@ -37,7 +37,14 @@ export class ProductService {
   }
 
   deleteProduct(product: Product): void {
-    const index = this.cacheProductList.indexOf(product, 0);
+    const index = this.cacheProductList.findIndex((item) => {
+      if(product.id) {
+        return item.id === product.id;
+      } else {
+        return item.uuid === product.uuid;
+      }
+    });
+
     if (index > -1) {
       this.cacheProductList.splice(index, 1);
       this.productListObserver.next(this.cacheProductList);

@@ -4,6 +4,7 @@ export class MockData {
   static products: Product[] = [
     {
       id: 1,
+      uuid: '',
       name: 'Product 1',
       category: 'Product 1',
       img_url: '',
@@ -35,6 +36,7 @@ export class MockData {
     },
     {
       id: 2,
+      uuid: '',
       name: 'Acer Nitro 5 Obsidian',
       img_url: 'https://cdn.alza.sk/ImgW.ashx?fd=f16&cd=NC108c7i04n2',
       category: 'Gaming',
@@ -67,6 +69,7 @@ export class MockData {
     },
     {
       id: 3,
+      uuid: '',
       name: 'Lenovo Legion 5 Pro',
       img_url: 'https://cdn.alza.sk/ImgW.ashx?fd=f16&cd=NT379u80o3',
       category: 'Gaming',
@@ -97,6 +100,7 @@ export class MockData {
     },
     {
       id: 4,
+      uuid: '',
       name: 'Macbook Pro 13" M1 SK2020',
       img_url: 'https://cdn.alza.sk/Foto/f16/NL/NL257a1b1.jpg',
       category: 'MacBook',
@@ -136,6 +140,7 @@ export class MockData {
     },
     {
       id: 5,
+      uuid: '',
       name: 'Dell Vostro 3500',
       img_url: 'https://cdn.alza.sk/ImgW.ashx?fd=f16&cd=ADC253z08i',
       category: 'Kancelária',
@@ -170,6 +175,7 @@ export class MockData {
     },
     {
       id: 6,
+      uuid: '',
       name: 'Asus Zenbook 13',
       img_url: 'https://cdn.alza.sk/ImgW.ashx?fd=f16&cd=NA618p71c2',
       category: 'Ultrabook',
@@ -201,6 +207,7 @@ export class MockData {
     },
     {
       id: 7,
+      uuid: '',
       name: 'Test',
       category: 'Test',
       img_url: '',
@@ -232,6 +239,7 @@ export class MockData {
     },
     {
       id: 8,
+      uuid: '',
       name: 'Test2',
       category: 'Test2',
       img_url: '',

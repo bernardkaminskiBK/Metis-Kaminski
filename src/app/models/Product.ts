@@ -3,6 +3,7 @@ import {Review} from "./Review";
 
 export class Product {
   id: number = 0;
+  uuid: string = '';
   name: string = '';
   img_url: string = '';
   category: string = '';

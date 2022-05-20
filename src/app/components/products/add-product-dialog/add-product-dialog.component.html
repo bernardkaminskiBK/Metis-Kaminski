@@ -1,12 +1,7 @@
 <h1 mat-dialog-title>Add new Product</h1>
 
 <div mat-dialog-content>
-  <form [formGroup]="productForm">
-    <mat-form-field appearance="outline">
-      <mat-label>Id</mat-label>
-      <input type="number" formControlName="id" matInput placeholder="Id">
-      <mat-hint>Hint</mat-hint>
-    </mat-form-field>
+  <form [formGroup]="productGroup">
 
     <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
@@ -35,16 +30,50 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Sold Total</mat-label>
-      <input type="number" formControlName="soldTotal" matInput placeholder="Sold Total">
+      <mat-label>Sold Last Month</mat-label>
+      <input type="number" formControlName="quantitySoldLastMonth" matInput placeholder="Sold Last Mont">
       <mat-hint>Hint</mat-hint>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Sold Last Month</mat-label>
-      <input type="number" formControlName="soldLastMonth" matInput placeholder="Sold Last Mont">
+      <mat-label>Sold Whole Period</mat-label>
+      <input type="number" formControlName="quantitySoldWholePeriod" matInput placeholder="Sold Whole Period">
       <mat-hint>Hint</mat-hint>
     </mat-form-field>
+
+    <form *ngIf="reviewGroup" id="reviewsForm" [formGroup]="reviewGroup">
+      <div class="container" formArrayName="reviews">
+        <div class="input-row" *ngFor="let item of reviewArray().controls;last as isLast, let index=index">
+          <mat-form-field>
+            <mat-label>Reviews</mat-label>
+            <input matInput formControlName="{{index}}">
+          </mat-form-field>
+          <button mat-icon-button color="warn" (click)="removeFromFormArray(reviewArray(), index)" *ngIf="reviewArray().length  > 1">
+            <mat-icon>remove_circle</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" *ngIf="isLast" (click)="addToFormArray(reviewArray())">
+            <mat-icon>add_circle</mat-icon>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <form *ngIf="vendorGroup" id="vendorsForm" [formGroup]="vendorGroup">
+      <div class="container" formArrayName="vendors">
+        <div class="input-row" *ngFor="let item of vendorArray().controls;last as isLast, let index=index">
+          <mat-form-field>
+            <mat-label>Vendors</mat-label>
+            <input matInput formControlName="{{index}}">
+          </mat-form-field>
+          <button mat-icon-button color="warn" (click)="removeFromFormArray(vendorArray(), index)" *ngIf="vendorArray().length  > 1">
+            <mat-icon>remove_circle</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" *ngIf="isLast" (click)="addToFormArray(vendorArray())">
+            <mat-icon>add_circle</mat-icon>
+          </button>
+        </div>
+      </div>
+    </form>
 
     <mat-form-field appearance="outline">
       <mat-label>Description</mat-label>
