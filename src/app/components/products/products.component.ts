@@ -5,6 +5,7 @@ import {ProductService} from 'src/app/shared/services/product.service';
 import {Constants} from 'src/app/utils/Constants';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {AddProductDialogComponent} from "./add-product-dialog/add-product-dialog.component";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-products',
@@ -56,15 +57,22 @@ export class ProductsComponent implements OnInit {
 
   // Kvazi fake data len na skusku na init pre most recent comment
   getMostRecentFromProductList() {
-    if (this.productList && this.productList.length &&
-      this.productList[0].reviews && this.productList[0].reviews.length) {
+    this.productService.getProductList().then((products) => {
+      const productList = products;
 
-      const mostRecentComment = this.productList[0].reviews[0].comment;
-      const mostRecentDate = this.productList[0].reviews[0].date;
+    if (productList && productList.length &&
+      productList[0].reviews && productList[0].reviews.length) {
+
+      const productLength = productList.length - 1;
+      const reviewLength = productList[productLength].reviews.length - 1;
+
+      const mostRecentComment = productList[productLength].reviews[reviewLength].comment;
+      const mostRecentDate = productList[productLength].reviews[reviewLength].date;
       this.mostRecentReview = new UserReview(mostRecentDate, mostRecentComment);
     } else {
       this.mostRecentReview = new UserReview('', '');
     }
+    });
   }
 
   filteredProductList(filteredProductList: Product[]) {
