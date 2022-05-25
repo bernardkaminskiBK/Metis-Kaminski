@@ -4,9 +4,11 @@
   <form [formGroup]="productGroup">
 
     <mat-form-field appearance="outline">
-      <mat-label>Name</mat-label>
-      <input formControlName="productName" matInput placeholder="Name">
-      <mat-hint>Hint</mat-hint>
+      <mat-label>Product Name</mat-label>
+      <input formControlName="productName" matInput placeholder="Product Name">
+      <mat-error *ngIf="productGroup.get('productName')?.hasError('required')">
+        The product name is required
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
@@ -20,26 +22,53 @@
     <mat-form-field appearance="outline">
       <mat-label>Price</mat-label>
       <input type="number" formControlName="price" matInput placeholder="Price">
-      <mat-hint>Hint</mat-hint>
+      <mat-error *ngIf="productGroup.get('price')?.hasError('min')">
+        Price can't be less or equal to 0.
+      </mat-error>
+      <mat-error *ngIf="productGroup.get('price')?.hasError('required')">
+        The price is required.
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>StockCount</mat-label>
       <input type="number" formControlName="stockCount" matInput placeholder="stock count">
-      <mat-hint>Hint</mat-hint>
+      <mat-error *ngIf="productGroup.get('stockCount')?.hasError('min')">
+        Price can't be less or equal to 0.
+      </mat-error>
+      <mat-error *ngIf="productGroup.get('stockCount')?.hasError('required')">
+        The stock count is required.
+      </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Sold Last Month</mat-label>
-      <input type="number" formControlName="quantitySoldLastMonth" matInput placeholder="Sold Last Mont">
-      <mat-hint>Hint</mat-hint>
-    </mat-form-field>
+    <form formGroupName="quantityGroup">
+      <mat-form-field appearance="outline">
+        <mat-label>Sold Products Last Month</mat-label>
+        <input type="number" formControlName="quantitySoldLastMonth" matInput placeholder="Sold Products Last Month">
+        <mat-error *ngIf="productGroup.get('quantityGroup.quantitySoldLastMonth')?.hasError('mismatch')">
+          The quantity of sold products by last month can't be greater than the quantity of sold products by whole
+          period.
+        </mat-error>
+        <mat-error *ngIf="productGroup.get('quantityGroup.quantitySoldLastMonth')?.hasError('min')">
+          The quantity of sold products by last month can't be less or equal to 0.
+        </mat-error>
+        <mat-error *ngIf="productGroup.get('quantityGroup.quantitySoldLastMonth')?.hasError('required')">
+          The quantity of sold products by last month is required.
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Sold Whole Period</mat-label>
-      <input type="number" formControlName="quantitySoldWholePeriod" matInput placeholder="Sold Whole Period">
-      <mat-hint>Hint</mat-hint>
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Sold Products Whole Period</mat-label>
+        <input type="number" formControlName="quantitySoldWholePeriod" matInput
+               placeholder="Sold Products Whole Period">
+        <mat-error *ngIf="productGroup.get('quantityGroup.quantitySoldWholePeriod')?.hasError('min')">
+          The quantity of sold products by whole period can't be less or equal to 0.
+        </mat-error>
+        <mat-error *ngIf="productGroup.get('quantityGroup.quantitySoldWholePeriod')?.hasError('required')">
+          The quantity of sold products by whole period is required.
+        </mat-error>
+      </mat-form-field>
+    </form>
 
     <form *ngIf="reviewGroup" id="reviewsForm" [formGroup]="reviewGroup">
       <div class="container" formArrayName="reviews">
@@ -48,7 +77,8 @@
             <mat-label>Reviews</mat-label>
             <input matInput formControlName="{{index}}">
           </mat-form-field>
-          <button mat-icon-button color="warn" (click)="removeFromFormArray(reviewArray(), index)" *ngIf="reviewArray().length  > 1">
+          <button mat-icon-button color="warn" (click)="removeFromFormArray(reviewArray(), index)"
+                  *ngIf="reviewArray().length  > 1">
             <mat-icon>remove_circle</mat-icon>
           </button>
           <button mat-icon-button color="primary" *ngIf="isLast" (click)="addToFormArray(reviewArray())">
@@ -65,7 +95,8 @@
             <mat-label>Vendors</mat-label>
             <input matInput formControlName="{{index}}">
           </mat-form-field>
-          <button mat-icon-button color="warn" (click)="removeFromFormArray(vendorArray(), index)" *ngIf="vendorArray().length  > 1">
+          <button mat-icon-button color="warn" (click)="removeFromFormArray(vendorArray(), index)"
+                  *ngIf="vendorArray().length  > 1">
             <mat-icon>remove_circle</mat-icon>
           </button>
           <button mat-icon-button color="primary" *ngIf="isLast" (click)="addToFormArray(vendorArray())">
@@ -84,6 +115,6 @@
 </div>
 
 <div mat-dialog-action [align]="'end'">
-  <button mat-button mat-dialog-close (click)="addProduct()">Add</button>
+  <button *ngIf="productGroup.valid" mat-button mat-dialog-close (click)="addProduct()">Add</button>
   <button mat-button mat-dialog-close>Close</button>
 </div>

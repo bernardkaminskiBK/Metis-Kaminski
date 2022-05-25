@@ -5,6 +5,8 @@ import {Product} from "../../../models/Product";
 import Utils from "../../../utils/Utils";
 import {Vendor} from "../../../models/Vendor";
 import {Review} from "../../../models/Review";
+import {ValidateSoldQuantity} from "../../../utils/CustomValidator";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-add-product-dialog',
@@ -14,12 +16,14 @@ import {Review} from "../../../models/Review";
 export class AddProductDialogComponent implements OnInit {
 
   productGroup = new FormGroup({
-    productName: new FormControl(''),
+    productName: new FormControl('', [Validators.required]),
     category: new FormControl(''),
-    price: new FormControl(''),
-    stockCount: new FormControl(''),
-    quantitySoldLastMonth: new FormControl(''),
-    quantitySoldWholePeriod: new FormControl(''),
+    price: new FormControl('', [Validators.required, Validators.min(1)]),
+    stockCount: new FormControl('', [Validators.required, Validators.min(1)]),
+    quantityGroup: new FormGroup({
+      quantitySoldLastMonth: new FormControl('', [Validators.required, Validators.min(1)]),
+      quantitySoldWholePeriod: new FormControl('', [Validators.required, Validators.min(1)])
+    }, ValidateSoldQuantity),
     description: new FormControl(''),
   });
 
@@ -33,7 +37,7 @@ export class AddProductDialogComponent implements OnInit {
 
   mockCategories: string[];
 
-  constructor(private formBuilder: FormBuilder, private productService: ProductService) {
+  constructor(private formBuilder: FormBuilder, private productService: ProductService, private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -43,6 +47,16 @@ export class AddProductDialogComponent implements OnInit {
   }
 
   private createNewProduct(): void {
+    this.productGroup.markAllAsTouched();
+    this.productGroup.updateValueAndValidity();
+
+    if (this.productGroup.valid) {
+      this.productService.addNewProduct(this.newProduct());
+      this.notification('Your product was successfully added to the list of products.')
+    }
+  }
+
+  private newProduct(): Product {
     const rawValue = this.productGroup.getRawValue();
 
     const product = new Product();
@@ -51,13 +65,12 @@ export class AddProductDialogComponent implements OnInit {
     product.category = rawValue.category;
     product.price = rawValue.price;
     product.stockCount = rawValue.stockCount;
-    product.quantitySoldLastMonth = rawValue.quantitySoldLastMonth;
-    product.quantitySoldWholePeriod = rawValue.quantitySoldWholePeriod;
+    product.quantitySoldLastMonth = this.productGroup.get('quantityGroup.quantitySoldLastMonth')?.value;
+    product.quantitySoldWholePeriod = this.productGroup.get('quantityGroup.quantitySoldWholePeriod')?.value;
     product.description = rawValue.description;
     product.vendors = this.getVendorsFromFormArray();
     product.reviews = this.getReviewsFromFormArray();
-
-    this.productService.addNewProduct(product);
+    return product;
   }
 
   reviewArray(): FormArray {
@@ -76,7 +89,7 @@ export class AddProductDialogComponent implements OnInit {
     formArray.removeAt(index);
   }
 
-  private getVendorsFromFormArray() : Vendor[] {
+  private getVendorsFromFormArray(): Vendor[] {
     const vendorsRawValue = this.vendorGroup.getRawValue();
     let vendorList: Vendor[] = [];
 
@@ -90,7 +103,7 @@ export class AddProductDialogComponent implements OnInit {
     return vendorList;
   }
 
-  private getReviewsFromFormArray() : Review[] {
+  private getReviewsFromFormArray(): Review[] {
     const reviewsRawValue = this.reviewGroup.getRawValue();
     let reviewList: Review[] = [];
 
@@ -106,5 +119,11 @@ export class AddProductDialogComponent implements OnInit {
 
   addProduct() {
     this.createNewProduct();
+  }
+
+  private notification(msg: string): void {
+    this.snackBar.open(msg, '', {
+      duration: 2000
+    });
   }
 }

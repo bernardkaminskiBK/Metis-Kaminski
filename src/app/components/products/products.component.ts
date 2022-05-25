@@ -5,7 +5,6 @@ import {ProductService} from 'src/app/shared/services/product.service';
 import {Constants} from 'src/app/utils/Constants';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {AddProductDialogComponent} from "./add-product-dialog/add-product-dialog.component";
-import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-products',
@@ -42,7 +41,8 @@ export class ProductsComponent implements OnInit {
       panelClass: "dialog-responsive"
     }
 
-    this.dialog.open(AddProductDialogComponent, config);
+    const dialogRef = this.dialog.open(AddProductDialogComponent, config);
+    dialogRef.disableClose = true;
   }
 
   private getProductList(): void {
