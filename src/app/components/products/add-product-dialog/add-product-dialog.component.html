@@ -23,7 +23,7 @@
       <mat-label>Price</mat-label>
       <input type="number" formControlName="price" matInput placeholder="Price">
       <mat-error *ngIf="productGroup.get('price')?.hasError('min')">
-        Price can't be less or equal to 0.
+        The price can't be less or equal to 0.
       </mat-error>
       <mat-error *ngIf="productGroup.get('price')?.hasError('required')">
         The price is required.
@@ -34,7 +34,7 @@
       <mat-label>StockCount</mat-label>
       <input type="number" formControlName="stockCount" matInput placeholder="stock count">
       <mat-error *ngIf="productGroup.get('stockCount')?.hasError('min')">
-        Price can't be less or equal to 0.
+        The stock count can't be less or equal to 0.
       </mat-error>
       <mat-error *ngIf="productGroup.get('stockCount')?.hasError('required')">
         The stock count is required.
