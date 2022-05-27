@@ -115,6 +115,6 @@
 </div>
 
 <div mat-dialog-action [align]="'end'">
-  <button *ngIf="productGroup.valid" mat-button mat-dialog-close (click)="addProduct()">Add</button>
+  <button [disabled]="!productGroup.valid" mat-button mat-dialog-close (click)="addProduct()">Add</button>
   <button mat-button mat-dialog-close>Close</button>
 </div>
