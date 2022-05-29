@@ -10,7 +10,7 @@ import {AppFilterOptionsComponent} from "./app-filter-options/app-filter-options
 import {ReviewComponent} from "./review/review.component";
 import {SortPipe} from "../../shared/pipes/sort.pipe";
 import {MaterialModule} from "../../shared/material/material.module";
-import { AddProductDialogComponent } from './add-product-dialog/add-product-dialog.component';
+import { AddProductDialogComponent } from '../../shared/modal-dialogs/add-product-dialog/add-product-dialog.component';
 
 const components = [
   ProductsComponent,

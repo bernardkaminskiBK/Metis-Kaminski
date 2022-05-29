@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ProductService} from "../../../shared/services/product.service";
+import {ProductService} from "../../services/product.service";
 import {Product} from "../../../models/Product";
 import Utils from "../../../utils/Utils";
 import {Vendor} from "../../../models/Vendor";

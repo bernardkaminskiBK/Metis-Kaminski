@@ -13,6 +13,7 @@ import {BackToTopComponent} from './components/back-to-top/back-to-top.component
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SnackBarService} from "./shared/services/snackBar.service";
 import { ShoppingCartBadgeComponent } from './components/shopping-cart-badge/shopping-cart-badge.component';
+import { AboutDialogComponent } from './shared/modal-dialogs/about-dialog/about-dialog.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ShoppingCartBadgeComponent } from './components/shopping-cart-badge/sho
     FooterComponent,
     SideNavComponent,
     BackToTopComponent,
-    ShoppingCartBadgeComponent
+    ShoppingCartBadgeComponent,
+    AboutDialogComponent
   ],
   imports: [
     BrowserAnimationsModule,

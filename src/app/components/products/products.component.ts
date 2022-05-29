@@ -4,7 +4,7 @@ import {UserReview} from 'src/app/models/UserReview';
 import {ProductService} from 'src/app/shared/services/product.service';
 import {Constants} from 'src/app/utils/Constants';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {AddProductDialogComponent} from "./add-product-dialog/add-product-dialog.component";
+import {AddProductDialogComponent} from "../../shared/modal-dialogs/add-product-dialog/add-product-dialog.component";
 
 @Component({
   selector: 'app-products',
