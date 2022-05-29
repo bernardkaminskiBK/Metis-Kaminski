@@ -11,7 +11,6 @@ import {Product} from "../../models/Product";
 })
 export class ShoppingCartComponent implements OnInit, OnDestroy {
 
-  quantity: number = 0;
   subtotal: number;
   shippingPrice: number = 10;
   total: number;
