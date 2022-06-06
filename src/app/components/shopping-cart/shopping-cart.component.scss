@@ -4,6 +4,12 @@
   @extend %center-content;
 }
 
+.center-countdown {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
 .no-item-in-cart {
   display: flex;
   justify-content: center;

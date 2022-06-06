@@ -16,7 +16,7 @@ export class ShoppingCartService {
 
   addProductToShoppingCart(product: Product): void {
     if (!this.countDownTimerService.isRunning()) {
-      this.countDownTimerService.startCountDownTimer(10);
+      this.countDownTimerService.startCountDownTimer(600);
     }
     this.shoppingCartArr.push(product);
     this.shoppingCartObserver.next(this.shoppingCartArr);
