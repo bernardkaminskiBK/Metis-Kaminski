@@ -11,6 +11,7 @@ import {ReviewComponent} from "./review/review.component";
 import {SortPipe} from "../../shared/pipes/sort.pipe";
 import {MaterialModule} from "../../shared/material/material.module";
 import { AddProductDialogComponent } from '../../shared/modal-dialogs/add-product-dialog/add-product-dialog.component';
+import {FormatTimePipe} from "../../shared/pipes/formatTime.pipe";
 
 const components = [
   ProductsComponent,
@@ -20,7 +21,8 @@ const components = [
   AppFilterOptionsComponent,
   ReviewComponent,
   AddProductDialogComponent,
-  SortPipe
+  SortPipe,
+  FormatTimePipe
 ];
 
 @NgModule({
@@ -34,5 +36,8 @@ const components = [
   declarations: [
     components
   ],
+  exports: [
+    FormatTimePipe
+  ]
 })
 export class ProductsModule {}

@@ -12,6 +12,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ShoppingCartService} from '../../../shared/services/shopping-cart.service';
 import {ProductService} from '../../../shared/services/product.service';
 import {Product} from '../../../models/Product';
+import {CountDownTimeService} from "../../../shared/services/countDownTime.service";
 
 @Component({
   selector: 'app-product-description',
