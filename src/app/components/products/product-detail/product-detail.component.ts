@@ -27,6 +27,7 @@ export class ProductDetailComponent implements OnInit {
 
         // Alternativa na upozornenie ze ups nie je taky produkt alebo radsej hodit tam hlasku ze
         // product not found napriklad, okej to-do do buducna...
+        // Ale bacha tato funkcionalita bola presunuta do product servicu...
         // if (!this.product) {
         //   this.router.navigate(['/404notFound']);
         // }
