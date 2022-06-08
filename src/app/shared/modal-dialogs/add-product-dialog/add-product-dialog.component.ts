@@ -94,11 +94,14 @@ export class AddProductDialogComponent implements OnInit {
     let vendorList: Vendor[] = [];
 
     vendorsRawValue.vendors.forEach((vendorName) => {
-      let vendor = new Vendor();
-      vendor.name = vendorName;
-      vendor.stockCount = 1;
+      if (vendorName && vendorName.length > 0) {
+        let vendor = new Vendor();
+        vendor.name = vendorName;
+        vendor.stockCount = 1;
 
-      vendorList.push(vendor);
+        vendorList.push(vendor);
+      }
+
     });
     return vendorList;
   }
@@ -108,11 +111,14 @@ export class AddProductDialogComponent implements OnInit {
     let reviewList: Review[] = [];
 
     reviewsRawValue.reviews.forEach((reviewItem) => {
-      let review = new Review();
-      review.date = Utils.getFormattedCurrentDate();
-      review.comment = reviewItem;
+      if (reviewItem && reviewItem.length > 0) {
+        let review = new Review();
+        review.date = Utils.getFormattedCurrentDate();
+        review.comment = reviewItem;
 
-      reviewList.push(review);
+        reviewList.push(review);
+      }
+
     });
     return reviewList;
   }

@@ -31,7 +31,7 @@ export class ProductDetailComponent implements OnInit {
         // if (!this.product) {
         //   this.router.navigate(['/404notFound']);
         // }
-      });
+      }).catch(() => 'product-detail-catch-error');
     });
   }
 
