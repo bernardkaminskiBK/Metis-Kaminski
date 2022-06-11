@@ -1,0 +1,141 @@
+<h1 *ngIf="productFormService.addEdit" mat-dialog-title>Add New Product</h1>
+<h1 *ngIf="!productFormService.addEdit" mat-dialog-title>Edit Product</h1>
+
+<div mat-dialog-content>
+  <form [formGroup]="productFormService.productGroup">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Product Name</mat-label>
+      <input formControlName="productName" matInput placeholder="Product Name">
+      <mat-error *ngIf="productFormService.productGroup.get('productName')?.hasError('required')">
+        The product name is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="category" placeholder="Category">
+        <mat-option *ngFor="let mockCategory of mockCategories" value="{{mockCategory}}">{{mockCategory}}</mat-option>
+      </mat-select>
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Price</mat-label>
+      <input type="number" formControlName="price" matInput placeholder="Price">
+      <mat-error *ngIf="productFormService.productGroup.get('price')?.hasError('min')">
+        The price can't be less or equal to 0.
+      </mat-error>
+      <mat-error *ngIf="productFormService.productGroup.get('price')?.hasError('required')">
+        The price is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>StockCount</mat-label>
+      <input type="number" formControlName="stockCount" matInput placeholder="stock count">
+      <mat-error *ngIf="productFormService.productGroup.get('stockCount')?.hasError('min')">
+        The stock count can't be less or equal to 0.
+      </mat-error>
+      <mat-error *ngIf="productFormService.productGroup.get('stockCount')?.hasError('required')">
+        The stock count is required.
+      </mat-error>
+    </mat-form-field>
+
+    <form formGroupName="quantityGroup">
+      <mat-form-field appearance="outline">
+        <mat-label>Sold Products Last Month</mat-label>
+        <input type="number" formControlName="quantitySoldLastMonth" matInput placeholder="Sold Products Last Month">
+        <mat-error
+          *ngIf="productFormService.productGroup.get('quantityGroup.quantitySoldLastMonth')?.hasError('mismatch')">
+          The quantity of sold products by last month can't be greater than the quantity of sold products by whole
+          period.
+        </mat-error>
+        <mat-error *ngIf="productFormService.productGroup.get('quantityGroup.quantitySoldLastMonth')?.hasError('min')">
+          The quantity of sold products by last month can't be less or equal to 0.
+        </mat-error>
+        <mat-error
+          *ngIf="productFormService.productGroup.get('quantityGroup.quantitySoldLastMonth')?.hasError('required')">
+          The quantity of sold products by last month is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Sold Products Whole Period</mat-label>
+        <input type="number" formControlName="quantitySoldWholePeriod" matInput
+               placeholder="Sold Products Whole Period">
+        <mat-error
+          *ngIf="productFormService.productGroup.get('quantityGroup.quantitySoldWholePeriod')?.hasError('min')">
+          The quantity of sold products by whole period can't be less or equal to 0.
+        </mat-error>
+        <mat-error
+          *ngIf="productFormService.productGroup.get('quantityGroup.quantitySoldWholePeriod')?.hasError('required')">
+          The quantity of sold products by whole period is required.
+        </mat-error>
+      </mat-form-field>
+    </form>
+
+    <form *ngIf="productFormService.reviewGroup" id="reviewsForm" [formGroup]="productFormService.reviewGroup">
+      <h1 mat-dialog-title>Reviews</h1>
+      <div class="container" formArrayName="reviews">
+        <div class="input-row"
+             *ngFor="let item of productFormService.reviewArray().controls;last as isLast, let index=index">
+          <mat-form-field>
+            <mat-label>Review</mat-label>
+            <input matInput formControlName="{{index}}">
+          </mat-form-field>
+          <button mat-icon-button color="warn"
+                  (click)="productFormService.removeFromFormArray(productFormService.reviewArray(), index)"
+                  *ngIf="productFormService.reviewArray().length  > 1">
+            <mat-icon>remove_circle</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" *ngIf="isLast"
+                  (click)="productFormService.addToFormArray(productFormService.reviewArray())">
+            <mat-icon>add_circle</mat-icon>
+          </button>
+        </div>
+      </div>
+    </form>
+
+
+    <form *ngIf="productFormService.vendorGroup" id="vendorsForm" [formGroup]="productFormService.vendorGroup">
+      <h1 mat-dialog-title>Vendors</h1>
+      <div class="container" formArrayName="vendors">
+        <div class="input-row"
+             *ngFor="let item of productFormService.vendorArray().controls;last as isLast, let index=index">
+          <mat-form-field>
+            <mat-label>Vendor</mat-label>
+            <input matInput formControlName="{{index}}">
+          </mat-form-field>
+          <button mat-icon-button color="warn"
+                  (click)="productFormService.removeFromFormArray(productFormService.vendorArray(), index)"
+                  *ngIf="productFormService.vendorArray().length  > 1">
+            <mat-icon>remove_circle</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" *ngIf="isLast"
+                  (click)="productFormService.addToFormArray(productFormService.vendorArray())">
+            <mat-icon>add_circle</mat-icon>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <h1 mat-dialog-title>Description</h1>
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" placeholder="description"></textarea>
+    </mat-form-field>
+
+  </form>
+</div>
+
+<div mat-dialog-action [align]="'end'">
+  <button *ngIf="productFormService.addEdit" [disabled]="!productFormService.productGroup.valid" mat-button
+          mat-dialog-close (click)="addProduct()">Add
+  </button>
+  <button *ngIf="!productFormService.addEdit" [disabled]="!productFormService.productGroup.valid" mat-button
+          mat-dialog-close (click)="editProduct()">Edit
+  </button>
+  <button mat-button (click)="onClear()">Clear</button>
+  <button mat-button (click)="onClose()" mat-dialog-close>Close</button>
+</div>

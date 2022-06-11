@@ -12,7 +12,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ShoppingCartService} from '../../../shared/services/shopping-cart.service';
 import {ProductService} from '../../../shared/services/product.service';
 import {Product} from '../../../models/Product';
-import {CountDownTimeService} from "../../../shared/services/countDownTime.service";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {AddEditProductDialogComponent} from "../../../shared/modal-dialogs/add-edit-product-dialog/add-edit-product-dialog.component";
+import {ProductFormService} from "../../../shared/services/productForm.service";
 
 @Component({
   selector: 'app-product-description',
@@ -35,7 +37,9 @@ export class ProductDescriptionComponent implements DoCheck {
     private router: Router,
     private route: ActivatedRoute,
     private shoppingCartService: ShoppingCartService,
-    private productService: ProductService
+    private productService: ProductService,
+    private productFormService: ProductFormService,
+    private dialog: MatDialog
   ) {
   }
 
@@ -80,5 +84,17 @@ export class ProductDescriptionComponent implements DoCheck {
     if(confirm('Are you sure you want to delete ' + this.product.name + '?')) {
       this.productService.deleteProduct(this.product);
     }
+  }
+
+  editProductDialog() {
+    let config: MatDialogConfig = {
+      panelClass: "dialog-responsive"
+    }
+
+    this.productFormService.fillDataEditProductForm(this.product);
+    this.productFormService.addEdit = false;
+
+    const dialogRef = this.dialog.open(AddEditProductDialogComponent, config);
+    dialogRef.disableClose = true;
   }
 }

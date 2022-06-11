@@ -10,8 +10,9 @@ import {AppFilterOptionsComponent} from "./app-filter-options/app-filter-options
 import {ReviewComponent} from "./review/review.component";
 import {SortPipe} from "../../shared/pipes/sort.pipe";
 import {MaterialModule} from "../../shared/material/material.module";
-import { AddProductDialogComponent } from '../../shared/modal-dialogs/add-product-dialog/add-product-dialog.component';
+import { AddEditProductDialogComponent } from '../../shared/modal-dialogs/add-edit-product-dialog/add-edit-product-dialog.component';
 import {FormatTimePipe} from "../../shared/pipes/formatTime.pipe";
+import {ProductFormService} from "../../shared/services/productForm.service";
 
 const components = [
   ProductsComponent,
@@ -20,7 +21,7 @@ const components = [
   AppFilterComponent,
   AppFilterOptionsComponent,
   ReviewComponent,
-  AddProductDialogComponent,
+  AddEditProductDialogComponent,
   SortPipe,
   FormatTimePipe
 ];
@@ -38,6 +39,7 @@ const components = [
   ],
   exports: [
     FormatTimePipe
-  ]
+  ],
+  providers: [ProductFormService]
 })
 export class ProductsModule {}

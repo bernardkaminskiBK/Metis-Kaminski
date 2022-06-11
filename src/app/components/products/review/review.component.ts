@@ -3,6 +3,7 @@ import {UserReview} from "../../../models/UserReview";
 import Utils from "../../../utils/Utils";
 import {Product} from "../../../models/Product";
 import {Review} from "../../../models/Review";
+import {ProductService} from "../../../shared/services/product.service";
 
 @Component({
   selector: 'app-review',
@@ -18,7 +19,7 @@ export class ReviewComponent implements OnInit {
 
   @ViewChild('input') textArea: ElementRef;
 
-  constructor() {
+  constructor(private productService: ProductService) {
   }
 
   ngOnInit(): void {
@@ -34,6 +35,9 @@ export class ReviewComponent implements OnInit {
 
       this.listOfComments.push(review);
       this.mostRecentReview.emit(new UserReview(review.date,  review.comment));
+
+      this.inputProduct.reviews = this.listOfComments;
+      this.productService.updateProduct(this.inputProduct);
 
       this.textArea.nativeElement.value = '';
 

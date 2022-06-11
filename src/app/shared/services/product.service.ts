@@ -38,7 +38,7 @@ export class ProductService {
 
   deleteProduct(product: Product): void {
     const index = this.cacheProductList.findIndex((item) => {
-      if(product.id) {
+      if (product.id) {
         return item.id === product.id;
       } else {
         return item.uuid === product.uuid;
@@ -64,6 +64,21 @@ export class ProductService {
         }, 500);
       }
     })
+  }
+
+  updateProduct(product: Product) {
+    const index = this.cacheProductList.indexOf(product, 0);
+    if (index > -1) {
+      this.cacheProductList[index].name = product.name;
+      this.cacheProductList[index].category = product.category;
+      this.cacheProductList[index].price = product.price;
+      this.cacheProductList[index].stockCount = product.stockCount;
+      this.cacheProductList[index].quantitySoldLastMonth = product.quantitySoldLastMonth;
+      this.cacheProductList[index].quantitySoldWholePeriod = product.quantitySoldWholePeriod;
+      this.cacheProductList[index].description = product.description;
+      this.cacheProductList[index].vendors = product.vendors;
+      this.cacheProductList[index].reviews = product.reviews;
+    }
   }
 
   private getAPIRequest(): Product[] {
@@ -192,4 +207,5 @@ export class ProductService {
     });
     return nameOfProduct;
   }
+
 }

@@ -4,7 +4,10 @@ import {UserReview} from 'src/app/models/UserReview';
 import {ProductService} from 'src/app/shared/services/product.service';
 import {Constants} from 'src/app/utils/Constants';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {AddProductDialogComponent} from "../../shared/modal-dialogs/add-product-dialog/add-product-dialog.component";
+import {
+  AddEditProductDialogComponent
+} from "../../shared/modal-dialogs/add-edit-product-dialog/add-edit-product-dialog.component";
+import {ProductFormService} from "../../shared/services/productForm.service";
 
 @Component({
   selector: 'app-products',
@@ -15,14 +18,17 @@ export class ProductsComponent implements OnInit {
   checkBoxState: boolean;
 
   productList: Product[];
-  viewList: any[];
+  viewList: Product[];
   sortBy = Constants.AZ;
 
   mostRecentReview: UserReview;
 
   private subscription: any;
 
-  constructor(private productService: ProductService, private dialog: MatDialog) {
+  constructor(
+    private productService: ProductService,
+    private productFormService: ProductFormService,
+    private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -36,19 +42,21 @@ export class ProductsComponent implements OnInit {
     );
   }
 
-  openDialog() {
+  addProductDialog() {
     let config: MatDialogConfig = {
       panelClass: "dialog-responsive"
     }
 
-    const dialogRef = this.dialog.open(AddProductDialogComponent, config);
+    this.productFormService.addEdit = true;
+
+    const dialogRef = this.dialog.open(AddEditProductDialogComponent, config);
     dialogRef.disableClose = true;
   }
 
   private getProductList(): void {
-   this.productService.getProductList().then((products) => {
-     this.productList = products;
-   });
+    this.productService.getProductList().then((products) => {
+      this.productList = products;
+    });
   }
 
   getMostRecentData(userReview: UserReview) {
@@ -60,18 +68,18 @@ export class ProductsComponent implements OnInit {
     this.productService.getProductList().then((products) => {
       const productList = products;
 
-    if (productList && productList.length &&
-      productList[0].reviews && productList[0].reviews.length) {
+      if (productList && productList.length &&
+        productList[0].reviews && productList[0].reviews.length) {
 
-      const productLength = productList.length - 1;
-      const reviewLength = productList[productLength].reviews.length - 1;
+        const productLength = productList.length - 1;
+        const reviewLength = productList[productLength].reviews.length - 1;
 
-      const mostRecentComment = productList[productLength].reviews[reviewLength].comment;
-      const mostRecentDate = productList[productLength].reviews[reviewLength].date;
-      this.mostRecentReview = new UserReview(mostRecentDate, mostRecentComment);
-    } else {
-      this.mostRecentReview = new UserReview('', '');
-    }
+        const mostRecentComment = productList[productLength].reviews[reviewLength].comment;
+        const mostRecentDate = productList[productLength].reviews[reviewLength].date;
+        this.mostRecentReview = new UserReview(mostRecentDate, mostRecentComment);
+      } else {
+        this.mostRecentReview = new UserReview('', '');
+      }
     });
   }
 
