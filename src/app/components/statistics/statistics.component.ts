@@ -6,13 +6,14 @@ import {Router} from "@angular/router";
 import {ProductService} from "../../shared/services/product.service";
 import {Product} from "../../models/Product";
 import {Vendor} from "../../models/Vendor";
+import {StatisticsService} from "../../shared/services/statistics.service";
 
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.scss']
 })
-export class StatisticsComponent implements OnInit{
+export class StatisticsComponent implements OnInit {
 
   displayedColumnsFirst: string[] =
     ['id', 'name', 'price', 'stockCount', 'quantitySoldLastMonth', 'quantitySoldWholePeriod'];
@@ -43,18 +44,19 @@ export class StatisticsComponent implements OnInit{
 
   totalCashFlowByLastMonth: number;
   totalCashFlowByWholePeriod: number;
-  avgPriceSoldProducts: string;
+  avgPriceSoldProducts: number;
   mostSoldProductName: string;
 
   products: Product[];
   selected: any;
 
-  constructor(private router: Router, private productService: ProductService) {
+  constructor(private router: Router, private productService: ProductService, private statisticsService: StatisticsService) {
   }
 
   ngOnInit(): void {
     this.productService.getProductList().then((products) => {
       this.products = products;
+      this.statisticsService.addData(this.products);
       this.setTables();
       this.setTablesFilters();
     });
@@ -62,14 +64,14 @@ export class StatisticsComponent implements OnInit{
 
   private setTables(): void {
     this.tableSourceFirst = new MatTableDataSource<Product>(this.products);
-    this.tableSourceSecond = new MatTableDataSource<Product>(this.productService.getProductCashFlowStates());
-    this.tableSourceThird = new MatTableDataSource<Product>(this.productService.getProductsNotInStock());
-    this.tableSourceFourth = new MatTableDataSource<Vendor>(this.productService.getFirstVendorList());
+    this.tableSourceSecond = new MatTableDataSource<Product>(this.statisticsService.getProductCashFlowStates());
+    this.tableSourceThird = new MatTableDataSource<Product>(this.statisticsService.getProductsNotInStock());
+    this.tableSourceFourth = new MatTableDataSource<Vendor>(this.statisticsService.getFirstVendorList());
 
-    this.totalCashFlowByLastMonth = this.productService.getTotalCashFlowByLastMonth();
-    this.totalCashFlowByWholePeriod = this.productService.getTotalCashFlowByWholePeriod();
-    this.avgPriceSoldProducts = this.productService.getAveragePriceSoldProducts();
-    this.mostSoldProductName = this.productService.getMostSoldProductName();
+    this.totalCashFlowByLastMonth = this.statisticsService.getTotalCashFlowByLastMonth();
+    this.totalCashFlowByWholePeriod = this.statisticsService.getTotalCashFlowByWholePeriod();
+    this.avgPriceSoldProducts = this.statisticsService.getAveragePriceSoldProducts();
+    this.mostSoldProductName = this.statisticsService.getMostSoldProductName();
 
     this.selected = this.products[0].name;
   }
@@ -110,14 +112,14 @@ export class StatisticsComponent implements OnInit{
 
   fillFourthTableWithContent(): void {
     this.tableSourceFourth =
-      new MatTableDataSource<Vendor>(this.productService.getVendorsByProductName(this.selected.name));
+      new MatTableDataSource<Vendor>(this.statisticsService.getVendorsByProductName(this.selected.name));
     this.selected = this.selected.name;
 
     this.tableSourceFourth.sort = this.sortFourth;
     this.tableSourceFourth.paginator = this.paginatorFourth;
   }
 
-  goToFragment(fragment: string) : void {
+  goToFragment(fragment: string): void {
     this.router.navigateByUrl('statistics#' + fragment);
   }
 }

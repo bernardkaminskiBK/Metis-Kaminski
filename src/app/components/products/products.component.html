@@ -85,6 +85,6 @@
   </div>
 </div>
 
-<div *ngIf="viewList.length == 0" class="empty-list">
+<div *ngIf="viewList && viewList.length == 0" class="empty-list">
   <h2>List of products is empty.</h2>
 </div>

@@ -1,9 +1,9 @@
 import {Injectable} from "@angular/core";
 import {BehaviorSubject} from "rxjs";
 import {Product} from "../../models/Product";
-import {Vendor} from "../../models/Vendor";
-import {MockData} from "../../utils/MockData";
 import {Router} from "@angular/router";
+import {ApiService} from "./api.service";
+import {Constants} from "../../utils/Constants";
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,7 @@ export class ProductService {
   private cacheProductList: Product[] = [];
   productListObserver = new BehaviorSubject<Product[]>(this.cacheProductList);
 
-  constructor(private router: Router) {
-
+  constructor(private router: Router, private apiService: ApiService) {
   }
 
   increaseProductStockCountStateByOne(product: Product): void {
@@ -51,18 +50,21 @@ export class ProductService {
     }
   }
 
+  // TODO:Tento mechanizmus bude komplet prerobeny no len na zatial ponecham pre potrebu na lepsiu koordinaciu v predoslej logike... na zatial staci ze nam vrati zoznam produktov.
   getProductList(): Promise<Product[]> {
     return new Promise<Product[]>((resolve) => {
-      if (this.cacheProductList && this.cacheProductList.length) {
-        resolve(this.cacheProductList);
-      } else {
-        setTimeout(() => {
-          const data = this.getAPIRequest();
-          this.cacheProductList = data;
-          this.productListObserver.next(this.cacheProductList);
-          resolve(data);
-        }, 500);
-      }
+      // if (this.cacheProductList && this.cacheProductList.length) {
+      //   resolve(this.cacheProductList);
+      // } else {
+      //   this.getAPIRequest();
+      //   this.cacheProductList = data;
+      //   this.productListObserver.next(this.cacheProductList);
+      //   resolve(this.cacheProductList);
+        this.apiService.get(Constants.endpoints.products.list).toPromise().then((products: Product[]) => {
+          resolve(products);
+        }).catch(() => {
+        });
+      // }
     })
   }
 
@@ -73,139 +75,63 @@ export class ProductService {
       this.cacheProductList[index].category = product.category;
       this.cacheProductList[index].price = product.price;
       this.cacheProductList[index].stockCount = product.stockCount;
-      this.cacheProductList[index].quantitySoldLastMonth = product.quantitySoldLastMonth;
-      this.cacheProductList[index].quantitySoldWholePeriod = product.quantitySoldWholePeriod;
+      this.cacheProductList[index].sellCountLastMonth = product.sellCountLastMonth;
+      this.cacheProductList[index].sellCountOverall = product.sellCountOverall;
       this.cacheProductList[index].description = product.description;
       this.cacheProductList[index].vendors = product.vendors;
       this.cacheProductList[index].reviews = product.reviews;
     }
   }
 
-  private getAPIRequest(): Product[] {
-    return MockData.products;
-  }
+  // private getAPIRequest(): void {
+  //   this.apiService.get().toPromise().then((products: Product[]) => {
+  //     console.log('api request product service getAPIRequest(): ' + products.length)
+  //     this.cacheProductList = products;
+  //   }).catch(() => {
+  //   });
+  // }
+
+  // private getAPIRequest(): Product[] {
+  //   return MockData.products;
+  // }
 
   getProductById(id: number): Promise<Product> {
     return new Promise<Product>((resolve, reject) => {
-      if (this.cacheProductList) {
-        this.findId(resolve, reject, id, this.cacheProductList);
-      } else {
-        this.cacheProductList = this.getAPIRequest();
-        this.findId(resolve, reject, id, this.cacheProductList);
-      }
+      // if (this.cacheProductList) {
+      //   this.findId(resolve, reject, id, this.cacheProductList);
+      // } else {
+        // this.cacheProductList = this.getAPIRequest();
+        this.apiService.get(Constants.endpoints.products.getById, {id: id}).toPromise().then((product: Product) => {
+          // this.findId(resolve, reject, id, products);
+          resolve(product);
+        }).catch(() => {
+          reject();
+          this.error404();
+        });
+      // }
     });
   }
 
-  private findId(resolve, reject, productId: number, cacheProducts: Product[]) {
-    const data = cacheProducts.find((product) => product.id === productId) as Product;
-    if (data) {
-      resolve(data);
-    } else {
-      this.error404();
-      reject();
-    }
-  }
+  // private findId(resolve, reject, productId: number, cacheProducts: Product[]) {
+  //   const data = cacheProducts.find((product) => product.id === productId) as Product;
+  //   if (data) {
+  //     resolve(data);
+  //   } else {
+  //     this.error404();
+  //     reject();
+  //   }
+  // }
 
   private error404(): void {
     this.router.navigateByUrl('404notFound');
   }
 
-  getFirstVendorList(): Vendor[] {
-    return this.cacheProductList[0].vendors;
-  }
 
   getMockCategoryData(): string[] {
     return ['Ultrabook', 'Kancelária', 'MacBook', 'Gaming'];
   }
 
 
-  getVendorsByProductName(productName: string): Vendor[] {
-    let vendors: Vendor[] = [];
-    this.cacheProductList.forEach((product: Product) => {
-      if (product.name == productName) {
-        vendors = product.vendors;
-      }
-    });
-    return vendors;
-  }
 
-  /*
-       Ďalší zoznam, ktorý bude slúžiť na zoznam produktov, ktoré majú nulové množstvo na sklade.
-       Zoznam umožní rýchli prehľad tovaru, ktorý treba urgentne do objednať.
-   */
-  getProductsNotInStock(): Product[] {
-    return this.cacheProductList.filter((product: Product) => {
-      return product.stockCount == 0
-    });
-  }
-
-  // Obraty pre každý produkt separátne (celkový, za posledný mesiac)
-  getProductCashFlowStates(): Product[] {
-    let result: Product [] = [];
-    this.cacheProductList.forEach((product) => {
-      if (product.price) {
-        product.cashFlowLastMonth =
-          product.price * product.quantitySoldLastMonth;
-
-        product.cashFlowWholePeriod =
-          product.price * product.quantitySoldWholePeriod;
-
-        result.push(product);
-      }
-    });
-    return result;
-  }
-
-  // Celkový obrat za posledný mesiac (sumarizácia cez všetky produkty v jednom čísle)
-  getTotalCashFlowByLastMonth(): number {
-    let sum: number = 0
-    this.getProductCashFlowStates().forEach((product) => {
-      if (product.price) {
-        sum += product.cashFlowLastMonth;
-      }
-    });
-    return sum;
-  }
-
-  // Celkový obrat za celé obdobie (sumarizácie cez všetky produkty v jednom čísle)
-  getTotalCashFlowByWholePeriod(): number {
-    let sumWholePeriod: number = 0;
-    this.getProductCashFlowStates().forEach((product) => {
-      if (product.price) {
-        sumWholePeriod += product.price * product.quantitySoldWholePeriod;
-      }
-    });
-    return sumWholePeriod;
-  }
-
-  // Priemerná cena predávaných produktov
-  getAveragePriceSoldProducts(): string {
-    let avg: number = 0;
-    this.cacheProductList.forEach((product) => {
-      if (product.price) {
-        avg += product.quantitySoldLastMonth + product.quantitySoldWholePeriod;
-      }
-    });
-    let result = (this.getTotalCashFlowByWholePeriod() + this.getTotalCashFlowByLastMonth()) / avg;
-    return result.toFixed(2).replace('.', ',') + ' €';
-  }
-
-  // Najpredávanejší produkt
-  getMostSoldProductName(): string {
-    let sum: number = 0;
-    let temp: number = 0;
-    let nameOfProduct: string = '';
-
-    this.cacheProductList.forEach((product) => {
-      if (product.price) {
-        sum = product.quantitySoldLastMonth + product.quantitySoldWholePeriod;
-        if (temp < sum) {
-          temp = sum;
-          nameOfProduct = product.name;
-        }
-      }
-    });
-    return nameOfProduct;
-  }
 
 }

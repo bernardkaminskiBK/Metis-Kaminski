@@ -32,14 +32,20 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subscription = this.productService.productListObserver.subscribe(
-      (newValue: Product[]) => {
-        this.viewList = newValue;
+    // this.subscription = this.productService.productListObserver.subscribe(
+    //   (newValue: Product[]) => {
+    //     this.viewList = newValue;
+    //
+    //     this.getProductList();
+    //     this.getMostRecentFromProductList();
+    //   }
+    // );
 
-        this.getProductList();
-        this.getMostRecentFromProductList();
-      }
-    );
+    this.productService.getProductList().then((products) => {
+      this.viewList = products;
+      this.getProductList();
+      this.getMostRecentFromProductList();
+    });
   }
 
   addProductDialog() {

@@ -66,8 +66,8 @@ export class ProductFormService {
       price: product.price,
       stockCount: product.stockCount,
       quantityGroup: {
-        quantitySoldLastMonth: product.quantitySoldLastMonth,
-        quantitySoldWholePeriod: product.quantitySoldWholePeriod
+        quantitySoldLastMonth: product.sellCountLastMonth,
+        quantitySoldWholePeriod: product.sellCountOverall
       },
       description: product.description
     })

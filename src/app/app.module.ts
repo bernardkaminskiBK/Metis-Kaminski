@@ -16,6 +16,7 @@ import { ShoppingCartBadgeComponent } from './components/shopping-cart-badge/sho
 import { AboutDialogComponent } from './shared/modal-dialogs/about-dialog/about-dialog.component';
 import { CountDownTimerComponent } from './components/count-down-timer/count-down-timer.component';
 import {ProductsModule} from "./components/products/products.module";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {ProductsModule} from "./components/products/products.module";
     FontAwesomeModule,
     FormsModule,
     MaterialModule,
-    ProductsModule
+    ProductsModule,
+    HttpClientModule
   ],
   providers: [SnackBarService],
   bootstrap: [AppComponent],
