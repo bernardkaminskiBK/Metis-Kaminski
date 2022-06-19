@@ -37,7 +37,7 @@ export class ReviewComponent implements OnInit {
       this.mostRecentReview.emit(new UserReview(review.date,  review.comment));
 
       this.inputProduct.reviews = this.listOfComments;
-      this.productService.updateProduct(this.inputProduct);
+      this.productService.updateProduct(this.inputProduct).then(() => {}).catch(() => {});
 
       this.textArea.nativeElement.value = '';
 

@@ -99,8 +99,8 @@ export class ProductFormService {
       product.category = rawValue.category;
       product.price = rawValue.price;
       product.stockCount = rawValue.stockCount;
-      product.quantitySoldLastMonth = this.productGroup.get('quantityGroup.quantitySoldLastMonth')?.value;
-      product.quantitySoldWholePeriod = this.productGroup.get('quantityGroup.quantitySoldWholePeriod')?.value;
+      product.sellCountLastMonth = this.productGroup.get('quantityGroup.quantitySoldLastMonth')?.value;
+      product.sellCountOverall = this.productGroup.get('quantityGroup.quantitySoldWholePeriod')?.value;
       product.description = rawValue.description;
       product.vendors = this.getVendorsFromFormArray();
       product.reviews = this.getReviewsFromFormArray();
@@ -110,8 +110,8 @@ export class ProductFormService {
       product.category = rawValue.category;
       product.price = rawValue.price;
       product.stockCount = rawValue.stockCount;
-      product.quantitySoldLastMonth = this.productGroup.get('quantityGroup.quantitySoldLastMonth')?.value;
-      product.quantitySoldWholePeriod = this.productGroup.get('quantityGroup.quantitySoldWholePeriod')?.value;
+      product.sellCountLastMonth = this.productGroup.get('quantityGroup.quantitySoldLastMonth')?.value;
+      product.sellCountOverall = this.productGroup.get('quantityGroup.quantitySoldWholePeriod')?.value;
       product.description = rawValue.description;
       product.vendors = this.getVendorsFromFormArray();
       product.reviews = this.getReviewsFromFormArray();
@@ -122,9 +122,11 @@ export class ProductFormService {
 
   saveProduct(): void {
     if (this.addEdit) {
-      this.productService.addNewProduct(this.addEditProduct());
+      this.productService.addNewProduct(this.addEditProduct()).then((result) => {
+
+      }).then(() => {});
     } else {
-      this.productService.updateProduct(this.addEditProduct());
+      this.productService.updateProduct(this.addEditProduct()).then(() => {}).catch(() => {});
     }
   }
 

@@ -1,5 +1,6 @@
 import {Vendor} from "./Vendor";
 import {Review} from "./Review";
+import Utils from "../utils/Utils";
 
 export class Product {
   id: number = 0;
@@ -24,21 +25,23 @@ export class Product {
   ram: number = 0;
   memory: number = 0;
 
-  // id: number = 0;
-  // uuid: string = '';
-  // name: string = '';
-  // img_url: string = '';
-  // category: string = '';
-  // price: number = 0;
-  // stockCount: number = 0;
-  // sellCountOverall: number = 0;
-  // sellCountLastMonth: number = 0;
-  // cashFlowLastMonth: number = 0;
-  // cashFlowWholePeriod: number = 0;
-  // display: number = 0;
-  // ram: number = 0;
-  // memory: number = 0;
-  // description: string = '';
-  // vendors: Vendor [];
-  // reviews: Review [];
+  constructor(obj?: any) {
+    if(obj) {
+      this.id= obj.id;
+      if(obj) {
+        this.uuid = obj.uuid;
+      }else {
+        this.uuid = Utils.generateUUID()
+      }
+      this.name = obj.name;
+      this.price = obj.price;
+      this.category = obj.category;
+      this.description = obj.description;
+      this.stockCount = obj.stockCount;
+      this.sellCountOverall = obj.sellCountOverall;
+      this.sellCountLastMonth = obj.sellCountLastMonth;
+      this.vendors = obj.vendors;
+      this.reviews = obj.reviews;
+    }
+  }
 }

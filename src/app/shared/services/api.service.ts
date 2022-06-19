@@ -24,6 +24,20 @@ export class ApiService {
       .pipe(catchError(ApiService.handleError));
   }
 
+  post(endpoint: string, data): Observable<any> {
+    return this.http.post(ApiService.createUrl(endpoint), data, ApiService.jsonHttpOptions)
+      .pipe(
+        catchError(ApiService.handleError)
+      )
+  }
+
+  put(endpoint: string, id: any, data) {
+    return this.http.put(ApiService.createUrl(endpoint, {id: id}), data, ApiService.jsonHttpOptions)
+      .pipe(
+        catchError(ApiService.handleError)
+      )
+  }
+
   private static createUrl(endpoint: string, param?: any): string {
     const protocol = 'https://';
     const serverName = 'angularkurz.itcooking.eu';

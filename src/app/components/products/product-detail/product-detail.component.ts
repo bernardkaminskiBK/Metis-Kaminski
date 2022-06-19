@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from '../../../shared/services/product.service';
-import { Product } from '../../../models/Product';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ProductService} from '../../../shared/services/product.service';
+import {Product} from '../../../models/Product';
 
 @Component({
   selector: 'app-product-detail',
@@ -16,7 +16,8 @@ export class ProductDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private data: ProductService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
@@ -24,21 +25,9 @@ export class ProductDetailComponent implements OnInit {
 
       this.data.getProductById(this.productId).then((product) => {
         this.product = product;
-
-        // Alternativa na upozornenie ze ups nie je taky produkt alebo radsej hodit tam hlasku ze
-        // product not found napriklad, okej to-do do buducna...
-        // Ale bacha tato funkcionalita bola presunuta do product servicu...
-        // if (!this.product) {
-        //   this.router.navigate(['/404notFound']);
-        // }
       }).catch(() => 'product-detail-catch-error');
     });
   }
-
-  // Ponechal som tu to ako priklad :-)
-  // navigateTo() {
-  //   this.router.navigate(['/product-detail/6']);
-  // }
 
   goBack() {
     this.router.navigate(['/products']);
