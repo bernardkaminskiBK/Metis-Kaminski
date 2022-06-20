@@ -5,15 +5,19 @@
 
   <ul>
     <li *ngFor="let review of inputProduct.reviews">
-      {{review.comment}}
+      {{review}}
     </li>
   </ul>
 
-  <textarea #input placeholder="Add your comment here..." class="textarea-wrapper"></textarea>
-  <button (click)="addComment()" class="button-28">Submit</button>
+  <div *ngIf="inputProduct.editPermission">
+    <textarea #input placeholder="Add your comment here..." class="textarea-wrapper"></textarea>
+    <button (click)="addComment()" class="button-28">Submit</button>
 
-  <div *ngIf="inputProduct.price && inputProduct.stockCount">
-    <hr>
+    <div *ngIf="inputProduct.price && inputProduct.stockCount">
+      <hr>
+    </div>
   </div>
+
+
 
 </div>

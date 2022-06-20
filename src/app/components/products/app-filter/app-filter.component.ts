@@ -3,7 +3,7 @@ import {
   ElementRef,
   EventEmitter,
   Input,
-  OnChanges,
+  OnChanges, OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
@@ -15,12 +15,11 @@ import { Product } from '../../../models/Product';
   templateUrl: './app-filter.component.html',
   styleUrls: ['./app-filter.component.scss'],
 })
-export class AppFilterComponent implements OnChanges {
+export class AppFilterComponent implements OnInit, OnChanges {
   searchInputText: string = '';
 
   @ViewChild('input') search: ElementRef;
 
-  @Input('listOfProducts') data: Product[];
   @Input('isCheckBoxChecked') isCheckBoxChecked: boolean;
   @Output('filteredList') filteredData: EventEmitter<Product[]> =
     new EventEmitter<Product[]>();
@@ -30,10 +29,13 @@ export class AppFilterComponent implements OnChanges {
   private array: Product[];
   private subscription: any;
 
-  ngOnChanges() {
+  ngOnInit(): void {
     this.productService.getProductList().then((products) => {
       this.array = products;
     });
+  }
+
+  ngOnChanges() {
     if(this.array) {
       this.filter();
     }

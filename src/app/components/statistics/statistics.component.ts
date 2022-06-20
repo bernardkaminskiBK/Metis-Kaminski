@@ -59,6 +59,7 @@ export class StatisticsComponent implements OnInit {
       this.statisticsService.addData(this.products);
       this.setTables();
       this.setTablesFilters();
+    }).catch(() => {
     });
   }
 

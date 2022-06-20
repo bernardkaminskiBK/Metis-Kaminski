@@ -4,7 +4,6 @@ import {ValidateSoldQuantity} from "../../utils/CustomValidator";
 import {ProductService} from "./product.service";
 import {Product} from "../../models/Product";
 import {Vendor} from "../../models/Vendor";
-import {Review} from "../../models/Review";
 import Utils from "../../utils/Utils";
 
 @Injectable()
@@ -74,7 +73,7 @@ export class ProductFormService {
 
     if (product.reviews && product.reviews.length) {
       product.reviews.forEach((review) => {
-        this.reviewArray().push(new FormControl(review.comment))
+        this.reviewArray().push(new FormControl(review))
       });
     }
 
@@ -102,7 +101,7 @@ export class ProductFormService {
       product.sellCountLastMonth = this.productGroup.get('quantityGroup.quantitySoldLastMonth')?.value;
       product.sellCountOverall = this.productGroup.get('quantityGroup.quantitySoldWholePeriod')?.value;
       product.description = rawValue.description;
-      product.vendors = this.getVendorsFromFormArray();
+      product.vendors = this.getVendorsFromFormArray(rawValue.stockCount);
       product.reviews = this.getReviewsFromFormArray();
     } else {
       product = this.product
@@ -113,7 +112,7 @@ export class ProductFormService {
       product.sellCountLastMonth = this.productGroup.get('quantityGroup.quantitySoldLastMonth')?.value;
       product.sellCountOverall = this.productGroup.get('quantityGroup.quantitySoldWholePeriod')?.value;
       product.description = rawValue.description;
-      product.vendors = this.getVendorsFromFormArray();
+      product.vendors = this.getVendorsFromFormArray(rawValue.stockCount);
       product.reviews = this.getReviewsFromFormArray();
     }
 
@@ -124,13 +123,16 @@ export class ProductFormService {
     if (this.addEdit) {
       this.productService.addNewProduct(this.addEditProduct()).then((result) => {
 
-      }).then(() => {});
+      }).catch(() => {
+      });
     } else {
-      this.productService.updateProduct(this.addEditProduct()).then(() => {}).catch(() => {});
+      this.productService.updateProduct(this.addEditProduct()).then(() => {
+      }).catch(() => {
+      });
     }
   }
 
-  private getVendorsFromFormArray(): Vendor[] {
+  private getVendorsFromFormArray(stockCount): Vendor[] {
     const vendorsRawValue = this.vendorGroup.getRawValue();
     let vendorList: Vendor[] = [];
 
@@ -138,7 +140,7 @@ export class ProductFormService {
       if (vendorName && vendorName.length > 0) {
         let vendor = new Vendor();
         vendor.name = vendorName;
-        vendor.stockCount = 1;
+        vendor.stockCount = stockCount;
 
         vendorList.push(vendor);
       }
@@ -147,19 +149,14 @@ export class ProductFormService {
     return vendorList;
   }
 
-  private getReviewsFromFormArray(): Review[] {
+  private getReviewsFromFormArray(): string[] {
     const reviewsRawValue = this.reviewGroup.getRawValue();
-    let reviewList: Review[] = [];
+    let reviewList: string[] = [];
 
     reviewsRawValue.reviews.forEach((reviewItem) => {
       if (reviewItem && reviewItem.length > 0) {
-        let review = new Review();
-        review.date = Utils.getFormattedCurrentDate();
-        review.comment = reviewItem;
-
-        reviewList.push(review);
+        reviewList.push(reviewItem);
       }
-
     });
     return reviewList;
   }

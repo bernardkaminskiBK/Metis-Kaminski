@@ -34,6 +34,32 @@ hr {
   border: 0.5px solid $main-primary-color;
 }
 
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.vendor {
+  border-radius: $border-radius-size;
+  padding: 5px 15px 5px 15px;
+  color: white;
+  font-weight: bold;
+  margin: 5px;
+  background-color: $main-primary-color;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-size: 13px;
+}
+
+.sold-out {
+  border-radius: 5px;
+  padding: 5px 15px 5px 15px;
+  color: white;
+  font-weight: bold;
+  background-color: $main-primary-color;
+  width: fit-content;
+}
+
 .main-product {
   margin-top: 50px;
   border-radius: $border-radius-size;

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductService} from "../../services/product.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {ProductFormService} from "../../services/productForm.service";
 
 @Component({

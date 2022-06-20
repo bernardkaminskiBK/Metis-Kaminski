@@ -38,6 +38,13 @@ export class ApiService {
       )
   }
 
+  delete(endpoint: string, id: any) {
+    return this.http.delete(ApiService.createUrl(endpoint, {id: id}))
+      .pipe(
+        catchError(ApiService.handleError)
+      )
+  }
+
   private static createUrl(endpoint: string, param?: any): string {
     const protocol = 'https://';
     const serverName = 'angularkurz.itcooking.eu';
@@ -56,4 +63,5 @@ export class ApiService {
     }
     return throwError(() => error);
   }
+
 }

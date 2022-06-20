@@ -2,22 +2,29 @@
   <div #main class="main-product">
 
     <div class="main-top">
-      <div (click)="deleteProduct()">
-        <a class="details-button">Delete</a>
+      <div *ngIf="showDelete">
+        <div *ngIf="product.editPermission" (click)="deleteProduct()">
+          <a class="details-button">Delete</a>
+        </div>
       </div>
 
-      <div (click)="navigateToProductDetail()" class="product_detail_btn">
-        <a class="details-button">Details</a>
+      <div *ngIf="showDetails">
+        <div (click)="navigateToProductDetail()" class="product_detail_btn">
+          <a class="details-button">Details</a>
+        </div>
       </div>
 
-      <div (click)="editProductDialog()" class="product_detail_btn">
-        <a class="details-button">Edit</a>
+      <div *ngIf="showEdit">
+        <div *ngIf="product.editPermission" (click)="editProductDialog()" class="product_detail_btn">
+          <a class="details-button">Edit</a>
+        </div>
       </div>
 
       <div class="offset-style">
         x: {{offSetLeftProduct}} y: {{offSetTopProduct}}
       </div>
     </div>
+
 
     <div class="title">
 
@@ -53,7 +60,7 @@
         </div>
       </div>
 
-      <div class="row-vendors">
+      <div *ngIf="product.vendors && product.vendors.length" class="row-vendors">
         <h2>Vendors</h2>
         <hr>
         <div class="column-vendor">
@@ -61,8 +68,10 @@
         </div>
       </div>
 
-      <app-review [inputProduct]="product"
-                  (mostRecentReview)="getMostRecentData($event)"></app-review>
+      <div *ngIf="product.reviews && product.reviews.length">
+        <app-review [inputProduct]="product"
+                    (mostRecentReview)="getMostRecentData($event)"></app-review>
+      </div>
 
       <button *ngIf="product.price && product.stockCount" (click)="addProductToShoppingCart()" class="button-28">Add to
         cart

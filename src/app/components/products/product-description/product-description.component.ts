@@ -13,7 +13,9 @@ import {ShoppingCartService} from '../../../shared/services/shopping-cart.servic
 import {ProductService} from '../../../shared/services/product.service';
 import {Product} from '../../../models/Product';
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
-import {AddEditProductDialogComponent} from "../../../shared/modal-dialogs/add-edit-product-dialog/add-edit-product-dialog.component";
+import {
+  AddEditProductDialogComponent
+} from "../../../shared/modal-dialogs/add-edit-product-dialog/add-edit-product-dialog.component";
 import {ProductFormService} from "../../../shared/services/productForm.service";
 
 @Component({
@@ -23,10 +25,18 @@ import {ProductFormService} from "../../../shared/services/productForm.service";
 })
 export class ProductDescriptionComponent implements DoCheck {
   @Input('Product') product: Product;
+
+  @Input() showDelete: boolean = true;
+  @Input() showDetails: boolean = true;
+  @Input() showEdit: boolean = true;
+
   @Output() mostRecentData: EventEmitter<UserReview> =
     new EventEmitter<UserReview>();
 
   @ViewChild('main') main: ElementRef;
+
+  @Output() refreshProductList: EventEmitter<boolean> =
+    new EventEmitter<boolean>();
 
   offSetTopProduct = 0;
   offSetLeftProduct = 0;
@@ -81,8 +91,12 @@ export class ProductDescriptionComponent implements DoCheck {
   }
 
   deleteProduct() {
-    if(confirm('Are you sure you want to delete ' + this.product.name + '?')) {
-      this.productService.deleteProduct(this.product);
+    if (confirm('Are you sure you want to delete ' + this.product.name + '?')) {
+      this.productService.deleteProduct(this.product).then(() => {
+        this.refreshProductList.emit(true);
+      }).catch(() => {
+        console.error('Something went wrong while deleting record...')
+      });
     }
   }
 
@@ -95,6 +109,13 @@ export class ProductDescriptionComponent implements DoCheck {
     this.productFormService.addEdit = false;
 
     const dialogRef = this.dialog.open(AddEditProductDialogComponent, config);
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.productService.getProductList().then((products) => {
+        this.refreshProductList.emit(true);
+      });
+    });
+
     dialogRef.disableClose = true;
   }
 }

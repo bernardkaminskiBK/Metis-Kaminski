@@ -6,12 +6,6 @@ import {ApiService} from "./api.service";
 import {Constants} from "../../utils/Constants";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
-const addProductSuccessMsg = 'Your product was successfully added to the list of products.';
-const addProductFailureMsg = 'Something went wrong, your product was not added to the product list.';
-
-const updateProductSuccessMsg = 'Your product was successfully updated in the list of products.';
-const updateProductFailureMsg = 'Something went wrong, your product was not updated in the product list.';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -42,41 +36,44 @@ export class ProductService {
       this.apiService.post(Constants.endpoints.products.createProduct, product).toPromise().then((result: Product) => {
         product.id = result.id;
         resolve(result);
-        this.notification(addProductSuccessMsg);
+        this.notification(Constants.addProductSuccessMsg);
       }).catch(() => {
-        this.notification(addProductFailureMsg);
+        this.notification(Constants.addProductFailureMsg);
         reject();
       });
     });
   }
 
-  deleteProduct(product: Product): void {
-    // TODO: delete product
+  deleteProduct(product: Product): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      this.apiService.delete(Constants.endpoints.products.deleteProduct, product.id).toPromise().then(() => {
+        resolve();
+        this.notification(Constants.deleteProductSuccessMsg);
+      }).catch(() => {
+        this.notification(Constants.deleteProductFailureMsg);
+        reject();
+      });
+    });
   }
 
   updateProduct(product: Product): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       this.apiService.put(Constants.endpoints.products.updateProduct, product.id, product).toPromise().then(() => {
         resolve();
-        this.notification(updateProductSuccessMsg);
+        this.notification(Constants.updateProductSuccessMsg);
       }).catch(() => {
-        this.notification(updateProductFailureMsg);
+        this.notification(Constants.updateProductFailureMsg);
         reject();
       });
     });
   }
 
   getProductList(): Promise<Product[]> {
-    return new Promise<Product[]>((resolve) => {
-      this.apiService.get(Constants.endpoints.products.list).toPromise().then((products: Product[]) => {
-        const productList: Product[] = [];
-        if(products && products.length) {
-          products.forEach((product: any) => {
-            productList.push(new Product(product));
-          });
-        }
+    return new Promise<Product[]>((resolve, reject) => {
+      this.apiService.get(Constants.endpoints.products.list).toPromise().then((productList: Product[]) => {
         resolve(productList);
       }).catch(() => {
+        reject();
       });
     })
   }
@@ -84,7 +81,7 @@ export class ProductService {
   getProductById(id: number): Promise<Product> {
     return new Promise<Product>((resolve, reject) => {
       this.apiService.get(Constants.endpoints.products.getById, {id: id}).toPromise().then((product: Product) => {
-        resolve(new Product(product));
+        resolve(product);
       }).catch(() => {
         reject();
         this.error404();
@@ -95,7 +92,6 @@ export class ProductService {
   private error404(): void {
     this.router.navigateByUrl('404notFound');
   }
-
 
   getMockCategoryData(): string[] {
     return ['Ultrabook', 'Kancelária', 'MacBook', 'Gaming'];

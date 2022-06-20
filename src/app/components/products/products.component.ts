@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Product} from 'src/app/models/Product';
 import {UserReview} from 'src/app/models/UserReview';
 import {ProductService} from 'src/app/shared/services/product.service';
@@ -17,7 +17,6 @@ import {ProductFormService} from "../../shared/services/productForm.service";
 export class ProductsComponent implements OnInit {
   checkBoxState: boolean;
 
-  productList: Product[];
   viewList: Product[];
   sortBy = Constants.AZ;
 
@@ -32,18 +31,8 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.subscription = this.productService.productListObserver.subscribe(
-    //   (newValue: Product[]) => {
-    //     this.viewList = newValue;
-    //
-    //     this.getProductList();
-    //     this.getMostRecentFromProductList();
-    //   }
-    // );
-
     this.productService.getProductList().then((products) => {
       this.viewList = products;
-      this.getProductList();
       this.getMostRecentFromProductList();
     });
   }
@@ -56,13 +45,13 @@ export class ProductsComponent implements OnInit {
     this.productFormService.addEdit = true;
 
     const dialogRef = this.dialog.open(AddEditProductDialogComponent, config);
-    dialogRef.disableClose = true;
-  }
-
-  private getProductList(): void {
-    this.productService.getProductList().then((products) => {
-      this.productList = products;
+    dialogRef.afterClosed().subscribe(() => {
+      this.productService.getProductList().then((products) => {
+          this.viewList = products;
+      });
     });
+
+    dialogRef.disableClose = true;
   }
 
   getMostRecentData(userReview: UserReview) {
@@ -71,22 +60,7 @@ export class ProductsComponent implements OnInit {
 
   // Kvazi fake data len na skusku na init pre most recent comment
   getMostRecentFromProductList() {
-    this.productService.getProductList().then((products) => {
-      const productList = products;
-
-      if (productList && productList.length &&
-        productList[0].reviews && productList[0].reviews.length) {
-
-        const productLength = productList.length - 1;
-        const reviewLength = productList[productLength].reviews.length - 1;
-
-        const mostRecentComment = productList[productLength].reviews[reviewLength].comment;
-        const mostRecentDate = productList[productLength].reviews[reviewLength].date;
-        this.mostRecentReview = new UserReview(mostRecentDate, mostRecentComment);
-      } else {
-        this.mostRecentReview = new UserReview('', '');
-      }
-    });
+    this.mostRecentReview = new UserReview('', '');
   }
 
   filteredProductList(filteredProductList: Product[]) {
@@ -105,5 +79,11 @@ export class ProductsComponent implements OnInit {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  refreshProductList() {
+    this.productService.getProductList().then((products) => {
+      this.viewList = products;
+    });
   }
 }

@@ -1,15 +1,12 @@
 <div class="center">
   <div class="flex-container">
     <app-app-filter
-      [listOfProducts]="productList"
       [isCheckBoxChecked]="checkBoxState"
-      (filteredList)="filteredProductList($event)"
-    >
+      (filteredList)="filteredProductList($event)">
     </app-app-filter>
 
     <app-app-filter-options
-      (isCheckedCheckbox)="pushFurtherCheckBoxState($event)"
-    >
+      (isCheckedCheckbox)="pushFurtherCheckBoxState($event)">
     </app-app-filter-options>
   </div>
 </div>
@@ -42,7 +39,9 @@
     <div *ngFor="let product of viewList | sort: sortBy">
       <app-product-description
         [Product]="product"
-        (mostRecentData)="getMostRecentData($event)">
+        [showEdit]="false"
+        (mostRecentData)="getMostRecentData($event)"
+        (refreshProductList)="refreshProductList()">
         <span productName>{{ product.name }}</span>
 
         <ng-container category>
@@ -56,12 +55,8 @@
         </ng-container>
 
         <ng-container stock>
-          <span *ngIf="product.stockCount === 0" class="sold-out"
-          >Sold Out</span
-          >
-          <span *ngIf="product.stockCount > 0"
-          >Stock: {{ product.stockCount }}x</span
-          >
+          <span *ngIf="product.stockCount === 0" class="sold-out">Sold Out</span>
+          <span *ngIf="product.stockCount > 0">Stock: {{ product.stockCount }}x</span>
         </ng-container>
 
         <ng-container
