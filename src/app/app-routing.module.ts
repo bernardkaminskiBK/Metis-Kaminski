@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {ExtraOptions, RouterModule, Routes} from '@angular/router';
-import {PrihlaskaComponent} from './components/prihlaska/prihlaska.component';
+import {AdministrationComponent} from './components/administration/administration.component';
 import {ReferenciaComponent} from './components/referencia/referencia.component';
 import {WelcomeComponent} from './components/welcome/welcome.component';
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
@@ -11,7 +11,10 @@ const routes: Routes = [
   {path: '', component: WelcomeComponent},
   {path: 'profil', component: ProfilComponent},
   {path: 'referencie', component: ReferenciaComponent},
-  {path: 'prihlaska', component: PrihlaskaComponent},
+  {
+    path: 'administration',
+    loadChildren: () => import('./components/administration/administration.module').then((m) => m.AdministrationModule),
+  },
   {
     path: 'products',
     loadChildren: () => import('./components/products/products.module').then((m) => m.ProductsModule),
@@ -41,7 +44,6 @@ export const routingComponents = [
   WelcomeComponent,
   ProfilComponent,
   ReferenciaComponent,
-  PrihlaskaComponent,
   ShoppingCartComponent,
   PageNotFoundComponent
 ];
