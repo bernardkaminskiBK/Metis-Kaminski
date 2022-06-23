@@ -13,6 +13,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 const material = [
   MatButtonModule,
@@ -28,7 +29,8 @@ const material = [
   MatMenuModule,
   MatSnackBarModule,
   MatBadgeModule,
-  MatDialogModule
+  MatDialogModule,
+  MatCheckboxModule
 ];
 
 @NgModule({

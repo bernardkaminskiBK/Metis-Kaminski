@@ -3,6 +3,7 @@ export class Constants {
   public static ZA: string = 'Z-A';
 
   public static api = '/api/';
+
   public static endpoints = {
     products: {
       list: 'v1/lessons/product/GetProducts',
@@ -10,6 +11,10 @@ export class Constants {
       createProduct: 'v1/lessons/product/CreateProduct',
       updateProduct: 'v1/lessons/product/UpdateProduct',
       deleteProduct: 'v1/lessons/product/RemoveProduct'
+    },
+    user: {
+      login: 'https://angularkurz.itcooking.eu/api/user/authenticate',
+      logout: 'user/logout'
     }
   };
 

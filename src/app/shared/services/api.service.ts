@@ -2,50 +2,55 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable, throwError} from "rxjs";
 import {Constants} from "../../utils/Constants";
+import {UserService} from "./UserService";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private static get jsonHttpOptions() {
+  private get jsonHttpOptions() {
     let headers = new HttpHeaders();
     headers = headers.set('Access-Control-Allow-Origin', '*');
     headers = headers.set('Content-Type', 'application/json');
     headers = headers.set('X-Requested-With', 'XMLHttpRequest');
 
+    if (this.userService.isAuthentication) {
+      headers = headers.set('Authorization', 'Basic ' + this.userService.getUser()!.token);
+    }
+
     return {headers: headers};
   }
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private userService: UserService) {
   }
 
   get(endpoint: string, param?: any): Observable<any> {
-    return this.http.get(ApiService.createUrl(endpoint, param), ApiService.jsonHttpOptions)
-      .pipe(catchError(ApiService.handleError));
+    return this.http.get(this.createUrl(endpoint, param), this.jsonHttpOptions)
+      .pipe(catchError(this.handleError));
   }
 
   post(endpoint: string, data): Observable<any> {
-    return this.http.post(ApiService.createUrl(endpoint), data, ApiService.jsonHttpOptions)
+    return this.http.post(this.createUrl(endpoint), data, this.jsonHttpOptions)
       .pipe(
-        catchError(ApiService.handleError)
+        catchError(this.handleError)
       )
   }
 
   put(endpoint: string, id: any, data) {
-    return this.http.put(ApiService.createUrl(endpoint, {id: id}), data, ApiService.jsonHttpOptions)
+    return this.http.put(this.createUrl(endpoint, {id: id}), data, this.jsonHttpOptions)
       .pipe(
-        catchError(ApiService.handleError)
+        catchError(this.handleError)
       )
   }
 
   delete(endpoint: string, id: any) {
-    return this.http.delete(ApiService.createUrl(endpoint, {id: id}))
+    return this.http.delete(this.createUrl(endpoint, {id: id}))
       .pipe(
-        catchError(ApiService.handleError)
+        catchError(this.handleError)
       )
   }
 
-  private static createUrl(endpoint: string, param?: any): string {
+  private createUrl(endpoint: string, param?: any): string {
     const protocol = 'https://';
     const serverName = 'angularkurz.itcooking.eu';
     let url = protocol + serverName + Constants.api + endpoint;
@@ -55,7 +60,7 @@ export class ApiService {
     return url;
   }
 
-  private static handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred: ', error.error.message);
     } else {

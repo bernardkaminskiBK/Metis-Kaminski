@@ -1,3 +1,9 @@
 <div class="center">
-  <h1>Aministration works!</h1>
+
+  <div (click)="logout()" class="log-out">
+    <img alt="menu" src="assets/IMG/logout-icon.png"/>
+  </div>
+
+  <h1>Welcome {{ userService.getUser()!.firstName }}</h1>
+
 </div>

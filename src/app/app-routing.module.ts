@@ -1,18 +1,19 @@
 import {NgModule} from '@angular/core';
 import {ExtraOptions, RouterModule, Routes} from '@angular/router';
-import {AdministrationComponent} from './components/administration/administration.component';
 import {ReferenciaComponent} from './components/referencia/referencia.component';
 import {WelcomeComponent} from './components/welcome/welcome.component';
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {ProfilComponent} from './components/profil/profil.component';
 import {ShoppingCartComponent} from './components/shopping-cart/shopping-cart.component';
+import {LogInComponent} from "./components/log-in/log-in.component";
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
   {path: 'profil', component: ProfilComponent},
   {path: 'referencie', component: ReferenciaComponent},
+  {path: 'login', component: LogInComponent},
   {
-    path: 'administration',
+    path: 'admin',
     loadChildren: () => import('./components/administration/administration.module').then((m) => m.AdministrationModule),
   },
   {
@@ -45,5 +46,6 @@ export const routingComponents = [
   ProfilComponent,
   ReferenciaComponent,
   ShoppingCartComponent,
+  LogInComponent,
   PageNotFoundComponent
 ];

@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {ApiService} from "./api.service";
 import {Constants} from "../../utils/Constants";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {NotificationService} from "./notification.service";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ProductService {
   private cacheProductList: Product[] = [];
   productListObserver = new BehaviorSubject<Product[]>(this.cacheProductList);
 
-  constructor(private router: Router, private apiService: ApiService, private snackBar: MatSnackBar) {
+  constructor(private router: Router, private apiService: ApiService, private snackBar: NotificationService) {
   }
 
   increaseProductStockCountStateByOne(product: Product): void {
@@ -36,9 +37,9 @@ export class ProductService {
       this.apiService.post(Constants.endpoints.products.createProduct, product).toPromise().then((result: Product) => {
         product.id = result.id;
         resolve(result);
-        this.notification(Constants.addProductSuccessMsg);
+        this.snackBar.notification(Constants.addProductSuccessMsg);
       }).catch(() => {
-        this.notification(Constants.addProductFailureMsg);
+        this.snackBar.notification(Constants.addProductFailureMsg);
         reject();
       });
     });
@@ -48,9 +49,9 @@ export class ProductService {
     return new Promise<void>((resolve, reject) => {
       this.apiService.delete(Constants.endpoints.products.deleteProduct, product.id).toPromise().then(() => {
         resolve();
-        this.notification(Constants.deleteProductSuccessMsg);
+        this.snackBar.notification(Constants.deleteProductSuccessMsg);
       }).catch(() => {
-        this.notification(Constants.deleteProductFailureMsg);
+        this.snackBar.notification(Constants.deleteProductFailureMsg);
         reject();
       });
     });
@@ -60,9 +61,9 @@ export class ProductService {
     return new Promise<void>((resolve, reject) => {
       this.apiService.put(Constants.endpoints.products.updateProduct, product.id, product).toPromise().then(() => {
         resolve();
-        this.notification(Constants.updateProductSuccessMsg);
+        this.snackBar.notification(Constants.updateProductSuccessMsg);
       }).catch(() => {
-        this.notification(Constants.updateProductFailureMsg);
+        this.snackBar.notification(Constants.updateProductFailureMsg);
         reject();
       });
     });
@@ -95,12 +96,6 @@ export class ProductService {
 
   getMockCategoryData(): string[] {
     return ['Ultrabook', 'Kancelária', 'MacBook', 'Gaming'];
-  }
-
-  private notification(msg: string): void {
-    this.snackBar.open(msg, '', {
-      duration: 2000
-    });
   }
 
 }
