@@ -69,14 +69,23 @@ export class ProductService {
     });
   }
 
-  getProductList(): Promise<Product[]> {
+  getProductList(isAuth?: boolean): Promise<Product[]> {
     return new Promise<Product[]>((resolve, reject) => {
-      this.apiService.get(Constants.endpoints.products.list).toPromise().then((productList: Product[]) => {
+      let endpoint;
+
+      if (isAuth) {
+        endpoint = Constants.endpoints.productsAuth.list;
+      } else {
+        endpoint = Constants.endpoints.products.list;
+      }
+
+      this.apiService.get(endpoint).toPromise().then((productList: Product[]) => {
         resolve(productList);
       }).catch(() => {
         reject();
       });
-    })
+
+    });
   }
 
   getProductById(id: number): Promise<Product> {

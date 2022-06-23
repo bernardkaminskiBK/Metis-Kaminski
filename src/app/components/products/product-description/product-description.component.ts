@@ -29,6 +29,7 @@ export class ProductDescriptionComponent implements DoCheck {
   @Input() showDelete: boolean = true;
   @Input() showDetails: boolean = true;
   @Input() showEdit: boolean = true;
+  @Input() showAddButton: boolean = true;
 
   @Output() mostRecentData: EventEmitter<UserReview> =
     new EventEmitter<UserReview>();

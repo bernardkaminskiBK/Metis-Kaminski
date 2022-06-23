@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProductService} from '../../../shared/services/product.service';
 import {Product} from '../../../models/Product';
+import {UserService} from "../../../shared/services/UserService";
 
 @Component({
   selector: 'app-product-detail',
@@ -11,6 +12,9 @@ import {Product} from '../../../models/Product';
 export class ProductDetailComponent implements OnInit {
   productId: number;
   product: Product;
+
+  urlName: string;
+  hideAddButton: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -23,14 +27,22 @@ export class ProductDetailComponent implements OnInit {
     this.route.paramMap.subscribe(() => {
       this.productId = parseInt(<string>this.route.snapshot.paramMap.get('id'));
 
+      this.urlName = window.location.pathname;
+
       this.data.getProductById(this.productId).then((product) => {
         this.product = product;
       }).catch(() => 'product-detail-catch-error');
     });
+
+    this.hideAddButton = !this.urlName.includes('/admin');
   }
 
   goBack() {
-    this.router.navigate(['/products']);
+    if (this.urlName.includes('/admin')) {
+      this.router.navigate(['/admin']);
+    } else {
+      this.router.navigate(['/products']);
+    }
   }
 
 }

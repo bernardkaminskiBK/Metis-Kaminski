@@ -12,6 +12,13 @@ export class Constants {
       updateProduct: 'v1/lessons/product/UpdateProduct',
       deleteProduct: 'v1/lessons/product/RemoveProduct'
     },
+    productsAuth: {
+      list: 'v1/auth/lessons/product/GetProducts',
+      getById: 'v1/auth/lessons/product/GetProductById',
+      createProduct: 'v1/auth/lessons/product/CreateProduct',
+      updateProduct: 'v1/auth/lessons/product/UpdateProduct',
+      deleteProduct: 'v1/auth/lessons/product/RemoveProduct'
+    },
     user: {
       login: 'https://angularkurz.itcooking.eu/api/user/authenticate',
       logout: 'user/logout'

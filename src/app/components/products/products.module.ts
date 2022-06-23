@@ -40,7 +40,9 @@ const components = [
     components
   ],
   exports: [
-    FormatTimePipe
+    FormatTimePipe,
+    SortPipe,
+    ProductDescriptionComponent
   ],
   providers: [ProductFormService]
 })

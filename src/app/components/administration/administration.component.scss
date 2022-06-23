@@ -1,7 +1,25 @@
 @import './src/styles';
 
 .center {
-  height: 100vh;
+
+}
+
+h2 {
+  color: $main-primary-color;
+  font-size: 18px;
+}
+
+hr {
+  @include bordered(0.5px, $main-primary-color);
+}
+
+.sold-out {
+  border-radius: 5px;
+  padding: 5px 15px 5px 15px;
+  color: white;
+  font-weight: bold;
+  background-color: $main-primary-color;
+  width: fit-content;
 }
 
 .log-out {
@@ -14,4 +32,11 @@
 img {
   width: 40px;
   height: 40px;
+}
+
+.list-products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 150px;
 }

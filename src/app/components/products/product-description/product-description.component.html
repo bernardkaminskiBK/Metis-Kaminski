@@ -73,9 +73,11 @@
                     (mostRecentReview)="getMostRecentData($event)"></app-review>
       </div>
 
-      <button *ngIf="product.price && product.stockCount" (click)="addProductToShoppingCart()" class="button-28">Add to
-        cart
-      </button>
+     <div *ngIf="showAddButton">
+       <button *ngIf="product.price && product.stockCount" (click)="addProductToShoppingCart()" class="button-28">Add to
+         cart
+       </button>
+     </div>
     </div>
 
   </div>
