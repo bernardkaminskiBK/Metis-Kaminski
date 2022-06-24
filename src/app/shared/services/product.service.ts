@@ -34,7 +34,7 @@ export class ProductService {
 
   addNewProduct(product: Product): Promise<Product> {
     return new Promise<Product>((resolve, reject) => {
-      this.apiService.post(Constants.endpoints.products.createProduct, product).toPromise().then((result: Product) => {
+      this.apiService.post(Constants.endpoints.productsAuth.createProduct, product).toPromise().then((result: Product) => {
         product.id = result.id;
         resolve(result);
         this.snackBar.notification(Constants.addProductSuccessMsg);
@@ -47,7 +47,7 @@ export class ProductService {
 
   deleteProduct(product: Product): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      this.apiService.delete(Constants.endpoints.products.deleteProduct, product.id).toPromise().then(() => {
+      this.apiService.delete(Constants.endpoints.productsAuth.deleteProduct, product.id).toPromise().then(() => {
         resolve();
         this.snackBar.notification(Constants.deleteProductSuccessMsg);
       }).catch(() => {
@@ -59,7 +59,7 @@ export class ProductService {
 
   updateProduct(product: Product): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      this.apiService.put(Constants.endpoints.products.updateProduct, product.id, product).toPromise().then(() => {
+      this.apiService.put(Constants.endpoints.productsAuth.updateProduct, product.id, product).toPromise().then(() => {
         resolve();
         this.snackBar.notification(Constants.updateProductSuccessMsg);
       }).catch(() => {

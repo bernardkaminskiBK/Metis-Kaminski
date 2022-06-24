@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProductService} from '../../../shared/services/product.service';
 import {Product} from '../../../models/Product';
-import {UserService} from "../../../shared/services/UserService";
 
 @Component({
   selector: 'app-product-detail',
@@ -15,6 +14,7 @@ export class ProductDetailComponent implements OnInit {
 
   urlName: string;
   hideAddButton: boolean = false;
+  hideEdit: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,6 +35,7 @@ export class ProductDetailComponent implements OnInit {
     });
 
     this.hideAddButton = !this.urlName.includes('/admin');
+    this.hideEdit = !this.urlName.includes('/products')
   }
 
   goBack() {

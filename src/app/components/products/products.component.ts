@@ -1,13 +1,8 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Product} from 'src/app/models/Product';
 import {UserReview} from 'src/app/models/UserReview';
 import {ProductService} from 'src/app/shared/services/product.service';
 import {Constants} from 'src/app/utils/Constants';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {
-  AddEditProductDialogComponent
-} from "../../shared/modal-dialogs/add-edit-product-dialog/add-edit-product-dialog.component";
-import {ProductFormService} from "../../shared/services/productForm.service";
 
 @Component({
   selector: 'app-products',
@@ -26,8 +21,7 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private productFormService: ProductFormService,
-    private dialog: MatDialog) {
+  ) {
   }
 
   ngOnInit(): void {
@@ -35,23 +29,6 @@ export class ProductsComponent implements OnInit {
       this.viewList = products;
       this.getMostRecentFromProductList();
     });
-  }
-
-  addProductDialog() {
-    let config: MatDialogConfig = {
-      panelClass: "dialog-responsive"
-    }
-
-    this.productFormService.addEdit = true;
-
-    const dialogRef = this.dialog.open(AddEditProductDialogComponent, config);
-    dialogRef.afterClosed().subscribe(() => {
-      this.productService.getProductList().then((products) => {
-          this.viewList = products;
-      });
-    });
-
-    dialogRef.disableClose = true;
   }
 
   getMostRecentData(userReview: UserReview) {

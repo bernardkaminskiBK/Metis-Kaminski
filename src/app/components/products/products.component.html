@@ -16,18 +16,15 @@
     <div class="sort-style">
       <h2>Most recent comment</h2>
 
-      <div class="buttons-recent-comment">
-        <mat-icon matSuffix (click)="addProductDialog()">add</mat-icon>
-
-        <button mat-button [matMenuTriggerFor]="menu">
-          <mat-icon>sort</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="clickSort('A-Z')">A-Z</button>
-          <button mat-menu-item (click)="clickSort('Z-A')">Z-A</button>
-        </mat-menu>
-      </div>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>sort</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="clickSort('A-Z')">A-Z</button>
+        <button mat-menu-item (click)="clickSort('Z-A')">Z-A</button>
+      </mat-menu>
     </div>
+
     <hr class="line"/>
     <p class="review-date">Added {{ mostRecentReview.reviewDate }}</p>
     <p>{{ mostRecentReview.reviewComment }}</p>
@@ -40,6 +37,7 @@
       <app-product-description
         [Product]="product"
         [showEdit]="false"
+        [showDelete]="false"
         (mostRecentData)="getMostRecentData($event)"
         (refreshProductList)="refreshProductList()">
         <span productName>{{ product.name }}</span>

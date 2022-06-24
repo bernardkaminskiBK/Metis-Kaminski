@@ -4,6 +4,57 @@
 
 }
 
+.owner-name {
+  border-radius: 5px;
+  padding: 10px 20px 10px 20px;
+  color: white;
+  background-color: brown;
+  font-weight: bold;
+  width: fit-content;
+  margin-left: 25px;
+}
+
+.title  {
+  display: flex;
+  flex-direction: column;
+  color: $main-primary-color;
+  font-weight: bold;
+  font-size: 25px;
+  margin-top: 40px;
+  margin-left: 45px;
+}
+
+.admin-buttons {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  margin-left: 45px;
+}
+
+button {
+  margin-bottom: 15px;
+}
+
+.button-28 {
+  @extend %button-twenty-eight;
+}
+
+.button-28:disabled {
+  pointer-events: none;
+}
+
+.button-28:hover {
+  color: $main-primary-color;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.button-28:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+
 h2 {
   color: $main-primary-color;
   font-size: 18px;
@@ -38,5 +89,12 @@ img {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  margin-top: 30px;
+}
+
+.empty-list {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
   margin-top: 150px;
 }

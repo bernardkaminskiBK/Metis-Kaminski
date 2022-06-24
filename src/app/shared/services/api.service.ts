@@ -44,7 +44,7 @@ export class ApiService {
   }
 
   delete(endpoint: string, id: any) {
-    return this.http.delete(this.createUrl(endpoint, {id: id}))
+    return this.http.delete(this.createUrl(endpoint, {id: id}), this.jsonHttpOptions)
       .pipe(
         catchError(this.handleError)
       )

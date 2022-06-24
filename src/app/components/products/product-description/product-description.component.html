@@ -1,4 +1,9 @@
 <div class="center">
+
+  <div>
+    <ng-content select="[ownerName]"></ng-content>
+  </div>
+
   <div #main class="main-product">
 
     <div class="main-top">
@@ -24,7 +29,6 @@
         x: {{offSetLeftProduct}} y: {{offSetTopProduct}}
       </div>
     </div>
-
 
     <div class="title">
 
@@ -73,11 +77,12 @@
                     (mostRecentReview)="getMostRecentData($event)"></app-review>
       </div>
 
-     <div *ngIf="showAddButton">
-       <button *ngIf="product.price && product.stockCount" (click)="addProductToShoppingCart()" class="button-28">Add to
-         cart
-       </button>
-     </div>
+      <div *ngIf="showAddButton">
+        <button *ngIf="product.price && product.stockCount" (click)="addProductToShoppingCart()" class="button-28">Add
+          to
+          cart
+        </button>
+      </div>
     </div>
 
   </div>
