@@ -20,7 +20,7 @@ export class ProductsComponent implements OnInit {
   private subscription: any;
 
   constructor(
-    private productService: ProductService,
+    private productService: ProductService
   ) {
   }
 
@@ -35,7 +35,7 @@ export class ProductsComponent implements OnInit {
     this.mostRecentReview = userReview;
   }
 
-  // Kvazi fake data len na skusku na init pre most recent comment
+  // TODO: Kvazi fake data len na skusku na init pre most recent comment
   getMostRecentFromProductList() {
     this.mostRecentReview = new UserReview('', '');
   }

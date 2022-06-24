@@ -11,8 +11,8 @@ export class CountDownTimeService {
   private time: number;
   private timer: any;
 
-  startCountDownTimer(time: number): void {
-    this.time = time;
+  startCountDownTimer(timeInSeconds: number): void {
+    this.time = timeInSeconds;
     if (this.timer) {
       clearInterval(this.timer);
     }

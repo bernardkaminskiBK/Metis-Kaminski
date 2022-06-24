@@ -39,7 +39,7 @@ export class AdministrationComponent implements OnInit, DoCheck {
     }
   }
 
-   getProductList(): void {
+  getProductList(): void {
     this.productService.getProductList(this.userService.isAuthentication).then((products) => {
       this.viewList = products;
 
@@ -47,8 +47,8 @@ export class AdministrationComponent implements OnInit, DoCheck {
     });
   }
 
-  // Nie je to najlepsi sposob ale mala operacia, tak som si povedal ze checkuj
-  // to prosim ta stale, kym nevymislim nieco lepsie...
+  // TODO: Nie je to najlepsi sposob ale mala operacia, tak som si povedal ze checkuj
+  //  to prosim ta stale, kym nevymislim nieco lepsie...
   ngDoCheck(): void {
     this.setLayoutTitle();
   }

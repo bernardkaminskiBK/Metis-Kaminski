@@ -3,7 +3,6 @@ import {ShoppingCartService} from "../../shared/services/shopping-cart.service";
 import {ProductService} from "../../shared/services/product.service";
 import {Router} from "@angular/router";
 import {Product} from "../../models/Product";
-import {CountDownTimeService} from "../../shared/services/countDownTime.service";
 
 @Component({
   selector: 'app-shopping-cart',
@@ -39,7 +38,6 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   removeProductFromCart(product: Product) {
     this.shoppingCartService.deleteProductFromShoppingCart(product);
-    this.productService.increaseProductStockCountStateByOne(product);
   }
 
   navigateBackToProducts() {

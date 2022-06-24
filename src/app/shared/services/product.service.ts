@@ -1,10 +1,8 @@
 import {Injectable} from "@angular/core";
-import {BehaviorSubject} from "rxjs";
 import {Product} from "../../models/Product";
 import {Router} from "@angular/router";
 import {ApiService} from "./api.service";
 import {Constants} from "../../utils/Constants";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {NotificationService} from "./notification.service";
 
 @Injectable({
@@ -12,24 +10,7 @@ import {NotificationService} from "./notification.service";
 })
 export class ProductService {
 
-  private cacheProductList: Product[] = [];
-  productListObserver = new BehaviorSubject<Product[]>(this.cacheProductList);
-
   constructor(private router: Router, private apiService: ApiService, private snackBar: NotificationService) {
-  }
-
-  increaseProductStockCountStateByOne(product: Product): void {
-    const index = this.cacheProductList.indexOf(product, 0);
-    if (index > -1) {
-      this.cacheProductList[index].stockCount = this.cacheProductList[index].stockCount + 1;
-    }
-  }
-
-  decreaseProductStockCountStateByOne(product: Product): void {
-    const index = this.cacheProductList.indexOf(product, 0);
-    if (index > -1) {
-      this.cacheProductList[index].stockCount = this.cacheProductList[index].stockCount - 1;
-    }
   }
 
   addNewProduct(product: Product): Promise<Product> {
