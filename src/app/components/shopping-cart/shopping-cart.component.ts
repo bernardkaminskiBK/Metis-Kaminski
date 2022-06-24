@@ -11,7 +11,6 @@ import {Product} from "../../models/Product";
 })
 export class ShoppingCartComponent implements OnInit, OnDestroy {
 
-  quantity: number = 0;
   subtotal: number;
   shippingPrice: number = 10;
   total: number;
@@ -39,9 +38,6 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   removeProductFromCart(product: Product) {
     this.shoppingCartService.deleteProductFromShoppingCart(product);
-
-    product.stockCount += 1;
-    this.productService.refreshProductList(product);
   }
 
   navigateBackToProducts() {
@@ -54,4 +50,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     }
   }
 
+  back() {
+    this.router.navigateByUrl('products');
+  }
 }

@@ -2,7 +2,7 @@ import {ProductsComponent} from "./products.component";
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {ProductsRoutingModule} from "./products-routing.module";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ProductDescriptionComponent} from "./product-description/product-description.component";
 import {ProductDetailComponent} from "./product-detail/product-detail.component";
 import {AppFilterComponent} from "./app-filter/app-filter.component";
@@ -10,6 +10,11 @@ import {AppFilterOptionsComponent} from "./app-filter-options/app-filter-options
 import {ReviewComponent} from "./review/review.component";
 import {SortPipe} from "../../shared/pipes/sort.pipe";
 import {MaterialModule} from "../../shared/material/material.module";
+import {
+  AddEditProductDialogComponent
+} from '../../shared/modal-dialogs/add-edit-product-dialog/add-edit-product-dialog.component';
+import {FormatTimePipe} from "../../shared/pipes/formatTime.pipe";
+import {ProductFormService} from "../../shared/services/productForm.service";
 
 const components = [
   ProductsComponent,
@@ -18,7 +23,9 @@ const components = [
   AppFilterComponent,
   AppFilterOptionsComponent,
   ReviewComponent,
-  SortPipe
+  AddEditProductDialogComponent,
+  SortPipe,
+  FormatTimePipe
 ];
 
 @NgModule({
@@ -26,10 +33,18 @@ const components = [
     CommonModule,
     FormsModule,
     ProductsRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ],
   declarations: [
     components
   ],
+  exports: [
+    FormatTimePipe,
+    SortPipe,
+    ProductDescriptionComponent
+  ],
+  providers: [ProductFormService]
 })
-export class ProductsModule {}
+export class ProductsModule {
+}

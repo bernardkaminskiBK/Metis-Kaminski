@@ -1,40 +1,46 @@
 <div class="center">
   <div class="main-product" *ngIf="product">
-    <h1>Product detail:</h1>
+    <app-product-description
+      [Product]="product"
+      [showDelete]="false"
+      [showDetails]="false"
+      [showEdit]="hideEdit"
+      [showAddButton]="hideAddButton">
+      <span productName>{{ product.name }}</span>
 
-    <h2>Product Name:</h2>
-    <p>{{product.name}}</p>
-    <h2>Id:</h2>
-    <p>{{product.id}}</p>
-    <h2>Category:</h2>
-    <p>{{product.category}}</p>
-    <h2> Price:</h2>
-    <p>{{product.price}} Eur</p>
-    <h2>StockCount:</h2>
-    <p> {{product.stockCount}}</p>
-    <h2> Description:</h2>
-    <p>{{product.description}}</p>
+      <ng-container category>
+        <span>{{ product.category }}</span>
+      </ng-container>
 
-    <hr>
+      <ng-container price>
+        <span *ngIf="product.price && product.price === 0"></span>
+        <span *ngIf="product.price && product.price !== 0"
+        >Price: {{ product.price }}€</span>
+      </ng-container>
 
-    <h2>Vendors:</h2>
-    <div *ngFor="let vendor of product.vendors">
-        <ul>
-          <li>{{vendor.name}}</li>
-        </ul>
-    </div>
+      <ng-container stock>
+        <span *ngIf="product.stockCount === 0" class="sold-out">Sold Out</span>
+        <span *ngIf="product.stockCount > 0">Stock: {{ product.stockCount }}x</span>
+      </ng-container>
 
-    <hr>
+      <ng-container
+        *ngIf="product.description && product.description.length" description>
+        <h2>Description</h2>
+        <hr/>
+        <span>{{ product.description }}</span>
+      </ng-container>
 
-    <h2>Reviews:</h2>
-    <div *ngFor="let review of product.reviews">
-      <ul>
-        <li>{{review.date}}: {{review.comment}}</li>
-      </ul>
-    </div>
+      <ng-container vendors>
+        <div class="wrapper">
+          <ng-container *ngFor="let vendor of product.vendors">
+            <div *ngIf="vendor.stockCount > 0" class="vendor">
+              {{ vendor.name }}
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+    </app-product-description>
+
+    <button (click)="goBack()" class="button-28">Back</button>
   </div>
-
-  <button (click)="goBack()" class="button-28">Back</button>
-
-<!--  <button (click)="navigateTo()" class="button-28">Navigate to</button>-->
 </div>

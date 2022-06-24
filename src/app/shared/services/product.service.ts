@@ -1,379 +1,91 @@
 import {Injectable} from "@angular/core";
-import {BehaviorSubject} from "rxjs";
 import {Product} from "../../models/Product";
-import {Vendor} from "../../models/Vendor";
+import {Router} from "@angular/router";
+import {ApiService} from "./api.service";
+import {Constants} from "../../utils/Constants";
+import {NotificationService} from "./notification.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  productListObserver = new BehaviorSubject<Product[]>(this.getProductList());
-
-  refreshProductList(product: Product): void {
-    this.getProductList().push(product);
+  constructor(private router: Router, private apiService: ApiService, private snackBar: NotificationService) {
   }
 
-  getProductList(): Product[] {
-    return [
-      {
-        id: 1,
-        name: 'Product 1',
-        category: 'Product 1',
-        img_url: '',
-        price: 0,
-        stockCount: 0,
-        quantitySoldWholePeriod: 0,
-        quantitySoldLastMonth: 0,
-        cashFlowLastMonth: 0,
-        cashFlowWholePeriod: 0,
-        display: 0,
-        ram: 4,
-        memory: 16,
-        description: '',
-        vendors: [
-          {name: 'Alza', stockCount: 2},
-          {name: 'Agem', stockCount: 1},
-          {name: 'MediaMarkt', stockCount: 1},
-          {name: 'Asbis', stockCount: 1},
-          {name: 'Nay', stockCount: 1}
-        ],
-        reviews: [
-          {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
-          {
-            date: "12:22 23.3.2022",
-            comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"
-          },
-          {date: "12:22 24.3.2022", comment: "from repetition, injected humour, or non-characteristic words etc."},
-        ]
-      },
-      {
-        id: 2,
-        name: 'Acer Nitro 5 Obsidian',
-        img_url: 'https://cdn.alza.sk/ImgW.ashx?fd=f16&cd=NC108c7i04n2',
-        category: 'Gaming',
-        price: 849,
-        stockCount: 18,
-        quantitySoldWholePeriod: 5,
-        quantitySoldLastMonth: 2,
-        cashFlowLastMonth: 0,
-        cashFlowWholePeriod: 0,
-        display: 15.6,
-        ram: 16,
-        memory: 512,
-        description: 'Herný notebook – Intel Core i5 9300H Coffee Lake, 15.6" IPS matný 1920 × 1080 120Hz, RAM 8GB DDR4, NVIDIA GeForce GTX 1650 4GB, SSD 512GB, numerická klávesnica, podsvietená klávesnica, webkamera, USB-C, WiFi 6, 56 Wh batéria, hmotnosť 2.5kg, Windows 10 Home, HDD upgrade kit (AN515-54-54KC) ',
-        vendors: [
-          {name: 'Alza', stockCount: 10},
-          {name: 'Agem', stockCount: 2},
-          {name: 'MediaMarkt', stockCount: 1},
-          {name: 'Asbis', stockCount: 0},
-          {name: 'Nay', stockCount: 5},
-        ],
-        reviews: [
-          {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
-          {
-            date: "12:22 23.3.2022",
-            comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"
-          },
-          {date: "12:22 24.3.2022", comment: "from repetition, injected humour, or non-characteristic words etc."},
-          {date: "12:22 24.3.2022", comment: "typesetting, remaining essentially unchanged. It was popularised in the"}
-        ]
-      },
-      {
-        id: 3,
-        name: 'Lenovo Legion 5 Pro',
-        img_url: 'https://cdn.alza.sk/ImgW.ashx?fd=f16&cd=NT379u80o3',
-        category: 'Gaming',
-        price: 1539,
-        stockCount: 50,
-        quantitySoldWholePeriod: 10,
-        quantitySoldLastMonth: 3,
-        cashFlowLastMonth: 0,
-        cashFlowWholePeriod: 0,
-        display: 16,
-        ram: 16,
-        memory: 1000,
-        description: 'Herný notebook – AMD Ryzen 7 5800H, 16" IPS antireflexný 2560 × 1600 165Hz, RAM 16GB DDR4, NVIDIA GeForce RTX 3070 8GB 140 W, SSD 1000GB, numerická klávesnica, podsvietená RGB klávesnica, webkamera, USB-C, WiFi 6, 80 Wh batéria, hmotnosť 2.45kg, bez operačného systému',
-        vendors: [
-          {name: 'Alza', stockCount: 10},
-          {name: 'Agem', stockCount: 10},
-          {name: 'MediaMarkt', stockCount: 10},
-          {name: 'Asbis', stockCount: 10},
-          {name: 'Nay', stockCount: 10},
-        ],
-        reviews: [
-          {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
-          {
-            date: "12:22 23.3.2022",
-            comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"
-          }
-        ]
-      },
-      {
-        id: 4,
-        name: 'Macbook Pro 13" M1 SK2020',
-        img_url: 'https://cdn.alza.sk/Foto/f16/NL/NL257a1b1.jpg',
-        category: 'MacBook',
-        price: 1459,
-        stockCount: 3,
-        quantitySoldWholePeriod: 6,
-        quantitySoldLastMonth: 1,
-        cashFlowLastMonth: 0,
-        cashFlowWholePeriod: 0,
-        display: 13.3,
-        ram: 8,
-        memory: 256,
-        description: 'MacBook – Apple M1, 13.3" IPS lesklý 2560 × 1600 , RAM 8GB, Apple M1 8-jadrová GPU, SSD 256GB, podsvietená klávesnica, webkamera, USB-C, čítačka odtlačkov prstov, WiFi 6, 58.2 Wh batéria, hmotnosť 1.37kg, MAC OS',
-        vendors: [
-          {name: 'Alza', stockCount: 0},
-          {name: 'Agem', stockCount: 0},
-          {name: 'MediaMarkt', stockCount: 0},
-          {name: 'Asbis', stockCount: 2},
-          {name: 'Nay', stockCount: 1},
-        ],
-        reviews: [
-          {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
-          {
-            date: "12:22 23.3.2022",
-            comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"
-          },
-          {date: "12:22 24.3.2022", comment: "from repetition, injected humour, or non-characteristic words etc."},
-          {date: "12:22 24.3.2022", comment: "typesetting, remaining essentially unchanged. It was popularised in the"},
-          {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
-          {
-            date: "12:22 23.3.2022",
-            comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"
-          },
-          {date: "12:22 24.3.2022", comment: "from repetition, injected humour, or non-characteristic words etc."},
-          {date: "12:22 24.3.2022", comment: "typesetting, remaining essentially unchanged. It was popularised in the"}
-        ]
-      },
-      {
-        id: 5,
-        name: 'Dell Vostro 3500',
-        img_url: 'https://cdn.alza.sk/ImgW.ashx?fd=f16&cd=ADC253z08i',
-        category: 'Kancelária',
-        price: 0,
-        stockCount: 18,
-        quantitySoldWholePeriod: 8,
-        quantitySoldLastMonth: 4,
-        cashFlowLastMonth: 0,
-        cashFlowWholePeriod: 0,
-        display: 15,
-        ram: 8,
-        memory: 256,
-        description: 'Notebook – Intel Core i3 1115G4 Tiger Lake, 15" IPS matný 1920 × 1080, RAM 8GB DDR4, Intel UHD Graphics, SSD 256GB, numerická klávesnica, podsvietená klávesnica, webkamera, USB 3.2 Gen 1, čítačka odtlačkov prstov, WiFi 5, 42 Wh batéria, hmotnosť 1.98kg, Windows 10 Pro (NBD)',
-        vendors: [
-          {name: 'Alza', stockCount: 0},
-          {name: 'Agem', stockCount: 0},
-          {name: 'MediaMarkt', stockCount: 0},
-          {name: 'Asbis', stockCount: 0},
-          {name: 'Nay', stockCount: 0},
-        ],
-        reviews: [
-          {date: "12:22 24.3.2022", comment: "typesetting, remaining essentially unchanged. It was popularised in the"},
-          {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
-          {
-            date: "12:22 23.3.2022",
-            comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"
-          },
-          {date: "12:22 24.3.2022", comment: "from repetition, injected humour, or non-characteristic words etc."},
-          {date: "12:22 24.3.2022", comment: "typesetting, remaining essentially unchanged. It was popularised in the"}
-
-        ]
-      },
-      {
-        id: 6,
-        name: 'Asus Zenbook 13',
-        img_url: 'https://cdn.alza.sk/ImgW.ashx?fd=f16&cd=NA618p71c2',
-        category: 'Ultrabook',
-        price: 1149,
-        stockCount: 6,
-        quantitySoldWholePeriod: 5,
-        quantitySoldLastMonth: 2,
-        cashFlowLastMonth: 0,
-        cashFlowWholePeriod: 0,
-        display: 16,
-        ram: 16,
-        memory: 1000,
-        description: '',
-        vendors: [
-          {name: 'Alza', stockCount: 2},
-          {name: 'Agem', stockCount: 1},
-          {name: 'MediaMarkt', stockCount: 1},
-          {name: 'Asbis', stockCount: 1},
-          {name: 'Nay', stockCount: 1}
-        ],
-        reviews: [
-          {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
-          {
-            date: "12:22 23.3.2022",
-            comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"
-          },
-          {date: "12:22 24.3.2022", comment: "from repetition, injected humour, or non-characteristic words etc."},
-        ]
-      },
-      {
-        id: 7,
-        name: 'Test',
-        category: 'Test',
-        img_url: '',
-        price: 500,
-        stockCount: 2,
-        quantitySoldWholePeriod: 2,
-        quantitySoldLastMonth: 2,
-        cashFlowLastMonth: 0,
-        cashFlowWholePeriod: 0,
-        display: 15.6,
-        ram: 8,
-        memory: 500,
-        description: '',
-        vendors: [
-          {name: 'Alza', stockCount: 1},
-          {name: 'Agem', stockCount: 1},
-          {name: 'MediaMarkt', stockCount: 1},
-          {name: 'Asbis', stockCount: 1},
-          {name: 'Nay', stockCount: 1}
-        ],
-        reviews: [
-          {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
-          {
-            date: "12:22 23.3.2022",
-            comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"
-          },
-          {date: "12:22 24.3.2022", comment: "from repetition, injected humour, or non-characteristic words etc."},
-        ]
-      },
-      {
-        id: 8,
-        name: 'Test2',
-        category: 'Test2',
-        img_url: '',
-        price: 500,
-        stockCount: 1,
-        quantitySoldWholePeriod: 1,
-        quantitySoldLastMonth: 1,
-        cashFlowLastMonth: 0,
-        cashFlowWholePeriod: 0,
-        display: 15.6,
-        ram: 8,
-        memory: 500,
-        description: '',
-        vendors: [
-          {name: 'Alza', stockCount: 1},
-          {name: 'Agem', stockCount: 1},
-          {name: 'MediaMarkt', stockCount: 1},
-          {name: 'Asbis', stockCount: 1},
-          {name: 'Nay', stockCount: 1}
-        ],
-        reviews: [
-          {date: "12:22 22.3.2022", comment: "Lorem Ipsum is simply dummy text"},
-          {
-            date: "12:22 23.3.2022",
-            comment: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a"
-          },
-          {date: "12:22 24.3.2022", comment: "from repetition, injected humour, or non-characteristic words etc."},
-        ]
-      }
-    ];
-  }
-
-  getProductById(id: number): Product {
-    return this.getProductList()
-      .find((product) => product.id === id) as Product;
-  }
-
-  getFirstVendorList(): Vendor[] {
-    return this.getProductList()[0].vendors;
-  }
-
-
-  getVendorsByProductName(productName: string): Vendor[] {
-    let vendors: Vendor[] = [];
-    this.getProductList().forEach((product: Product) => {
-      if (product.name == productName) {
-        vendors = product.vendors;
-      }
-    });
-    return vendors;
-  }
-
-  /*
-       Ďalší zoznam, ktorý bude slúžiť na zoznam produktov, ktoré majú nulové množstvo na sklade.
-       Zoznam umožní rýchli prehľad tovaru, ktorý treba urgentne do objednať.
-   */
-  getProductsNotInStock(): Product[] {
-    return this.getProductList().filter((product: Product) => {
-      return product.stockCount == 0
+  addNewProduct(product: Product): Promise<Product> {
+    return new Promise<Product>((resolve, reject) => {
+      this.apiService.post(Constants.endpoints.productsAuth.createProduct, product).toPromise().then((result: Product) => {
+        product.id = result.id;
+        resolve(result);
+        this.snackBar.notification(Constants.addProductSuccessMsg);
+      }).catch(() => {
+        this.snackBar.notification(Constants.addProductFailureMsg);
+        reject();
+      });
     });
   }
 
-  // Obraty pre každý produkt separátne (celkový, za posledný mesiac)
-  getProductCashFlowStates(): Product[] {
-    let result: Product [] = [];
-    this.getProductList().forEach((product) => {
-      if (product.price) {
-        product.cashFlowLastMonth =
-          product.price * product.quantitySoldLastMonth;
-
-        product.cashFlowWholePeriod =
-          product.price * product.quantitySoldWholePeriod;
-
-        result.push(product);
-      }
+  deleteProduct(product: Product): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      this.apiService.delete(Constants.endpoints.productsAuth.deleteProduct, product.id).toPromise().then(() => {
+        resolve();
+        this.snackBar.notification(Constants.deleteProductSuccessMsg);
+      }).catch(() => {
+        this.snackBar.notification(Constants.deleteProductFailureMsg);
+        reject();
+      });
     });
-    return result;
   }
 
-  // Celkový obrat za posledný mesiac (sumarizácia cez všetky produkty v jednom čísle)
-  getTotalCashFlowByLastMonth(): number {
-    let sum: number = 0
-    this.getProductCashFlowStates().forEach((product) => {
-      if (product.price) {
-        sum += product.cashFlowLastMonth;
-      }
+  updateProduct(product: Product): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      this.apiService.put(Constants.endpoints.productsAuth.updateProduct, product.id, product).toPromise().then(() => {
+        resolve();
+        this.snackBar.notification(Constants.updateProductSuccessMsg);
+      }).catch(() => {
+        this.snackBar.notification(Constants.updateProductFailureMsg);
+        reject();
+      });
     });
-    return sum;
   }
 
-  // Celkový obrat za celé obdobie (sumarizácie cez všetky produkty v jednom čísle)
-  getTotalCashFlowByWholePeriod(): number {
-    let sumWholePeriod: number = 0;
-    this.getProductCashFlowStates().forEach((product) => {
-      if (product.price) {
-        sumWholePeriod += product.price * product.quantitySoldWholePeriod;
+  getProductList(isAuth?: boolean): Promise<Product[]> {
+    return new Promise<Product[]>((resolve, reject) => {
+      let endpoint;
+
+      if (isAuth) {
+        endpoint = Constants.endpoints.productsAuth.list;
+      } else {
+        endpoint = Constants.endpoints.products.list;
       }
+
+      this.apiService.get(endpoint).toPromise().then((productList: Product[]) => {
+        resolve(productList);
+      }).catch(() => {
+        reject();
+      });
+
     });
-    return sumWholePeriod;
   }
 
-  // Priemerná cena predávaných produktov
-  getAveragePriceSoldProducts(): string {
-    let avg: number = 0;
-    this.getProductList().forEach((product) => {
-      if (product.price) {
-        avg += product.quantitySoldLastMonth + product.quantitySoldWholePeriod;
-      }
+  getProductById(id: number): Promise<Product> {
+    return new Promise<Product>((resolve, reject) => {
+      this.apiService.get(Constants.endpoints.products.getById, {id: id}).toPromise().then((product: Product) => {
+        resolve(product);
+      }).catch(() => {
+        reject();
+        this.error404();
+      });
     });
-    let result = (this.getTotalCashFlowByWholePeriod() + this.getTotalCashFlowByLastMonth()) / avg;
-    return result.toFixed(2).replace('.', ',') + ' €';
   }
 
-  // Najpredávanejší produkt
-  getMostSoldProductName(): string {
-    let sum: number = 0;
-    let temp: number = 0;
-    let nameOfProduct: string = '';
-
-    this.getProductList().forEach((product) => {
-      if (product.price) {
-        sum = product.quantitySoldLastMonth + product.quantitySoldWholePeriod;
-        if (temp < sum) {
-          temp = sum;
-          nameOfProduct = product.name;
-        }
-      }
-    });
-    return nameOfProduct;
+  private error404(): void {
+    this.router.navigateByUrl('404notFound');
   }
+
+  getMockCategoryData(): string[] {
+    return ['Ultrabook', 'Kancelária', 'MacBook', 'Gaming'];
+  }
+
 }

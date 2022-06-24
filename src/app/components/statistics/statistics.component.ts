@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
@@ -6,13 +6,14 @@ import {Router} from "@angular/router";
 import {ProductService} from "../../shared/services/product.service";
 import {Product} from "../../models/Product";
 import {Vendor} from "../../models/Vendor";
+import {StatisticsService} from "../../shared/services/statistics.service";
 
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.scss']
 })
-export class StatisticsComponent implements OnInit, AfterViewInit {
+export class StatisticsComponent implements OnInit {
 
   displayedColumnsFirst: string[] =
     ['id', 'name', 'price', 'stockCount', 'quantitySoldLastMonth', 'quantitySoldWholePeriod'];
@@ -43,31 +44,40 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
 
   totalCashFlowByLastMonth: number;
   totalCashFlowByWholePeriod: number;
-  avgPriceSoldProducts: string;
+  avgPriceSoldProducts: number;
   mostSoldProductName: string;
 
   products: Product[];
   selected: any;
 
-  constructor(private router: Router, private data: ProductService) {
+  constructor(private router: Router, private productService: ProductService, private statisticsService: StatisticsService) {
   }
 
   ngOnInit(): void {
-    this.tableSourceFirst = new MatTableDataSource<Product>(this.data.getProductList());
-    this.tableSourceSecond = new MatTableDataSource<Product>(this.data.getProductCashFlowStates());
-    this.tableSourceThird = new MatTableDataSource<Product>(this.data.getProductsNotInStock());
-    this.tableSourceFourth = new MatTableDataSource<Vendor>(this.data.getFirstVendorList());
+    this.productService.getProductList().then((products) => {
+      this.products = products;
+      this.statisticsService.addData(this.products);
+      this.setTables();
+      this.setTablesFilters();
+    }).catch(() => {
+    });
+  }
 
-    this.totalCashFlowByLastMonth = this.data.getTotalCashFlowByLastMonth();
-    this.totalCashFlowByWholePeriod = this.data.getTotalCashFlowByWholePeriod();
-    this.avgPriceSoldProducts = this.data.getAveragePriceSoldProducts();
-    this.mostSoldProductName = this.data.getMostSoldProductName();
+  private setTables(): void {
+    this.tableSourceFirst = new MatTableDataSource<Product>(this.products);
+    this.tableSourceSecond = new MatTableDataSource<Product>(this.statisticsService.getProductCashFlowStates());
+    this.tableSourceThird = new MatTableDataSource<Product>(this.statisticsService.getProductsNotInStock());
+    this.tableSourceFourth = new MatTableDataSource<Vendor>(this.statisticsService.getFirstVendorList());
 
-    this.products = this.data.getProductList();
+    this.totalCashFlowByLastMonth = this.statisticsService.getTotalCashFlowByLastMonth();
+    this.totalCashFlowByWholePeriod = this.statisticsService.getTotalCashFlowByWholePeriod();
+    this.avgPriceSoldProducts = this.statisticsService.getAveragePriceSoldProducts();
+    this.mostSoldProductName = this.statisticsService.getMostSoldProductName();
+
     this.selected = this.products[0].name;
   }
 
-  ngAfterViewInit(): void {
+  private setTablesFilters(): void {
     this.tableSourceFirst.sort = this.sortFirst;
     this.tableSourceFirst.paginator = this.paginatorFirst;
 
@@ -103,14 +113,14 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
 
   fillFourthTableWithContent(): void {
     this.tableSourceFourth =
-      new MatTableDataSource<Vendor>(this.data.getVendorsByProductName(this.selected.name));
+      new MatTableDataSource<Vendor>(this.statisticsService.getVendorsByProductName(this.selected.name));
     this.selected = this.selected.name;
 
     this.tableSourceFourth.sort = this.sortFourth;
     this.tableSourceFourth.paginator = this.paginatorFourth;
   }
 
-  goToFragment(fragment: string) : void {
+  goToFragment(fragment: string): void {
     this.router.navigateByUrl('statistics#' + fragment);
   }
 }

@@ -1,15 +1,12 @@
 <div class="center">
   <div class="flex-container">
     <app-app-filter
-      [listOfProducts]="productList"
       [isCheckBoxChecked]="checkBoxState"
-      (filteredList)="filteredProductList($event)"
-    >
+      (filteredList)="filteredProductList($event)">
     </app-app-filter>
 
     <app-app-filter-options
-      (isCheckedCheckbox)="pushFurtherCheckBoxState($event)"
-    >
+      (isCheckedCheckbox)="pushFurtherCheckBoxState($event)">
     </app-app-filter-options>
   </div>
 </div>
@@ -27,19 +24,22 @@
         <button mat-menu-item (click)="clickSort('Z-A')">Z-A</button>
       </mat-menu>
     </div>
-    <hr class="line" />
+
+    <hr class="line"/>
     <p class="review-date">Added {{ mostRecentReview.reviewDate }}</p>
     <p>{{ mostRecentReview.reviewComment }}</p>
   </div>
 </div>
 
-<div class="list-wrapper">
-  <div class="list-contacts">
+<div class="list-wrapper" *ngIf="viewList && viewList.length">
+  <div class="list-products">
     <div *ngFor="let product of viewList | sort: sortBy">
       <app-product-description
         [Product]="product"
+        [showEdit]="false"
+        [showDelete]="false"
         (mostRecentData)="getMostRecentData($event)"
-      >
+        (refreshProductList)="refreshProductList()">
         <span productName>{{ product.name }}</span>
 
         <ng-container category>
@@ -49,25 +49,18 @@
         <ng-container price>
           <span *ngIf="product.price && product.price === 0"></span>
           <span *ngIf="product.price && product.price !== 0"
-            >Price: {{ product.price }}€</span
-          >
+          >Price: {{ product.price }}€</span>
         </ng-container>
 
         <ng-container stock>
-          <span *ngIf="product.stockCount === 0" class="sold-out"
-            >Sold Out</span
-          >
-          <span *ngIf="product.stockCount > 0"
-            >Stock: {{ product.stockCount }}x</span
-          >
+          <span *ngIf="product.stockCount === 0" class="sold-out">Sold Out</span>
+          <span *ngIf="product.stockCount > 0">Stock: {{ product.stockCount }}x</span>
         </ng-container>
 
         <ng-container
-          *ngIf="product.description && product.description.length"
-          description
-        >
+          *ngIf="product.description && product.description.length" description>
           <h2>Description</h2>
-          <hr />
+          <hr/>
           <span>{{ product.description }}</span>
         </ng-container>
 
@@ -83,4 +76,8 @@
       </app-product-description>
     </div>
   </div>
+</div>
+
+<div *ngIf="viewList && viewList.length == 0" class="empty-list">
+  <h2>List of products is empty.</h2>
 </div>

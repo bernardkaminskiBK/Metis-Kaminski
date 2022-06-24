@@ -12,6 +12,10 @@ h4 {
   box-sizing: border-box;
 }
 
+p {
+  cursor: pointer;
+}
+
 .product-footer {
   background-color: $main-primary-color;
   padding: 1px 0;
@@ -58,7 +62,7 @@ h4 {
   margin-bottom: 10px;
 }
 
-.footer-column ul li a {
+.footer-column ul li p {
   font-size: 12px;
   font-family: "Poppins", sans-serif;
   color: white;
@@ -67,20 +71,20 @@ h4 {
   transition: all 0.3s ease;
 }
 
-.footer-column ul li a:hover {
+.footer-column ul li p:hover {
   padding-left: 8px;
 }
 
 .social-links {
   float: right;
-  margin-top: 100px;
+  margin-top: 150px;
 }
 
 .ng-fa-icon.icon-hover-highlight:hover {
   color: $main-primary-color;
 }
 
-.footer-column .social-links a {
+.footer-column .social-links p {
   display: inline-block;
   height: 40px;
   width: 40px;
@@ -88,6 +92,10 @@ h4 {
   text-align: center;
   line-height: 40px;
   transition: all 0.5s ease;
+}
+
+a {
+  margin: 10px;
 }
 
 
@@ -103,7 +111,7 @@ ul {
 
    .social-links {
      float: left;
-     margin-top: 100px;
+     margin-top: 150px;
    }
  }
 

@@ -1,9 +1,28 @@
 <div class="center">
+
+  <div>
+    <ng-content select="[ownerName]"></ng-content>
+  </div>
+
   <div #main class="main-product">
 
     <div class="main-top">
-      <div (click)="navigateToProductDetail()" class="product_detail_btn">
-        <a class="details-button">Details</a>
+      <div *ngIf="showDelete">
+        <div *ngIf="product.editPermission" (click)="deleteProduct()">
+          <a class="details-button">Delete</a>
+        </div>
+      </div>
+
+      <div *ngIf="showDetails">
+        <div (click)="navigateToProductDetail()" class="product_detail_btn">
+          <a class="details-button">Details</a>
+        </div>
+      </div>
+
+      <div *ngIf="showEdit">
+        <div *ngIf="product.editPermission" (click)="editProductDialog()" class="product_detail_btn">
+          <a class="details-button">Edit</a>
+        </div>
       </div>
 
       <div class="offset-style">
@@ -20,7 +39,7 @@
           </h2>
         </div>
         <div class="column-category">
-          <h2>
+          <h2 *ngIf="product.category">
             <ng-content select="[category]"></ng-content>
           </h2>
         </div>
@@ -45,7 +64,7 @@
         </div>
       </div>
 
-      <div class="row-vendors">
+      <div *ngIf="product.vendors && product.vendors.length" class="row-vendors">
         <h2>Vendors</h2>
         <hr>
         <div class="column-vendor">
@@ -53,10 +72,17 @@
         </div>
       </div>
 
-      <app-review [inputProduct]="product"
-                  (mostRecentReview)="getMostRecentData($event)"></app-review>
+      <div *ngIf="product.reviews && product.reviews.length">
+        <app-review [inputProduct]="product"
+                    (mostRecentReview)="getMostRecentData($event)"></app-review>
+      </div>
 
-      <button *ngIf="product.price && product.stockCount" (click)="addProductToShoppingCart()" class="button-28">Add to cart</button>
+      <div *ngIf="showAddButton">
+        <button *ngIf="product.price && product.stockCount" (click)="addProductToShoppingCart()" class="button-28">Add
+          to
+          cart
+        </button>
+      </div>
     </div>
 
   </div>

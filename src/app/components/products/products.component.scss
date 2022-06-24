@@ -143,12 +143,15 @@ hr {
   width: fit-content;
 }
 
-.list-wrapper {
-  margin: 0 auto
-}
-
-.list-contacts {
+.list-products {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+}
+
+.empty-list {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  margin-top: 150px;
 }

@@ -1,0 +1,73 @@
+<div class="center">
+
+  <div (click)="logout()" class="log-out">
+    <img alt="menu" src="assets/IMG/logout-icon.png"/>
+  </div>
+
+  <div class="title">
+    <p>Welcome {{ userName }}</p>
+    <p>choose your options:</p>
+  </div>
+
+  <div class="admin-buttons">
+    <button class="button-28" (click)="addProductDialog()">Add new product</button>
+    <button class="button-28" (click)="getMyProducts()">Show my products</button>
+    <button class="button-28" (click)="getProductList()">Show all products</button>
+  </div>
+
+</div>
+
+<div class="list-products" *ngIf="viewList && viewList.length">
+  <div *ngFor="let product of viewList">
+    <app-product-description
+      [Product]="product"
+      [showEdit]="false"
+      [showAddButton]="false"
+      (refreshProductList)="getProductList()">
+
+      <ng-container ownerName>
+        <span *ngIf="product.ownerName" class="owner-name">{{ 'Owner: ' + product.ownerName }}</span>
+        <span *ngIf="!product.ownerName" class="owner-name">{{ 'Owner: Unknown' }}</span>
+      </ng-container>
+
+      <span productName>{{ product.name }}</span>
+
+      <ng-container category>
+        <span>{{ product.category }}</span>
+      </ng-container>
+
+      <ng-container price>
+        <span *ngIf="product.price && product.price === 0"></span>
+        <span *ngIf="product.price && product.price !== 0"
+        >Price: {{ product.price }}€</span>
+      </ng-container>
+
+      <ng-container stock>
+        <span *ngIf="product.stockCount === 0" class="sold-out">Sold Out</span>
+        <span *ngIf="product.stockCount > 0">Stock: {{ product.stockCount }}x</span>
+      </ng-container>
+
+      <ng-container
+        *ngIf="product.description && product.description.length" description>
+        <h2>Description</h2>
+        <hr/>
+        <span>{{ product.description }}</span>
+      </ng-container>
+
+      <ng-container vendors>
+        <div class="wrapper">
+          <ng-container *ngFor="let vendor of product.vendors">
+            <div *ngIf="vendor.stockCount > 0" class="vendor">
+              {{ vendor.name }}
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+    </app-product-description>
+  </div>
+</div>
+
+<div *ngIf="viewList && viewList.length === 0" class="empty-list">
+  <h2>List of products is empty.</h2>
+</div>
+

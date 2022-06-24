@@ -5,6 +5,16 @@ html {
   scroll-behavior: smooth;
 }
 
+.dialog-responsive {
+  width: 40%;
+}
+
+@media only screen and (max-width: 760px) {
+  .dialog-responsive {
+    width: 100%;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }

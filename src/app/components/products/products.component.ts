@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/models/Product';
-import { UserReview } from 'src/app/models/UserReview';
-import { ProductService } from 'src/app/shared/services/product.service';
-import { Constants } from 'src/app/utils/Constants';
+import {Component, OnInit} from '@angular/core';
+import {Product} from 'src/app/models/Product';
+import {UserReview} from 'src/app/models/UserReview';
+import {ProductService} from 'src/app/shared/services/product.service';
+import {Constants} from 'src/app/utils/Constants';
 
 @Component({
   selector: 'app-products',
@@ -12,42 +12,32 @@ import { Constants } from 'src/app/utils/Constants';
 export class ProductsComponent implements OnInit {
   checkBoxState: boolean;
 
-  productList: Product[];
-  viewList: any[];
+  viewList: Product[];
   sortBy = Constants.AZ;
 
   mostRecentReview: UserReview;
 
   private subscription: any;
 
-  constructor(private data: ProductService) {}
-
-  ngOnInit(): void {
-    this.subscription = this.data.productListObserver.subscribe(
-      (newValue: Product[]) => {
-        this.viewList = newValue;
-      }
-    );
-
-    this.getProductList();
-    this.getMostRecentFromProductList();
+  constructor(
+    private productService: ProductService
+  ) {
   }
 
-  private getProductList(): void {
-    this.productList = this.data.getProductList();
+  ngOnInit(): void {
+    this.productService.getProductList().then((products) => {
+      this.viewList = products;
+      this.getMostRecentFromProductList();
+    });
   }
 
   getMostRecentData(userReview: UserReview) {
     this.mostRecentReview = userReview;
   }
 
-  // Kvazi fake data len na skusku na init pre most recent comment
+  // TODO: Kvazi fake data len na skusku na init pre most recent comment
   getMostRecentFromProductList() {
-    if (this.productList) {
-      const mostRecentComment = this.productList[0].reviews[0].comment;
-      const mostRecentDate = this.productList[0].reviews[0].date;
-      this.mostRecentReview = new UserReview(mostRecentDate, mostRecentComment);
-    }
+    this.mostRecentReview = new UserReview('', '');
   }
 
   filteredProductList(filteredProductList: Product[]) {
@@ -66,5 +56,11 @@ export class ProductsComponent implements OnInit {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  refreshProductList() {
+    this.productService.getProductList().then((products) => {
+      this.viewList = products;
+    });
   }
 }
