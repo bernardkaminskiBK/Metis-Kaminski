@@ -8,7 +8,7 @@ import {UserService} from "../../../shared/services/UserService";
   templateUrl: './review.component.html',
   styleUrls: ['./review.component.scss']
 })
-export class ReviewComponent {
+export class ReviewComponent implements OnInit {
 
   @Input() inputProduct: Product;
   @Input() showReview: boolean;
@@ -20,6 +20,11 @@ export class ReviewComponent {
   @ViewChild('input') textArea: ElementRef;
 
   constructor(private userService: UserService) {
+
+  }
+
+  ngOnInit(): void {
+    this.listOfComments = this.inputProduct.reviews;
   }
 
   addComment() {
@@ -29,7 +34,6 @@ export class ReviewComponent {
 
       this.inputProduct.reviews = this.listOfComments;
       this.userService.createReview(this.textArea.nativeElement.value, this.inputProduct.id);
-
 
       this.textArea.nativeElement.value = '';
 
