@@ -72,8 +72,9 @@
         </div>
       </div>
 
-      <div *ngIf="product.reviews && product.reviews.length">
+      <div *ngIf="showReview">
         <app-review [inputProduct]="product"
+                    [showReview]="showAddComment"
                     (mostRecentReview)="getMostRecentData($event)"></app-review>
       </div>
 

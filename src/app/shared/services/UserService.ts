@@ -9,7 +9,7 @@ import {User} from "../../models/User";
 })
 export class UserService {
 
-  private static get jsonHttpOptions() {
+  static get jsonHttpOptions() {
     let headers = new HttpHeaders();
     headers = headers.set('Access-Control-Allow-Origin', '*');
     headers = headers.set('Content-Type', 'application/json');
@@ -29,7 +29,7 @@ export class UserService {
 
   get isAuthentication(): boolean {
     const user = localStorage.getItem('user');
-    if(user) {
+    if (user) {
       this.user = JSON.parse(user) as User;
     }
     return this.user ? true : false;
@@ -47,12 +47,27 @@ export class UserService {
           resolve(this.user);
         } else {
           reject();
-          this.snackBar.notification('Username or password is incorrect');
+          this.snackBar.notification(Constants.failedLoginMsg);
         }
       }).catch((error) => {
         reject();
         console.error(error);
-        this.snackBar.notification('Username or password is incorrect');
+        this.snackBar.notification(Constants.failedLoginMsg);
+      });
+    });
+  }
+
+  createReview(comment: string, productId: number): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      this.http.post(Constants.endpoints.user.createReview, {
+        productId: productId,
+        message: comment
+      }, UserService.jsonHttpOptions).toPromise().then(() => {
+        resolve();
+        this.snackBar.notification(Constants.successAddedCommentMsg);
+      }).catch(() => {
+        reject()
+        this.snackBar.notification(Constants.failedAddedCommentMsg);
       });
     });
   }

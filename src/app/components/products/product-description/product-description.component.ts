@@ -30,6 +30,8 @@ export class ProductDescriptionComponent implements DoCheck {
   @Input() showDetails: boolean = true;
   @Input() showEdit: boolean = true;
   @Input() showAddButton: boolean = true;
+  @Input() showReview: boolean = false;
+  @Input() showAddComment: boolean = false;
 
   @Output() mostRecentData: EventEmitter<UserReview> =
     new EventEmitter<UserReview>();

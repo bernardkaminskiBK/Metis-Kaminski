@@ -1,5 +1,6 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {MatSidenav} from "@angular/material/sidenav";
+import {Component} from '@angular/core';
+import {UserService} from "../../shared/services/UserService";
+import {NotificationService} from "../../shared/services/notification.service";
 
 @Component({
   selector: 'app-side-nav',
@@ -8,4 +9,12 @@ import {MatSidenav} from "@angular/material/sidenav";
 })
 export class SideNavComponent {
 
+  constructor(public userService: UserService, private notificationService: NotificationService) {
+  }
+
+  isAuth(): void {
+    if(!this.userService.isAuthentication) {
+      this.notificationService.notification('To check statistics you need to be logged as Admin.')
+    }
+  }
 }

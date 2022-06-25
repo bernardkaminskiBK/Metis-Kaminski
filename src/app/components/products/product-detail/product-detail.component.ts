@@ -15,6 +15,7 @@ export class ProductDetailComponent implements OnInit {
   urlName: string;
   hideAddButton: boolean = false;
   hideEdit: boolean = false;
+  hideAddComment: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,6 +37,7 @@ export class ProductDetailComponent implements OnInit {
 
     this.hideAddButton = !this.urlName.includes('/admin');
     this.hideEdit = !this.urlName.includes('/products')
+    this.hideAddComment = !this.urlName.includes('/admin')
   }
 
   goBack() {

@@ -1,27 +1,25 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {UserReview} from "../../../models/UserReview";
 import {Product} from "../../../models/Product";
-import {ProductService} from "../../../shared/services/product.service";
+import {UserService} from "../../../shared/services/UserService";
 
 @Component({
   selector: 'app-review',
   templateUrl: './review.component.html',
   styleUrls: ['./review.component.scss']
 })
-export class ReviewComponent implements OnInit {
+export class ReviewComponent {
 
   @Input() inputProduct: Product;
+  @Input() showReview: boolean;
+
   @Output() mostRecentReview: EventEmitter<UserReview> = new EventEmitter<UserReview>();
 
   listOfComments: string[] = [];
 
   @ViewChild('input') textArea: ElementRef;
 
-  constructor(private productService: ProductService) {
-  }
-
-  ngOnInit(): void {
-    this.listOfComments = this.inputProduct.reviews;
+  constructor(private userService: UserService) {
   }
 
   addComment() {
@@ -30,7 +28,8 @@ export class ReviewComponent implements OnInit {
       this.listOfComments.push(this.textArea.nativeElement.value);
 
       this.inputProduct.reviews = this.listOfComments;
-      this.productService.updateProduct(this.inputProduct).then(() => {}).catch(() => {});
+      this.userService.createReview(this.textArea.nativeElement.value, this.inputProduct.id);
+
 
       this.textArea.nativeElement.value = '';
 

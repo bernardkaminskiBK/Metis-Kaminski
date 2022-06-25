@@ -9,7 +9,7 @@
     </li>
   </ul>
 
-  <div *ngIf="inputProduct.editPermission">
+  <div *ngIf="showReview">
     <textarea #input placeholder="Add your comment here..." class="textarea-wrapper"></textarea>
     <button (click)="addComment()" class="button-28">Submit</button>
   </div>

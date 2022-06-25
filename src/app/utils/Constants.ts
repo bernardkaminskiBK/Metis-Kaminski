@@ -10,7 +10,7 @@ export class Constants {
       getById: 'v1/lessons/product/GetProductById',
       createProduct: 'v1/lessons/product/CreateProduct',
       updateProduct: 'v1/lessons/product/UpdateProduct',
-      deleteProduct: 'v1/lessons/product/RemoveProduct'
+      deleteProduct: 'v1/lessons/product/RemoveProduct',
     },
     productsAuth: {
       list: 'v1/auth/lessons/product/GetProducts',
@@ -21,6 +21,7 @@ export class Constants {
     },
     user: {
       login: 'https://angularkurz.itcooking.eu/api/user/authenticate',
+      createReview: 'https://angularkurz.itcooking.eu/api/v1/lessons/product/CreateReview',
       logout: 'user/logout'
     }
   };
@@ -33,5 +34,10 @@ export class Constants {
 
   public static deleteProductSuccessMsg = 'Your product was successfully deleted from the list of products.';
   public static deleteProductFailureMsg = 'Something went wrong, your product was not deleted from the product list.';
+
+  public static failedLoginMsg = 'Username or password is incorrect';
+
+  public static successAddedCommentMsg = 'Your comment was successfully added.';
+  public static failedAddedCommentMsg = 'Oops something went wrong...';
 
 }
