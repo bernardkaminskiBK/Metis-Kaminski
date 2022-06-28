@@ -9,15 +9,6 @@ import {User} from "../../models/User";
 })
 export class UserService {
 
-  static get jsonHttpOptions() {
-    let headers = new HttpHeaders();
-    headers = headers.set('Access-Control-Allow-Origin', '*');
-    headers = headers.set('Content-Type', 'application/json');
-    headers = headers.set('X-Requested-With', 'XMLHttpRequest');
-
-    return {headers: headers};
-  }
-
   private user: User | undefined;
 
   constructor(private http: HttpClient, private snackBar: NotificationService) {
@@ -41,7 +32,7 @@ export class UserService {
       this.http.post(endpoint, {
         username: username,
         password: password
-      }, UserService.jsonHttpOptions).toPromise().then((result) => {
+      }).toPromise().then((result) => {
         if (result) {
           this.user = new User(result);
           resolve(this.user);
@@ -62,7 +53,7 @@ export class UserService {
       this.http.post(Constants.endpoints.user.createReview, {
         productId: productId,
         message: comment
-      }, UserService.jsonHttpOptions).toPromise().then(() => {
+      }).toPromise().then(() => {
         resolve();
         this.snackBar.notification(Constants.successAddedCommentMsg);
       }).catch(() => {

@@ -37,7 +37,7 @@ const components = [
     ReactiveFormsModule
   ],
   declarations: [
-    components
+    ...components
   ],
   exports: [
     FormatTimePipe,

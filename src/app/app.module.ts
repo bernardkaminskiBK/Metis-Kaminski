@@ -16,12 +16,19 @@ import {ShoppingCartBadgeComponent} from './components/shopping-cart-badge/shopp
 import {AboutDialogComponent} from './shared/modal-dialogs/about-dialog/about-dialog.component';
 import {CountDownTimerComponent} from './components/count-down-timer/count-down-timer.component';
 import {ProductsModule} from "./components/products/products.module";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {HeaderInterceptor} from "./shared/interceptors/header.interceptor";
+import {AuthenticateInterceptor} from "./shared/interceptors/authenticate.interceptor";
+
+const interceptorProviders = [
+  {provide: HTTP_INTERCEPTORS, useClass: AuthenticateInterceptor, multi: true},
+  {provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true}
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents,
+    ...routingComponents,
     HeaderComponent,
     FooterComponent,
     SideNavComponent,
@@ -40,7 +47,7 @@ import {HttpClientModule} from "@angular/common/http";
     ProductsModule,
     HttpClientModule
   ],
-  providers: [SnackBarService],
+  providers: [SnackBarService, ... interceptorProviders],
   bootstrap: [AppComponent],
   exports: []
 })

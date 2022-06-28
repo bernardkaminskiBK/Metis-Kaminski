@@ -8,43 +8,31 @@ import {UserService} from "./UserService";
   providedIn: 'root'
 })
 export class ApiService {
-  private get jsonHttpOptions() {
-    let headers = new HttpHeaders();
-    headers = headers.set('Access-Control-Allow-Origin', '*');
-    headers = headers.set('Content-Type', 'application/json');
-    headers = headers.set('X-Requested-With', 'XMLHttpRequest');
-
-    if (this.userService.isAuthentication) {
-      headers = headers.set('Authorization', 'Basic ' + this.userService.getUser()!.token);
-    }
-
-    return {headers: headers};
-  }
 
   constructor(private http: HttpClient, private userService: UserService) {
   }
 
   get(endpoint: string, param?: any): Observable<any> {
-    return this.http.get(this.createUrl(endpoint, param), this.jsonHttpOptions)
+    return this.http.get(this.createUrl(endpoint, param))
       .pipe(catchError(this.handleError));
   }
 
   post(endpoint: string, data): Observable<any> {
-    return this.http.post(this.createUrl(endpoint), data, this.jsonHttpOptions)
+    return this.http.post(this.createUrl(endpoint), data)
       .pipe(
         catchError(this.handleError)
       )
   }
 
   put(endpoint: string, id: any, data) {
-    return this.http.put(this.createUrl(endpoint, {id: id}), data, this.jsonHttpOptions)
+    return this.http.put(this.createUrl(endpoint, {id: id}), data)
       .pipe(
         catchError(this.handleError)
       )
   }
 
   delete(endpoint: string, id: any) {
-    return this.http.delete(this.createUrl(endpoint, {id: id}), this.jsonHttpOptions)
+    return this.http.delete(this.createUrl(endpoint, {id: id}))
       .pipe(
         catchError(this.handleError)
       )

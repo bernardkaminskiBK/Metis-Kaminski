@@ -54,10 +54,6 @@ export class ProductDescriptionComponent implements DoCheck {
   ) {
   }
 
-  ngOnInit(): void {
-
-  }
-
   ngDoCheck() {
     if (this.main && this.main.nativeElement) {
       if (this.offSetTopProduct !== this.main.nativeElement.offsetTop) {
