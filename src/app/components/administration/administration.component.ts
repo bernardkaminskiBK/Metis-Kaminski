@@ -29,14 +29,7 @@ export class AdministrationComponent implements OnInit, DoCheck {
   }
 
   ngOnInit(): void {
-    if (this.userService.isAuthentication) {
-      this.router.navigateByUrl('admin');
-
-      this.getProductList();
-
-    } else {
-      this.router.navigateByUrl('login');
-    }
+    this.getProductList();
   }
 
   getProductList(): void {
@@ -51,13 +44,6 @@ export class AdministrationComponent implements OnInit, DoCheck {
   //  to prosim ta stale, kym nevymislim nieco lepsie...
   ngDoCheck(): void {
     this.setLayoutTitle();
-  }
-
-  logout(): void {
-    if (confirm('Are you sure you want to logout ?')) {
-      this.userService.logout();
-      this.router.navigateByUrl('login');
-    }
   }
 
   setLayoutTitle(): void {

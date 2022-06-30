@@ -7,10 +7,6 @@ export class User {
   token: string;
   role: string;
 
-  get name(): string {
-    return this.firstName + ' ' + this.lastName;
-  }
-
   constructor(json?: any) {
     if(json) {
       this.id = json.id;
@@ -21,5 +17,9 @@ export class User {
       this.token = json.token;
       this.role = json.role;
     }
+  }
+
+  get name(): string {
+    return this.firstName + ' ' + this.lastName;
   }
 }

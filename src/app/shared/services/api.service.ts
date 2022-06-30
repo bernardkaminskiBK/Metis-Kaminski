@@ -1,15 +1,14 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {catchError, Observable, throwError} from "rxjs";
 import {Constants} from "../../utils/Constants";
-import {UserService} from "./UserService";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  constructor(private http: HttpClient, private userService: UserService) {
+  constructor(private http: HttpClient) {
   }
 
   get(endpoint: string, param?: any): Observable<any> {

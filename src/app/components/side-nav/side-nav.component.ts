@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {UserService} from "../../shared/services/UserService";
 import {NotificationService} from "../../shared/services/notification.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-side-nav',
@@ -9,12 +10,15 @@ import {NotificationService} from "../../shared/services/notification.service";
 })
 export class SideNavComponent {
 
-  constructor(public userService: UserService, private notificationService: NotificationService) {
+  constructor(public userService: UserService, private notificationService: NotificationService, private router: Router) {
   }
 
-  isAuth(): void {
-    if(!this.userService.isAuthentication) {
-      this.notificationService.notification('To check statistics you need to be logged as Admin.')
+  logout(): void {
+    if (this.userService.isAuthentication) {
+      if (confirm('Are you sure you want to logout ?')) {
+        this.userService.logout();
+        this.router.navigateByUrl('login');
+      }
     }
   }
 }

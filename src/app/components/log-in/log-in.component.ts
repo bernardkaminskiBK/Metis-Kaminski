@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserService} from "../../shared/services/UserService";
 import {MatCheckboxChange} from "@angular/material/checkbox";
@@ -9,7 +9,7 @@ import {User} from "../../models/User";
   templateUrl: './log-in.component.html',
   styleUrls: ['./log-in.component.scss']
 })
-export class LogInComponent implements OnInit {
+export class LogInComponent {
 
   username: string = '';
   password: string = '';
@@ -18,14 +18,6 @@ export class LogInComponent implements OnInit {
 
   constructor(private router: Router, private userService: UserService) {
 
-  }
-
-  ngOnInit(): void {
-    if (this.userService.isAuthentication) {
-      this.router.navigateByUrl('admin');
-    } else {
-      this.router.navigateByUrl('login');
-    }
   }
 
   login(): void {

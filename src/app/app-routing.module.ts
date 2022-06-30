@@ -6,6 +6,7 @@ import {PageNotFoundComponent} from './components/page-not-found/page-not-found.
 import {ProfilComponent} from './components/profil/profil.component';
 import {ShoppingCartComponent} from './components/shopping-cart/shopping-cart.component';
 import {LogInComponent} from "./components/log-in/log-in.component";
+import {AuthGuard} from "./shared/guards/auth.guard";
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import('./components/administration/administration.module').then((m) => m.AdministrationModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'products',
@@ -23,6 +25,7 @@ const routes: Routes = [
   {
     path: 'statistics',
     loadChildren: () => import('./components/statistics/statistics.module').then((m) => m.StatisticsModule),
+    canActivate: [AuthGuard]
   },
   {path: 'shopping-cart', component: ShoppingCartComponent},
   {path: '404notFound', component: PageNotFoundComponent},
