@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule, routingComponents} from './app-routing.module';
@@ -19,6 +19,18 @@ import {ProductsModule} from "./components/products/products.module";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {HeaderInterceptor} from "./shared/interceptors/header.interceptor";
 import {AuthenticateInterceptor} from "./shared/interceptors/authenticate.interceptor";
+
+import localeSk from '@angular/common/locales/sk';
+import localeHu from '@angular/common/locales/hu';
+import localeDe from '@angular/common/locales/de';
+import localeEn from '@angular/common/locales/en';
+import {registerLocaleData} from "@angular/common";
+import {I18nModule} from "./shared/i18n/i18n.module";
+
+registerLocaleData(localeSk);
+registerLocaleData(localeHu);
+registerLocaleData(localeDe);
+registerLocaleData(localeEn);
 
 const interceptorProviders = [
   {provide: HTTP_INTERCEPTORS, useClass: AuthenticateInterceptor, multi: true},
@@ -45,9 +57,14 @@ const interceptorProviders = [
     FormsModule,
     MaterialModule,
     ProductsModule,
-    HttpClientModule
+    HttpClientModule,
+    I18nModule
   ],
-  providers: [SnackBarService, ... interceptorProviders],
+  providers: [
+    SnackBarService,
+    {provide: LOCALE_ID, useValue: 'sk-SK'},
+    ...interceptorProviders
+  ],
   bootstrap: [AppComponent],
   exports: []
 })

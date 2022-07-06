@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {UserService} from "../../shared/services/UserService";
 import {MatCheckboxChange} from "@angular/material/checkbox";
 import {User} from "../../models/User";
+import {StorageService} from "../../shared/services/storage.service";
 
 @Component({
   selector: 'app-log-in',
@@ -16,8 +17,11 @@ export class LogInComponent {
 
   isChecked = false;
 
-  constructor(private router: Router, private userService: UserService) {
-
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private storageService: StorageService
+  ) {
   }
 
   login(): void {
@@ -38,6 +42,6 @@ export class LogInComponent {
   }
 
   private rememberMe(user: User) {
-    localStorage.setItem('user', JSON.stringify(user));
+    this.storageService.saveUser(user);
   }
 }

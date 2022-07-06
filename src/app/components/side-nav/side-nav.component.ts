@@ -10,15 +10,20 @@ import {Router} from "@angular/router";
 })
 export class SideNavComponent {
 
-  constructor(public userService: UserService, private notificationService: NotificationService, private router: Router) {
+  constructor(
+    public userService: UserService,
+    private notificationService: NotificationService,
+    private router: Router) {
   }
 
   logout(): void {
     if (this.userService.isAuthentication) {
-      if (confirm('Are you sure you want to logout ?')) {
+      if (confirm('Are you sure you want to logout?')) {
         this.userService.logout();
         this.router.navigateByUrl('login');
       }
+    } else {
+      this.notificationService.notification('You are already logged out.')
     }
   }
 }

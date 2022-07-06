@@ -1,4 +1,4 @@
-import {Component, DoCheck, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../shared/services/UserService";
 import {Router} from "@angular/router";
 import {ProductService} from "../../shared/services/product.service";
@@ -8,28 +8,31 @@ import {
   AddEditProductDialogComponent
 } from "../../shared/modal-dialogs/add-edit-product-dialog/add-edit-product-dialog.component";
 import {ProductFormService} from "../../shared/services/productForm.service";
+import {StorageService} from "../../shared/services/storage.service";
 
 @Component({
   selector: 'app-administration',
   templateUrl: './administration.component.html',
   styleUrls: ['./administration.component.scss']
 })
-export class AdministrationComponent implements OnInit, DoCheck {
+export class AdministrationComponent implements OnInit {
 
   viewList: Product[];
-  userName: string = '';
+  userName: string | undefined = '';
 
   constructor(
     private productService: ProductService,
     private userService: UserService,
     private router: Router,
     private productFormService: ProductFormService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private storageService: StorageService
   ) {
   }
 
   ngOnInit(): void {
     this.getProductList();
+    this.setLayoutTitle();
   }
 
   getProductList(): void {
@@ -40,16 +43,8 @@ export class AdministrationComponent implements OnInit, DoCheck {
     });
   }
 
-  // TODO: Nie je to najlepsi sposob ale mala operacia, tak som si povedal ze checkuj
-  //  to prosim ta stale, kym nevymislim nieco lepsie...
-  ngDoCheck(): void {
-    this.setLayoutTitle();
-  }
-
   setLayoutTitle(): void {
-    if (this.userService.getUser()) {
-      this.userName = this.userService.getUser()!.firstName
-    }
+    this.userName = this.storageService.loadUser()?.firstName;
   }
 
   addProductDialog(): void {

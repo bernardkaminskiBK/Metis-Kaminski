@@ -121,14 +121,9 @@ export class ProductFormService {
 
   saveProduct(): void {
     if (this.addEdit) {
-      this.productService.addNewProduct(this.addEditProduct()).then((result) => {
-
-      }).catch(() => {
-      });
+      this.productService.addNewProduct(this.addEditProduct()).catch(() => {});
     } else {
-      this.productService.updateProduct(this.addEditProduct()).then(() => {
-      }).catch(() => {
-      });
+      this.productService.updateProduct(this.addEditProduct()).catch(() => {});
     }
   }
 

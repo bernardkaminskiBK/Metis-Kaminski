@@ -1,8 +1,9 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Constants} from "../../utils/Constants";
 import {NotificationService} from "./notification.service";
 import {User} from "../../models/User";
+import {StorageService} from "./storage.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,11 @@ export class UserService {
 
   private user: User | undefined;
 
-  constructor(private http: HttpClient, private snackBar: NotificationService) {
+  constructor(
+    private http: HttpClient,
+    private snackBar: NotificationService,
+    private storageService: StorageService
+  ) {
   }
 
   getUser(): User | undefined {
@@ -19,10 +24,7 @@ export class UserService {
   }
 
   get isAuthentication(): boolean {
-    const user = localStorage.getItem('user');
-    if (user) {
-      this.user = JSON.parse(user) as User;
-    }
+    this.user = this.storageService.loadUser();
     return this.user ? true : false;
   }
 

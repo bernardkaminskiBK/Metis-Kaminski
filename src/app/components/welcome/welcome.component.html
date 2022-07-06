@@ -1,3 +1,8 @@
-<div class="center">
-  <h1>welcome works!</h1>
+<div class="content">
+  <div class="buttons">
+    <button *ngFor="let lang of supportedLanguage" (click)="changeLanguage(lang)">{{lang}}</button>
+  </div>
+  <div class="title">
+    <h1>{{'welcome_message' | i18n: loggedUserName}}</h1>
+  </div>
 </div>

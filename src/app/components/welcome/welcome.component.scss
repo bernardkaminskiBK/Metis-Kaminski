@@ -1,9 +1,22 @@
 @import './src/styles';
 
-.center {
-  @extend %center-content;
+.content {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.center h1 {
-  align-self: center;
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  margin-right: 5px;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
 }
