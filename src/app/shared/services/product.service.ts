@@ -20,8 +20,8 @@ export class ProductService {
         resolve(result);
         this.snackBar.notification(Constants.addProductSuccessMsg);
       }).catch(() => {
-        this.snackBar.notification(Constants.addProductFailureMsg);
         reject();
+        this.snackBar.notification(Constants.addProductFailureMsg);
       });
     });
   }
@@ -29,8 +29,8 @@ export class ProductService {
   deleteProduct(product: Product): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       this.apiService.delete(Constants.endpoints.productsAuth.deleteProduct, product.id).toPromise().then(() => {
-        resolve();
         this.snackBar.notification(Constants.deleteProductSuccessMsg);
+        resolve();
       }).catch(() => {
         this.snackBar.notification(Constants.deleteProductFailureMsg);
         reject();
@@ -41,8 +41,8 @@ export class ProductService {
   updateProduct(product: Product): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       this.apiService.put(Constants.endpoints.productsAuth.updateProduct, product.id, product).toPromise().then(() => {
-        resolve();
         this.snackBar.notification(Constants.updateProductSuccessMsg);
+        resolve();
       }).catch(() => {
         this.snackBar.notification(Constants.updateProductFailureMsg);
         reject();

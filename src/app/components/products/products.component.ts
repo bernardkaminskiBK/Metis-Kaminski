@@ -13,6 +13,7 @@ export class ProductsComponent implements OnInit {
   checkBoxState: boolean;
 
   viewList: Product[];
+  fullList: Product[];
   sortBy = Constants.AZ;
 
   mostRecentReview: UserReview;
@@ -27,6 +28,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.productService.getProductList().then((products) => {
       this.viewList = products;
+      this.fullList = products;
       this.getMostRecentFromProductList();
     });
   }

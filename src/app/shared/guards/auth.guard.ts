@@ -17,7 +17,6 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    // prihlasovacie udaje na user je simpleUser heslo
     if (this.userService.isAuthentication && this.userService.getUser()?.role === 'user') {
       this.router.navigateByUrl('products');
 

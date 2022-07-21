@@ -129,12 +129,8 @@
 </div>
 
 <div mat-dialog-action [align]="'end'">
-  <button *ngIf="productFormService.addEdit" [disabled]="!productFormService.productGroup.valid" mat-button
-          mat-dialog-close (click)="addProduct()">Add
-  </button>
-  <button *ngIf="!productFormService.addEdit" [disabled]="!productFormService.productGroup.valid" mat-button
-          mat-dialog-close (click)="editProduct()">Edit
-  </button>
+  <button *ngIf="productFormService.addEdit" [disabled]="!productFormService.productGroup.valid" mat-button (click)="addProduct()">Add</button>
+  <button *ngIf="!productFormService.addEdit" [disabled]="!productFormService.productGroup.valid" mat-button (click)="editProduct()">Edit</button>
   <button mat-button (click)="onClear()">Clear</button>
-  <button mat-button (click)="onClose()" mat-dialog-close>Close</button>
+  <button mat-button (click)="onClose()" [disabled]="loaderService.isLoading | async" mat-dialog-close>Close</button>
 </div>

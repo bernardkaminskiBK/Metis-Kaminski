@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductService} from "../../services/product.service";
 import {ProductFormService} from "../../services/productForm.service";
+import {MatDialog} from "@angular/material/dialog";
+import {LoaderService} from "../../services/loader.service";
 
 @Component({
   selector: 'app-add-product-dialog',
@@ -13,7 +15,9 @@ export class AddEditProductDialogComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    public productFormService: ProductFormService
+    public productFormService: ProductFormService,
+    private dialog: MatDialog,
+    public loaderService: LoaderService
   ) {
   }
 
@@ -23,13 +27,17 @@ export class AddEditProductDialogComponent implements OnInit {
   }
 
   addProduct(): void {
-    this.productFormService.saveProduct();
-    this.onClose();
+    this.loaderService.isLoading.next(true);
+    this.productFormService.saveProduct().then(() => {
+      this.onClose();
+    });
   }
 
   editProduct() {
-    this.productFormService.saveProduct();
-    this.onClose();
+    this.loaderService.isLoading.next(true);
+    this.productFormService.saveProduct().then(() => {
+      this.onClose();
+    });
   }
 
   onClear(): void {
@@ -38,6 +46,8 @@ export class AddEditProductDialogComponent implements OnInit {
 
   onClose(): void {
     this.productFormService.resetAllFormGroups(0);
+    this.dialog.closeAll();
+    this.loaderService.isLoading.next(false);
   }
 
 }

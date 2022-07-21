@@ -119,12 +119,22 @@ export class ProductFormService {
     return product;
   }
 
-  saveProduct(): void {
-    if (this.addEdit) {
-      this.productService.addNewProduct(this.addEditProduct()).catch(() => {});
-    } else {
-      this.productService.updateProduct(this.addEditProduct()).catch(() => {});
-    }
+  saveProduct(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      if (this.addEdit) {
+        this.productService.addNewProduct(this.addEditProduct()).then(() => {
+          resolve();
+        }).catch(() => {
+          reject();
+        });
+      } else {
+        this.productService.updateProduct(this.addEditProduct()).then(() => {
+          resolve();
+        }).catch(() => {
+          reject();
+        });
+      }
+    })
   }
 
   private getVendorsFromFormArray(stockCount): Vendor[] {
@@ -133,7 +143,7 @@ export class ProductFormService {
 
     vendorsRawValue.vendors.forEach((vendorName) => {
       if (vendorName && vendorName.length > 0) {
-        let vendor = new Vendor();
+        const vendor = new Vendor();
         vendor.name = vendorName;
         vendor.stockCount = stockCount;
 
@@ -146,7 +156,7 @@ export class ProductFormService {
 
   private getReviewsFromFormArray(): string[] {
     const reviewsRawValue = this.reviewGroup.getRawValue();
-    let reviewList: string[] = [];
+    const reviewList: string[] = [];
 
     reviewsRawValue.reviews.forEach((reviewItem) => {
       if (reviewItem && reviewItem.length > 0) {

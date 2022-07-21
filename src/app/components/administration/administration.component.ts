@@ -36,11 +36,11 @@ export class AdministrationComponent implements OnInit {
   }
 
   getProductList(): void {
-    this.productService.getProductList(this.userService.isAuthentication).then((products) => {
-      this.viewList = products;
+      this.productService.getProductList(this.userService.isAuthentication).then((products) => {
+        this.viewList = products;
 
-    }).catch(() => {
-    });
+      }).catch(() => {
+      });
   }
 
   setLayoutTitle(): void {

@@ -1,6 +1,7 @@
 <div class="center">
   <div class="flex-container">
     <app-app-filter
+      [dataList]="fullList"
       [isCheckBoxChecked]="checkBoxState"
       (filteredList)="filteredProductList($event)">
     </app-app-filter>

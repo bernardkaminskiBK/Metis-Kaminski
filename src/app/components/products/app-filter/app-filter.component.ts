@@ -3,40 +3,31 @@ import {
   ElementRef,
   EventEmitter,
   Input,
-  OnChanges, OnInit,
+  OnChanges,
   Output,
   ViewChild,
 } from '@angular/core';
-import { ProductService } from '../../../shared/services/product.service';
-import { Product } from '../../../models/Product';
+import {Product} from '../../../models/Product';
 
 @Component({
   selector: 'app-app-filter',
   templateUrl: './app-filter.component.html',
   styleUrls: ['./app-filter.component.scss'],
 })
-export class AppFilterComponent implements OnInit, OnChanges {
+export class AppFilterComponent implements OnChanges {
   searchInputText: string = '';
 
   @ViewChild('input') search: ElementRef;
 
   @Input('isCheckBoxChecked') isCheckBoxChecked: boolean;
+  @Input('dataList') array: Product[];
   @Output('filteredList') filteredData: EventEmitter<Product[]> =
     new EventEmitter<Product[]>();
 
-  constructor(private productService: ProductService) {}
-
-  private array: Product[];
   private subscription: any;
 
-  ngOnInit(): void {
-    this.productService.getProductList().then((products) => {
-      this.array = products;
-    });
-  }
-
   ngOnChanges() {
-    if(this.array) {
+    if (this.array) {
       this.filter();
     }
   }
