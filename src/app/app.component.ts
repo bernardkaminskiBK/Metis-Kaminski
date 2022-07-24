@@ -14,7 +14,6 @@ export class AppComponent implements OnInit {
 
   }
 
-
   ngOnInit(): void {
     // Rekurzivne volania priklad
     // const stock = new Stock();

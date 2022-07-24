@@ -27,14 +27,12 @@ export class AddEditProductDialogComponent implements OnInit {
   }
 
   addProduct(): void {
-    this.loaderService.isLoading.next(true);
     this.productFormService.saveProduct().then(() => {
       this.onClose();
     });
   }
 
   editProduct() {
-    this.loaderService.isLoading.next(true);
     this.productFormService.saveProduct().then(() => {
       this.onClose();
     });
@@ -47,7 +45,6 @@ export class AddEditProductDialogComponent implements OnInit {
   onClose(): void {
     this.productFormService.resetAllFormGroups(0);
     this.dialog.closeAll();
-    this.loaderService.isLoading.next(false);
   }
 
 }
