@@ -1,5 +1,10 @@
 <div class="center">
   <div class="main-product" *ngIf="product">
+
+    <div *ngIf="myGallery">
+      <app-unite-gallery [gallery]="myGallery"></app-unite-gallery>
+    </div>
+
     <app-product-description
       [Product]="product"
       [showDelete]="false"
@@ -8,6 +13,7 @@
       [showReview]="true"
       [showAddComment]="hideAddComment"
       [showAddButton]="hideAddButton">
+
       <span productName>{{ product.name }}</span>
 
       <ng-container category>

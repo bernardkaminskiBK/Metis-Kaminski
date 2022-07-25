@@ -35,9 +35,14 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "./src/app/shared/unitegallery/assets/unite-gallery.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./src/app/shared/unitegallery/assets/jquery-11.0.min.js",
+              "./src/app/shared/unitegallery/assets/unitegallery.min.js",
+              "./src/app/shared/unitegallery/themes/slider/ug-theme-slider.js"
+            ]
           },
           "configurations": {
             "production": {

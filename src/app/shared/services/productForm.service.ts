@@ -139,7 +139,7 @@ export class ProductFormService {
 
   private getVendorsFromFormArray(stockCount): Vendor[] {
     const vendorsRawValue = this.vendorGroup.getRawValue();
-    let vendorList: Vendor[] = [];
+    const vendorList: Vendor[] = [];
 
     vendorsRawValue.vendors.forEach((vendorName) => {
       if (vendorName && vendorName.length > 0) {

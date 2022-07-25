@@ -15,7 +15,7 @@ import {
 } from '../../shared/modal-dialogs/add-edit-product-dialog/add-edit-product-dialog.component';
 import {FormatTimePipe} from "../../shared/pipes/formatTime.pipe";
 import {ProductFormService} from "../../shared/services/productForm.service";
-import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {UniteGalleryModule} from "../../shared/unitegallery/uniteGallery.module";
 
 const components = [
   ProductsComponent,
@@ -30,13 +30,14 @@ const components = [
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        ProductsRoutingModule,
-        MaterialModule,
-        ReactiveFormsModule
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ProductsRoutingModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    UniteGalleryModule
+  ],
   declarations: [
     ...components
   ],
