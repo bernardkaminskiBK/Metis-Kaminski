@@ -1,8 +1,8 @@
 <div class="center">
   <div class="main-product" *ngIf="product">
 
-    <div *ngIf="myGallery">
-      <app-unite-gallery [gallery]="myGallery"></app-unite-gallery>
+    <div *ngIf="product.images">
+      <app-gallery [data]="product"></app-gallery>
     </div>
 
     <app-product-description

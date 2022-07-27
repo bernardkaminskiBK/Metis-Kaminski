@@ -1,4 +1,5 @@
 import {Vendor} from "./Vendor";
+import {Image} from "./Image";
 
 export class Product {
   id: number = 0;
@@ -17,6 +18,7 @@ export class Product {
   ownerUsername: string = '';
   vendors: Vendor [];
   reviews: string [];
+  images: Image [];
 
   img_url: string = '';
   display: number = 0;

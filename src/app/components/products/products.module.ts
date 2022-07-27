@@ -16,6 +16,7 @@ import {
 import {FormatTimePipe} from "../../shared/pipes/formatTime.pipe";
 import {ProductFormService} from "../../shared/services/productForm.service";
 import {UniteGalleryModule} from "../../shared/unitegallery/uniteGallery.module";
+import { GalleryComponent } from './gallery/gallery.component';
 
 const components = [
   ProductsComponent,
@@ -25,6 +26,7 @@ const components = [
   AppFilterOptionsComponent,
   ReviewComponent,
   AddEditProductDialogComponent,
+  GalleryComponent,
   SortPipe,
   FormatTimePipe
 ];

@@ -1,7 +1,7 @@
 @import './src/styles';
 
 h1, h2 {
-color: $main-primary-color;
+  color: $main-primary-color;
 }
 
 h1 {
@@ -64,7 +64,7 @@ hr {
   margin-top: 50px;
   border-radius: $border-radius-size;
   width: 600px;
-  background-color:white;
+  background-color: white;
   @include bordered(2px, $main-primary-color);
   position: relative;
   padding: 25px;
@@ -101,11 +101,13 @@ hr {
     width: 280px;
   }
 }
+
 .center {
   display: grid;
   justify-content: center;
   align-items: center;
 }
+
 .button-28 {
   @include button-submit($border-radius-size, 12px, 30px, 13px, 24px);
   @include bordered(2px, $main-primary-color);
