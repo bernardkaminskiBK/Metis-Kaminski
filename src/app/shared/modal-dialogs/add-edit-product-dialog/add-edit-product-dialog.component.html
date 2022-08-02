@@ -119,6 +119,28 @@
       </div>
     </form>
 
+    <form *ngIf="productFormService.imageUrlGroup" id="imageUrlForm" [formGroup]="productFormService.imageUrlGroup">
+      <h1 mat-dialog-title>Add Image URLs</h1>
+      <div class="container" formArrayName="images">
+        <div class="input-row"
+             *ngFor="let item of productFormService.imageUrlArray().controls;last as isLast, let index=index">
+          <mat-form-field>
+            <mat-label>Image Url</mat-label>
+            <input matInput formControlName="{{index}}">
+          </mat-form-field>
+          <button mat-icon-button color="warn"
+                  (click)="productFormService.removeFromFormArray(productFormService.imageUrlArray(), index)"
+                  *ngIf="productFormService.imageUrlArray().length  > 1">
+            <mat-icon>remove_circle</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" *ngIf="isLast"
+                  (click)="productFormService.addToFormArray(productFormService.imageUrlArray())">
+            <mat-icon>add_circle</mat-icon>
+          </button>
+        </div>
+      </div>
+    </form>
+
     <h1 mat-dialog-title>Description</h1>
     <mat-form-field appearance="outline">
       <mat-label>Description</mat-label>

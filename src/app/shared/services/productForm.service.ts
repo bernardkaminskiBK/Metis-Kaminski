@@ -4,6 +4,7 @@ import {ValidateSoldQuantity} from "../../utils/CustomValidator";
 import {ProductService} from "./product.service";
 import {Product} from "../../models/Product";
 import {Vendor} from "../../models/Vendor";
+import {Image} from "../../models/Image";
 import Utils from "../../utils/Utils";
 
 @Injectable()
@@ -29,6 +30,10 @@ export class ProductFormService {
     vendors: new FormArray([])
   });
 
+  imageUrlGroup = new FormGroup({
+    images: new FormArray([])
+  });
+
   addEdit: boolean = true;
   private product: Product;
 
@@ -38,6 +43,7 @@ export class ProductFormService {
   initFormArrays() {
     this.addToFormArray(this.reviewArray());
     this.addToFormArray(this.vendorArray());
+    this.addToFormArray(this.imageUrlArray());
   }
 
   reviewArray(): FormArray {
@@ -46,6 +52,10 @@ export class ProductFormService {
 
   vendorArray(): FormArray {
     return this.vendorGroup.get('vendors') as FormArray;
+  }
+
+  imageUrlArray(): FormArray {
+    return this.imageUrlGroup.get('images') as FormArray;
   }
 
   addToFormArray(formArray: FormArray): void {
@@ -83,6 +93,12 @@ export class ProductFormService {
       });
     }
 
+    if (product.images && product.images.length) {
+      product.images.forEach((image) => {
+        this.imageUrlArray().push(new FormControl(image.url))
+      });
+    }
+
     this.productGroup.markAllAsTouched();
     this.productGroup.updateValueAndValidity();
   }
@@ -103,6 +119,7 @@ export class ProductFormService {
       product.description = rawValue.description;
       product.vendors = this.getVendorsFromFormArray(rawValue.stockCount);
       product.reviews = this.getReviewsFromFormArray();
+      product.images = this.getImageUrlFromFormArray();
     } else {
       product = this.product
       product.name = rawValue.productName;
@@ -114,6 +131,7 @@ export class ProductFormService {
       product.description = rawValue.description;
       product.vendors = this.getVendorsFromFormArray(rawValue.stockCount);
       product.reviews = this.getReviewsFromFormArray();
+      product.images = this.getImageUrlFromFormArray();
     }
 
     return product;
@@ -166,13 +184,31 @@ export class ProductFormService {
     return reviewList;
   }
 
+  private getImageUrlFromFormArray(): Image[] {
+    const imgUrlRawValue = this.imageUrlGroup.getRawValue();
+    const imageUrlList: Image[] = [];
+
+    imgUrlRawValue.images.forEach((imgUrl) => {
+      if (imgUrl && imgUrl.length > 0) {
+        const image = new Image();
+        image.url = imgUrl;
+
+        imageUrlList.push(image);
+      }
+
+    });
+    return imageUrlList;
+  }
+
   resetAllFormGroups(startPosition: number): void {
     this.productGroup.reset();
     this.vendorGroup.reset();
     this.reviewGroup.reset();
+    this.imageUrlGroup.reset();
 
     this.vendorArray().controls.splice(startPosition, this.vendorArray().controls.length);
     this.reviewArray().controls.splice(startPosition, this.reviewArray().controls.length);
+    this.imageUrlArray().controls.splice(startPosition, this.imageUrlArray().controls.length);
   }
 
 }
