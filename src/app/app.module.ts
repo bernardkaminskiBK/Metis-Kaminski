@@ -26,6 +26,7 @@ import localeDe from '@angular/common/locales/de';
 import localeEn from '@angular/common/locales/en';
 import {registerLocaleData} from "@angular/common";
 import {I18nModule} from "./shared/i18n/i18n.module";
+import {LoaderInterceptor} from "./shared/interceptors/Loader.interceptor";
 
 registerLocaleData(localeSk);
 registerLocaleData(localeHu);
@@ -34,7 +35,8 @@ registerLocaleData(localeEn);
 
 const interceptorProviders = [
   {provide: HTTP_INTERCEPTORS, useClass: AuthenticateInterceptor, multi: true},
-  {provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true}
+  {provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true},
+  {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true},
 ];
 
 @NgModule({
