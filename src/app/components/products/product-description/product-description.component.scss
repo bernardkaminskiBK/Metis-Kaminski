@@ -130,6 +130,7 @@ h2 {
   display: grid;
   justify-content: center;
   align-items: center;
+  margin-top: 40px
 }
 
 .details-button {
@@ -203,10 +204,10 @@ hr {
 
 @media(max-width: 400px) {
   .main-product {
-    width: 360px;
+    width: 340px;
   }
   .content {
-    width: 268px;
+    width: 248px;
   }
 
   .button-28 {
@@ -214,7 +215,7 @@ hr {
   }
 }
 
-@media(max-width: 365px) {
+@media(max-width: 380px) {
   .main-product {
     width: 320px;
   }

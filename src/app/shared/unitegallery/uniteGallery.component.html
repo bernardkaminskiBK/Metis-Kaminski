@@ -1,8 +1,8 @@
 <div id="gallery" style="display:none;">
 
   <ng-container *ngFor="let image of _gallery">
-    <img alt="{{image}}"
-         src="{{image}}">
+    <img alt="{{image.url}}"
+         src="{{image.url}}">
   </ng-container>
 
   <!--  error NG8002: Can't bind to 'description' since it isn't a known property of 'img'.-->
@@ -15,3 +15,5 @@
 
 </div>
 
+<button (click)="destroy()">Destroy</button>
+<button (click)="init()">Init</button>

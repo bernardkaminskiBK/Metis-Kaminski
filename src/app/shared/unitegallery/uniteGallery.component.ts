@@ -30,4 +30,21 @@ export class UniteGalleryComponent implements AfterViewInit {
     this.instance = jQuery('#gallery').unitegallery(this.opt);
   }
 
+  destroy() {
+    this.instance.destroy();
+  }
+
+  init() {
+    const backup = this._gallery;
+    this._gallery = [];
+
+    console.log("lenght: " + backup.length);
+    setTimeout(() => {
+      this._gallery = backup;
+
+      setTimeout(() => {
+        this.initGallery();
+      }, 1);
+    }, 1);
+  }
 }

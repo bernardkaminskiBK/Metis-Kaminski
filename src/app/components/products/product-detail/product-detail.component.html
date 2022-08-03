@@ -2,7 +2,7 @@
   <div class="main-product" *ngIf="product">
 
     <div *ngIf="product.images">
-      <app-gallery [data]="product"></app-gallery>
+      <app-gallery [data]="product.images"></app-gallery>
     </div>
 
     <app-product-description
