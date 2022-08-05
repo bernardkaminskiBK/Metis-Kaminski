@@ -38,7 +38,6 @@ export class UniteGalleryComponent implements AfterViewInit {
     const backup = this._gallery;
     this._gallery = [];
 
-    console.log("lenght: " + backup.length);
     setTimeout(() => {
       this._gallery = backup;
 
