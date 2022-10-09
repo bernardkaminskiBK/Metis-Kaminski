@@ -107,32 +107,24 @@ export class ProductFormService {
     const rawValue = this.productGroup.getRawValue();
 
     let product;
+
     if (this.addEdit) {
       product = new Product();
       product.uuid = Utils.generateUUID();
-      product.name = rawValue.productName;
-      product.category = rawValue.category;
-      product.price = rawValue.price;
-      product.stockCount = rawValue.stockCount;
-      product.sellCountLastMonth = this.productGroup.get('quantityGroup.quantitySoldLastMonth')?.value;
-      product.sellCountOverall = this.productGroup.get('quantityGroup.quantitySoldWholePeriod')?.value;
-      product.description = rawValue.description;
-      product.vendors = this.getVendorsFromFormArray(rawValue.stockCount);
-      product.reviews = this.getReviewsFromFormArray();
-      product.images = this.getImageUrlFromFormArray();
     } else {
       product = this.product
-      product.name = rawValue.productName;
-      product.category = rawValue.category;
-      product.price = rawValue.price;
-      product.stockCount = rawValue.stockCount;
-      product.sellCountLastMonth = this.productGroup.get('quantityGroup.quantitySoldLastMonth')?.value;
-      product.sellCountOverall = this.productGroup.get('quantityGroup.quantitySoldWholePeriod')?.value;
-      product.description = rawValue.description;
-      product.vendors = this.getVendorsFromFormArray(rawValue.stockCount);
-      product.reviews = this.getReviewsFromFormArray();
-      product.images = this.getImageUrlFromFormArray();
     }
+
+    product.name = rawValue.productName;
+    product.category = rawValue.category;
+    product.price = rawValue.price;
+    product.stockCount = rawValue.stockCount;
+    product.sellCountLastMonth = this.productGroup.get('quantityGroup.quantitySoldLastMonth')?.value;
+    product.sellCountOverall = this.productGroup.get('quantityGroup.quantitySoldWholePeriod')?.value;
+    product.description = rawValue.description;
+    product.vendors = this.getVendorsFromFormArray(rawValue.stockCount);
+    product.reviews = this.getReviewsFromFormArray();
+    product.images = this.getImageUrlFromFormArray();
 
     return product;
   }
